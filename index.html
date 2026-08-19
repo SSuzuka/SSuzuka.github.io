@@ -3,137 +3,92 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Roblox-разработчик — AI-driven</title>
+  <title>Roblox-разработчик — AI-pipeline</title>
   <style>
     :root {
-      --bg: #0a0d12;
-      --bg-soft: #0f131a;
-      --card: #141a23;
-      --card-2: #18202c;
-      --border: #232c3a;
-      --border-2: #2e3a4d;
-      --text: #eef2f7;
-      --muted: #96a2b5;
-      --accent: #00a8ff;
-      --accent-2: #7fd8ff;
-      --code-bg: #0b0f16;
-      --code-c: #c7d3e0;
-      --code-k: #7fd8ff;
-      --code-s: #9ecb6f;
-      --code-n: #d8a657;
-      --code-cm: #5d6b7e;
-      --ok: #3ddc97;
-      --warn: #e0a94c;
-      --radius: 14px;
-      --shadow: 0 18px 50px rgba(0,0,0,.4);
+      --bg: #0a0d12; --card: #141a23; --border: #232c3a; --border-2: #2e3a4d;
+      --text: #eef2f7; --muted: #96a2b5; --accent: #00a8ff; --accent-2: #7fd8ff;
+      --code-bg: #0b0f16; --code-c: #c7d3e0; --code-k: #7fd8ff; --code-s: #9ecb6f;
+      --code-cm: #5d6b7e; --ok: #3ddc97; --warn: #e0a94c; --radius: 14px;
     }
     html[data-theme="light"] {
-      --bg: #f4f6fa;
-      --bg-soft: #eef1f6;
-      --card: #ffffff;
-      --card-2: #f8fafc;
-      --border: #dde3ec;
-      --border-2: #c6cedb;
-      --text: #16202e;
-      --muted: #5a6677;
-      --accent: #0077cc;
-      --accent-2: #005fa3;
-      --code-bg: #0d1117;
-      --code-c: #c9d4e0;
-      --code-k: #79c0ff;
-      --code-s: #a5d6ff;
-      --code-n: #e3b341;
-      --code-cm: #7d8590;
-      --warn: #a06a15;
-      --shadow: 0 18px 50px rgba(30,45,80,.12);
+      --bg: #f4f6fa; --card: #ffffff; --border: #dde3ec; --border-2: #c6cedb;
+      --text: #16202e; --muted: #5a6677; --accent: #0077cc; --accent-2: #005fa3;
+      --code-bg: #0d1117; --code-c: #c9d4e0; --code-k: #79c0ff; --code-s: #a5d6ff;
+      --code-cm: #7d8590; --warn: #a06a15;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: "Segoe UI", system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      transition: background .25s, color .25s;
-    }
-    .wrap { max-width: 1000px; margin: 0 auto; padding: 0 22px; }
+    body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 0 22px; }
 
-    nav {
-      position: sticky; top: 0; z-index: 50;
-      backdrop-filter: blur(10px);
-      background: color-mix(in srgb, var(--bg) 78%, transparent);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-inner {
-      max-width: 1000px; margin: 0 auto; padding: 12px 22px;
-      display: flex; align-items: center; justify-content: space-between; gap: 14px;
-    }
+    nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(10px); background: color-mix(in srgb, var(--bg) 78%, transparent); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 980px; margin: 0 auto; padding: 12px 22px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
     .brand { font-weight: 700; font-size: .95rem; display: flex; align-items: center; gap: 9px; }
-    .brand i {
-      width: 9px; height: 9px; border-radius: 50%; background: var(--accent);
-      box-shadow: 0 0 12px var(--accent); display: inline-block;
-    }
-    .nav-right { display: flex; align-items: center; gap: 18px; }
+    .brand i { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
     .nav-links { display: flex; gap: 20px; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: .9rem; }
     .nav-links a:hover { color: var(--accent-2); }
-
     .theme-switch { display: flex; gap: 2px; background: var(--card); border: 1px solid var(--border); border-radius: 999px; padding: 3px; }
-    .theme-switch button { border: none; background: transparent; color: var(--muted); cursor: pointer; padding: 4px 10px; border-radius: 999px; font-size: .78rem; font-weight: 600; transition: background .2s, color .2s; }
+    .theme-switch button { border: none; background: transparent; color: var(--muted); cursor: pointer; padding: 4px 10px; border-radius: 999px; font-size: .78rem; font-weight: 600; }
     .theme-switch button.active { background: var(--accent); color: #fff; }
 
-    header { padding: 60px 0 34px; }
-    .badge { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border-2); background: var(--card); border-radius: 999px; padding: 5px 14px; font-size: .78rem; font-weight: 600; color: var(--ok); margin-bottom: 20px; }
-    .badge i { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); animation: pulse 1.8s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
-    h1 { font-size: clamp(1.8rem, 4.6vw, 2.7rem); font-weight: 800; letter-spacing: -.5px; line-height: 1.18; margin-bottom: 16px; }
+    /* CTA наверху — главное */
+    .top-cta {
+      margin-top: 26px; background: var(--card); border: 1px solid var(--accent);
+      border-radius: var(--radius); padding: 20px 24px; display: flex; flex-wrap: wrap;
+      gap: 14px; align-items: center; justify-content: space-between;
+    }
+    .top-cta .avail { color: var(--ok); font-weight: 700; display: flex; align-items: center; gap: 8px; margin-bottom: 4px; font-size: .82rem; }
+    .top-cta .avail::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 10px var(--ok); }
+    .top-cta b { font-size: 1.05rem; }
+    .btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; padding: 9px 20px; border-radius: 999px; font-weight: 700; font-size: .9rem; }
+    .btn.ghost { background: transparent; border: 1px solid var(--border-2); color: var(--text); font-weight: 600; }
+    .btn.placeholder { opacity: .45; pointer-events: none; }
+
+    header { padding: 44px 0 20px; }
+    h1 { font-size: clamp(1.7rem, 4.4vw, 2.5rem); font-weight: 800; letter-spacing: -.5px; line-height: 1.2; margin-bottom: 14px; }
     h1 em { font-style: normal; color: var(--accent); }
-    .lead { color: var(--muted); max-width: 700px; font-size: clamp(1rem, 2vw, 1.1rem); margin-bottom: 10px; }
+    .lead { color: var(--muted); max-width: 680px; font-size: clamp(1rem, 2vw, 1.08rem); }
     .lead b { color: var(--text); }
 
-    section { padding: 40px 0; border-top: 1px solid var(--border); }
+    section { padding: 38px 0; border-top: 1px solid var(--border); }
     header + section { border-top: none; }
     .kicker { text-transform: uppercase; letter-spacing: 2px; font-size: .75rem; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
-    h2 { font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: 700; letter-spacing: -.3px; margin-bottom: 10px; }
-    .sub { color: var(--muted); max-width: 720px; margin-bottom: 22px; }
+    h2 { font-size: clamp(1.25rem, 3vw, 1.6rem); font-weight: 700; letter-spacing: -.3px; margin-bottom: 10px; }
+    .sub { color: var(--muted); max-width: 700px; margin-bottom: 20px; }
 
-    .stack { display: flex; flex-wrap: wrap; gap: 8px; }
-    .chip { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 6px 14px; border-radius: 999px; font-size: .82rem; font-family: ui-monospace, Consolas, monospace; }
-    .chip.hot { border-color: var(--accent); color: var(--accent-2); background: color-mix(in srgb, var(--accent) 10%, transparent); }
-
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
     .card h3 { font-size: 1rem; margin-bottom: 6px; }
     .card p { color: var(--muted); font-size: .9rem; }
 
-    /* честный блок умею/не умею */
     .split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     @media (max-width: 700px) { .split { grid-template-columns: 1fr; } }
     .split-col { border-radius: var(--radius); padding: 20px; border: 1px solid var(--border); background: var(--card); }
     .split-col.yes { border-color: color-mix(in srgb, var(--ok) 40%, var(--border)); }
     .split-col.no { border-color: color-mix(in srgb, var(--warn) 40%, var(--border)); }
-    .split-col h3 { font-size: .95rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .split-col h3 { font-size: .95rem; margin-bottom: 12px; }
     .split-col.yes h3 { color: var(--ok); }
     .split-col.no h3 { color: var(--warn); }
     .split-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
     .split-col li { color: var(--muted); font-size: .88rem; padding-left: 18px; position: relative; }
     .split-col li::before { content: "—"; position: absolute; left: 0; color: var(--border-2); }
 
-    /* кейсы */
-    .case { border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); margin-bottom: 16px; overflow: hidden; }
-    .case-head { padding: 18px 22px; display: grid; grid-template-columns: 44px 1fr; gap: 14px; }
-    .case-num { font-family: ui-monospace, Consolas, monospace; font-size: .9rem; color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); border: 1px solid var(--border); height: 30px; width: 38px; display: flex; align-items: center; justify-content: center; border-radius: 8px; }
-    .case h3 { font-size: 1.02rem; margin-bottom: 3px; }
-    .case .why { color: var(--muted); font-size: .9rem; margin-bottom: 4px; }
-    .case .why b { color: var(--text); }
-    .case .my-words { font-size: .85rem; color: var(--accent-2); background: color-mix(in srgb, var(--accent) 8%, transparent); border: 1px dashed var(--border-2); border-radius: 8px; padding: 10px 12px; margin-top: 10px; }
-    .case .my-words b { color: var(--accent-2); }
+    .flow { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 20px 0; }
+    .flow-step { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; font-size: .88rem; font-family: ui-monospace, Consolas, monospace; }
+    .flow-arrow { color: var(--border-2); font-size: 1.1rem; }
 
-    pre { background: var(--code-bg); color: var(--code-c); padding: 16px 22px; overflow-x: auto; font-size: .8rem; line-height: 1.55; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; border-top: 1px solid var(--border); }
-    pre code { font-family: inherit; }
-    .k { color: var(--code-k); } .s { color: var(--code-s); } .n { color: var(--code-n); } .cm { color: var(--code-cm); font-style: italic; }
-    .file { font-size: .75rem; color: var(--code-cm); font-family: ui-monospace, Consolas, monospace; padding: 8px 22px 0; display: block; }
+    .example { border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); padding: 20px 22px; margin-top: 8px; }
+    .example .tag { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-2); margin-bottom: 8px; display: block; }
+    .example p { color: var(--muted); font-size: .92rem; margin-bottom: 8px; }
+    .example p b { color: var(--text); }
 
-    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 20px; }
+    pre { background: var(--code-bg); color: var(--code-c); padding: 14px 20px; overflow-x: auto; font-size: .8rem; line-height: 1.55; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; border-radius: 10px; margin-top: 12px; }
+    .k { color: var(--code-k); } .s { color: var(--code-s); } .cm { color: var(--code-cm); font-style: italic; }
+    .file { font-size: .74rem; color: var(--code-cm); font-family: ui-monospace, Consolas, monospace; margin-top: 12px; display: block; }
+    .note { font-size: .82rem; color: var(--muted); border-left: 2px solid var(--border-2); padding-left: 12px; margin-top: 12px; }
+
+    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 16px; }
     .metric { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
     .metric b { font-family: ui-monospace, Consolas, monospace; font-size: 1.4rem; display: block; }
     .metric span { color: var(--muted); font-size: .8rem; }
@@ -145,37 +100,23 @@
     .term .yn.no { background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); }
     .term p { font-size: .88rem; color: var(--muted); }
 
-    .contact { background: var(--card); border: 1px solid var(--border-2); border-radius: var(--radius); padding: 26px 28px; display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; }
-    .contact .avail { color: var(--ok); font-weight: 700; display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-    .contact .avail::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 10px var(--ok); }
-    .contact b.big { font-size: 1.05rem; display: block; }
+    .contact { background: var(--card); border: 1px solid var(--border-2); border-radius: var(--radius); padding: 24px 26px; display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; }
     .contact small { color: var(--muted); }
-    .btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; padding: 9px 20px; border-radius: 999px; font-weight: 700; font-size: .9rem; transition: transform .15s, filter .15s; }
-    .btn:hover { transform: translateY(-1px); filter: brightness(1.08); }
-    .btn.ghost { background: transparent; border: 1px solid var(--border-2); color: var(--text); font-weight: 600; }
-    .btn.placeholder { opacity: .45; pointer-events: none; }
+    footer { text-align: center; color: var(--muted); font-size: .8rem; padding: 28px 0 40px; border-top: 1px solid var(--border); }
 
-    code.i { font-family: ui-monospace, Consolas, monospace; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent-2); border: 1px solid var(--border); padding: 1px 6px; border-radius: 6px; font-size: .85em; }
-
-    footer { text-align: center; color: var(--muted); font-size: .8rem; padding: 30px 0 44px; border-top: 1px solid var(--border); }
-
-    @media (max-width: 720px) {
-      .nav-links { display: none; }
-      .case-head { grid-template-columns: 1fr; gap: 8px; }
-      pre { padding: 12px 14px; font-size: .74rem; }
-    }
+    @media (max-width: 720px) { .nav-links { display: none; } }
   </style>
 </head>
 <body>
 
 <nav>
   <div class="nav-inner">
-    <div class="brand"><i></i>Roblox-разработчик · AI-driven</div>
-    <div class="nav-right">
+    <div class="brand"><i></i>Roblox-разработчик · AI-pipeline</div>
+    <div class="nav-right" style="display:flex;align-items:center;gap:18px;">
       <div class="nav-links">
-        <a href="#honest">Честно о себе</a>
+        <a href="#honest">О себе</a>
         <a href="#process">Как работаю</a>
-        <a href="#cases">Код</a>
+        <a href="#example">Пример</a>
         <a href="#terms">Условия</a>
         <a href="#contact">Контакты</a>
       </div>
@@ -189,41 +130,50 @@
 
 <div class="wrap">
 
+  <div class="top-cta">
+    <div>
+      <div class="avail">открыт к проектам</div>
+      <b>Ищу первую команду / проект, где можно расти как AI-pipeline разработчик</b>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <a class="btn placeholder" href="#">GitHub</a>
+      <a class="btn ghost placeholder" href="#">Discord</a>
+      <a class="btn ghost placeholder" href="#">Почта</a>
+    </div>
+  </div>
+
   <header>
-    <span class="badge"><i></i>ищу проект / команду</span>
-    <h1>Делаю рабочие системы для Roblox через <em>AI-агентов</em> — и отвечаю за результат</h1>
+    <h1>Собираю рабочие игровые системы через <em>AI-агентов</em> — от вопроса до теста</h1>
     <p class="lead">
-      5 месяцев в разработке. Не пишу код руками с нуля — веду AI-агентов по чёткому плану,
-      проверяю тестами, разбираюсь в багах и в том, <b>что и почему получилось в итоге</b>.
-      Не сеньор, не претендую им быть. Но система, которую я довёл до продакшна, реально работает —
-      ниже настоящий код из проекта, не выдуманный.
+      5 месяцев разработки одного проекта на Roblox. Не пишу код руками с нуля —
+      выстраиваю процесс: <b>ставлю задачу агенту → нахожу, где он ошибся или схалтурил → дожимаю до рабочего решения → проверяю тестами</b>.
+      Первая версия от агента почти никогда не финальная — часть работы как раз в том, чтобы это заметить и не пропустить.
     </p>
   </header>
 
   <!-- ЧЕСТНО -->
   <section id="honest">
     <div class="kicker">Сразу к делу</div>
-    <h2>Что я реально умею, а что нет</h2>
-    <p class="sub">Пишу это осознанно, чтобы не тратить ничьё время на созвоне. Лучше честно сейчас, чем неловко на собеседовании.</p>
+    <h2>Что реально умею, а что нет</h2>
+    <p class="sub">Пишу прямо, чтобы не тратить время ни себе, ни вам на созвоне.</p>
     <div class="split">
       <div class="split-col yes">
         <h3>✓ Умею</h3>
         <ul>
-          <li>Спроектировать систему данных для игры (экономика, профили, кланы) и объяснить, зачем она устроена именно так</li>
-          <li>Разбить фичу на задачи для агента, задать рамки (что нельзя трогать, какие паттерны использовать)</li>
-          <li>Найти дыру — где эксплойтер сломает экономику, где гонка данных, где дублирование покупки</li>
-          <li>Требовать тесты на каждое изменение и не принимать код, пока тесты не зелёные</li>
-          <li>Читать логи, воспроизводить баг, находить причину и формулировать агенту точную задачу на фикс</li>
-          <li>Снять видео теста / показать код / сделать тестовое задание в разумный срок</li>
+          <li>Спроектировать систему (экономика, профили игрока, межсерверные механики) и провести её через реализацию агентом до рабочего состояния</li>
+          <li>Найти сценарий, который сломает систему: гонки данных, дубли, спам, разрыв соединения в неудобный момент</li>
+          <li>Заметить, что агент сделал заглушку или упростил вместо честного решения, и дожать до нормального фикса</li>
+          <li>Держать процесс на тестах: правило простое — не прошли тесты, значит не готово</li>
+          <li>Объяснить, *как* я довожу задачу до результата (процесс), а не *как устроен* конкретный API изнутри</li>
         </ul>
       </div>
       <div class="split-col no">
         <h3>✕ Пока не умею / не буду</h3>
         <ul>
-          <li>Живое кодирование на созвоне под таймером — не мой формат, честно скажу «нет» на такое приглашение</li>
-          <li>Ответить с ходу на вопрос про редкий edge-case конкретного API без возможности проверить — предпочту сказать «не знаю, посмотрю» вместо угадывания</li>
-          <li>Писать большой объём кода вообще без ИИ — это не то, как я работаю, и не буду это изображать</li>
-          <li>Объяснить абсолютно каждую строчку в проекте на уровне внутренней механики Luau/Roblox — но логику и «зачем» — да</li>
+          <li>Живое кодирование на созвоне под таймером</li>
+          <li>Разбор тонких деталей конкретного API без возможности проверить — честно скажу «не знаю навскидку»</li>
+          <li>Писать много кода руками вообще без ИИ — не изображаю это</li>
+          <li>Показать сразу весь код проекта публично — экономика игры боевая, часть кода трогать открыто не готов</li>
         </ul>
       </div>
     </div>
@@ -232,121 +182,58 @@
   <!-- ПРОЦЕСС -->
   <section id="process">
     <div class="kicker">Процесс</div>
-    <h2>Как я работаю с агентами</h2>
-    <p class="sub">Это не «включил Cursor и жду». Есть процесс, который я выстроил сам за 5 месяцев, методом набитых шишек.</p>
+    <h2>Как выглядит моя работа над задачей</h2>
+    <p class="sub">Это не «включил Cursor и жду». Условная цепочка, которая почти никогда не проходит с первого раза идеально.</p>
+    <div class="flow">
+      <div class="flow-step">задача</div><div class="flow-arrow">→</div>
+      <div class="flow-step">вопросы себе / агенту</div><div class="flow-arrow">→</div>
+      <div class="flow-step">контракт (что нельзя ломать)</div><div class="flow-arrow">→</div>
+      <div class="flow-step">агент пишет</div><div class="flow-arrow">→</div>
+      <div class="flow-step">я проверяю руками / сценариями</div><div class="flow-arrow">→</div>
+      <div class="flow-step">правки</div><div class="flow-arrow">→</div>
+      <div class="flow-step">тесты / линт</div>
+    </div>
     <div class="cards">
-      <div class="card"><h3>Сначала план, потом код</h3><p>Прежде чем агент что-то пишет, я формулирую: что должно получиться, какие данные приходят от клиента (и почему им нельзя верить), что нельзя ломать.</p></div>
-      <div class="card"><h3>Маленькие задачи</h3><p>Не «сделай экономику», а «добавь проверку X в этом файле, не трогая остальное». Большие правки агент делает хуже и незаметнее ломает соседний код.</p></div>
-      <div class="card"><h3>Тесты как ворота</h3><p>304 теста в проекте. Новый код агента не принимается, пока прогон не зелёный — для меня самого это правило, а не для галочки в портфолио.</p></div>
-      <div class="card"><h3>Я разбираю, что вышло</h3><p>После того как агент написал код — я читаю диф, прошу объяснить логику, ищу, где он мог схитрить (заглушка вместо реальной проверки — частый грех агентов).</p></div>
+      <div class="card"><h3>Первая версия — черновик</h3><p>Агент почти всегда выдаёт что-то рабочее, но не финальное: где-то заглушка, где-то не учтён редкий случай. Это нормальная часть процесса, а не провал.</p></div>
+      <div class="card"><h3>Моя часть — заметить и дожать</h3><p>Я тестирую руками (спам кликов, разрыв соединения, повторный запрос) и требую от агента закрыть конкретный найденный случай, а не абстрактно «улучшить».</p></div>
+      <div class="card"><h3>Тесты — граница готовности</h3><p>304 теста в проекте. Задача не закрыта, пока прогон не пройден полностью — для меня самого, это не для галочки.</p></div>
+      <div class="card"><h3>Инструменты меняются быстро</h3><p>Модели, агентские харнессы, паттерны работы с контекстом обновляются каждые несколько месяцев. Слежу за этим целенаправленно, а не жду, что кто-то расскажет.</p></div>
     </div>
   </section>
 
-  <!-- КОД -->
-  <section id="cases">
-    <div class="kicker">Код из проекта</div>
-    <h2>Несколько реальных решений — с объяснением своими словами</h2>
-    <p class="sub">
-      Взял не все 15 сервисов, а несколько, логику которых могу пересказать и защитить сам, без подсказок.
-      Полный код — на созвоне или по запросу.
-    </p>
+  <!-- ПРИМЕР -->
+  <section id="example">
+    <div class="kicker">Пример</div>
+    <h2>Как это выглядело на реальной задаче</h2>
+    <p class="sub">Без вываливания всего кода — только суть ситуации и что я лично сделал в ней.</p>
 
-    <div class="case">
-      <div class="case-head">
-        <span class="case-num">01</span>
-        <div>
-          <h3>Клиенту нельзя верить — цену считает сервер</h3>
-          <p class="why">Игрок мог бы вызвать покупку с любыми аргументами через эксплойт. Поэтому <b>от клиента идёт только id апгрейда</b>, а цену, баланс и лимиты сервер пересчитывает сам из своих данных.</p>
-        </div>
-      </div>
-      <span class="file">server/services/EconomyService.ts</span>
-      <pre><code><span class="cm">// от клиента пришёл только upgradeId</span>
-<span class="k">const</span> playerData = selectServerPlayerData(state, userId);
-<span class="k">if</span> (!playerData) <span class="k">return</span>;
-<span class="k">const</span> template = UPGRADES[upgradeId];
-<span class="k">if</span> (!template) <span class="k">return</span>;
-
-<span class="k">const</span> purchaseCost = getScaledCost(template.baseCost, template.costMultiplier, upgrade.level);
-<span class="k">if</span> (!bnGte(playerData.currency, purchaseCost)) <span class="k">return</span>; <span class="cm">// денег не хватает</span>
-
-obbyStore.upgradePurchased(userId, upgradeId, nextLevel, nextCost, purchaseCost);</code></pre>
-      <div class="my-words"><b>Своими словами:</b> смысл простой — сервер никогда не доверяет цифрам от игрока, только его намерению («хочу купить X»). Всё, что влияет на баланс, пересчитывается заново на сервере. Это база анти-чит логики, тут я разбираюсь уверенно.</div>
+    <div class="example">
+      <span class="tag">задача</span>
+      <p>Перевод игровой валюты между игроками (клан-система).</p>
+      <span class="tag">что нашёл сам</span>
+      <p>Протестировал руками: быстро кликнул «перевести» несколько раз подряд, вышел из игры сразу после отправки запроса, попробовал открыть перевод на двух вкладках. Первая версия от агента спокойно давала задвоить перевод при быстром повторном клике — деньги списывались дважды.</p>
+      <span class="tag">что сделал</span>
+      <p>Показал агенту конкретное воспроизведение (не «почини race condition», а «вот шаги, вот результат, вот что должно быть вместо этого»), попросил блокировку повторного запроса и версию с явным подтверждением состояния перевода.</p>
+      <span class="tag">результат (кусок финального кода)</span>
+      <pre><code><span class="k">if</span> (!this.tryLockUser(senderUserId)) {
+  <span class="cm">// повторный клик того же перевода — не вторая транзакция</span>
+  sendTransferResult(player, requestId, sameRequest ? "pending" : "rejected", ...);
+  <span class="k">return</span>;
+}</code></pre>
+      <span class="file">server/services/CrystalShopService.ts</span>
+      <div class="note">Полный код и остальные сценарии (гонка серверов, разрыв соединения при загрузке профиля, дубли Roblox-чеков) — показываю на созвоне. Здесь не выкладываю намеренно: часть кода напрямую завязана на боевую экономику игры.</div>
     </div>
-
-    <div class="case">
-      <div class="case-head">
-        <span class="case-num">02</span>
-        <div>
-          <h3>Чек за покупку может прийти дважды — награда не должна выдаться дважды</h3>
-          <p class="why">Roblox может прислать один и тот же чек повторно. Если просто выдавать награду при получении чека — получится дублирование кристаллов.</p>
-        </div>
-      </div>
-      <span class="file">server/services/PurchaseService.ts</span>
-      <pre><code><span class="k">const</span> existing = playerData.processedReceipts[purchaseId];
-<span class="k">if</span> (existing !== undefined) {
-  <span class="cm">// чек уже обработан — просто подтверждаем, ничего не выдаём заново</span>
-  <span class="k">return</span> this.dataService.synchronizePlayersNow([userId])
-    ? PurchaseGranted : NotProcessedYet;
-}
-
-obbyStore.__grantDeveloperProduct(userId, purchaseId, newCrystals, receipt);
-<span class="k">return</span> this.dataService.synchronizePlayersNow([userId])
-  ? PurchaseGranted : NotProcessedYet;</code></pre>
-      <div class="my-words"><b>Своими словами:</b> каждый чек запоминается по id. Если он приходит снова — сервер не выдаёт награду ещё раз, а просто говорит «да, всё ок, уже выдано». Это то, что называется идемпотентностью: одна и та же операция, выполненная N раз, не должна дать разный результат.</div>
-    </div>
-
-    <div class="case">
-      <div class="case-head">
-        <span class="case-num">03</span>
-        <div>
-          <h3>Межсерверный босс: 10 серверов бьют одновременно</h3>
-          <p class="why">У босса есть <b>revision</b> — номер версии его состояния. Каждый удар проверяет, что бьёт по актуальной версии, а не по устаревшей, которую сервер получил секунду назад.</p>
-        </div>
-      </div>
-      <span class="file">server/services/ClanService.ts</span>
-      <pre><code>runtime.bossMap.UpdateAsync(STATE_KEY, (rawState) => {
-  <span class="k">const</span> current = this.decodeBossState(rawState) ?? runtime.boss;
-  <span class="k">if</span> (current.isDefeated) <span class="k">return</span> undefined; <span class="cm">// уже убит — не трогаем</span>
-
-  <span class="k">const</span> dealt = math.min(current.currentHP, damage);
-  <span class="k">return</span> JSONEncode({
-    ...current,
-    currentHP: current.currentHP - dealt,
-    revision: current.revision + 1,
-  });
-}, STATE_TTL_SECONDS);</code></pre>
-      <div class="my-words"><b>Своими словами:</b> босс общий на все сервера, а не свой на каждом. Если бы каждый сервер тупо вычитал урон из своей копии HP — можно было бы дважды посчитать один и тот же удар или, наоборот, потерять урон другого сервера. UpdateAsync гарантирует, что изменение всегда идёт от актуального состояния, а revision — просто счётчик, чтобы было видно, что состояние точно свежее, а не залежавшееся. Могу объяснить логику, но не готов на лету разбирать все тонкости API MemoryStore — это смотрел вместе с агентом при отладке гонки, которая реально была на проде.</div>
-    </div>
-
   </section>
 
   <!-- ТЕСТЫ -->
   <section id="tests">
     <div class="kicker">Проверка</div>
-    <h2>304 теста — не для красоты в портфолио</h2>
-    <p class="sub">
-      Правило простое: код (мой или агента) не считается готовым, пока прогон не зелёный. Это единственный способ
-      контролировать качество, когда сам не пишешь каждую строку руками.
-    </p>
+    <h2>304 теста — граница, а не цифра для портфолио</h2>
+    <p class="sub">Задача не считается сделанной, пока тесты не пройдены — для моего кода и для кода агента одинаково.</p>
     <div class="metrics">
       <div class="metric"><b>304</b><span>теста</span></div>
       <div class="metric"><b>30+</b><span>файлов</span></div>
       <div class="metric"><b>~60c</b><span>полный прогон</span></div>
-    </div>
-  </section>
-
-  <!-- УЧУСЬ -->
-  <section id="learning">
-    <div class="kicker">Сейчас</div>
-    <h2>Чем занимаюсь помимо проекта</h2>
-    <p class="sub">
-      Я не считаю, что «пять месяцев — и всё, дальше только код». Индустрия AI-инструментов меняется быстрее,
-      чем классический стек, и я слежу за этим осознанно, а не жду, что кто-то расскажет.
-    </p>
-    <div class="cards">
-      <div class="card"><h3>Новые модели и агентские пайплайны</h3><p>Слежу, какие модели и харнессы реально дают прирост в качестве кода, а не только в маркетинге.</p></div>
-      <div class="card"><h3>Как ставить агенту задачу лучше</h3><p>Работа с контекстом, декомпозиция, промпты-контракты — это отдельный навык, и я его целенаправленно прокачиваю.</p></div>
-      <div class="card"><h3>Разбор своего же кода</h3><p>Периодически возвращаюсь к старым модулям проекта и заставляю себя объяснить их заново — без агента под рукой.</p></div>
     </div>
   </section>
 
@@ -355,22 +242,25 @@ obbyStore.__grantDeveloperProduct(userId, purchaseId, newCrystals, receipt);
     <div class="kicker">Условия</div>
     <h2>Как со мной удобнее работать</h2>
     <div class="terms">
-      <div class="term"><span class="yn ok">ок</span><p>Тестовое задание с разумным сроком (не за 2 часа) — сделаю, покажу код и видео результата.</p></div>
-      <div class="term"><span class="yn ok">ок</span><p>Асинхронное общение (текст, задача в таск-трекере) — комфортнее, чем спонтанный созвон с вопросами на лету.</p></div>
-      <div class="term"><span class="yn ok">ок</span><p>Показать реальный репозиторий и историю работы над проектом на созвоне.</p></div>
-      <div class="term"><span class="yn no">нет</span><p>Live-coding интервью / алгоритмические задачи под таймером — честно откажусь, это не покажет ничего полезного про мою реальную работу.</p></div>
-      <div class="term"><span class="yn no">нет</span><p>Блиц-вопросы по редким деталям API без возможности проверить — предпочту сказать «не знаю навскидку, посмотрю» вместо гадания.</p></div>
+      <div class="term"><span class="yn ok">ок</span><p>Тестовое задание с разумным сроком — сделаю, покажу код и видео результата.</p></div>
+      <div class="term"><span class="yn ok">ок</span><p>Созвон с объяснением процесса (как ставлю задачу агенту, как ищу баги, как проверяю) — с радостью.</p></div>
+      <div class="term"><span class="yn ok">ок</span><p>Показать код и репозиторий приватно / под NDA.</p></div>
+      <div class="term"><span class="yn no">нет</span><p>Live-coding под таймером на созвоне.</p></div>
+      <div class="term"><span class="yn no">нет</span><p>Разбор тонкостей конкретного API без возможности свериться — отвечу честно «не знаю навскидку».</p></div>
     </div>
+    <p class="sub" style="margin-top:18px;">
+      Публичной истории коммитов пока нет — проект делался соло, пушил напрямую в main.
+      Сейчас перехожу на фиче-бранчи и PR по каждой задаче, чтобы это можно было показывать открыто.
+    </p>
   </section>
 
   <!-- КОНТАКТ -->
   <section id="contact">
     <div class="kicker">Связь</div>
-    <h2>Тестовое, вопросы, предложения</h2>
+    <h2>Тестовое, созвон, предложения</h2>
     <div class="contact">
       <div>
-        <div class="avail">открыт к проектам</div>
-        <b class="big">Ищу первую команду / проект, где можно расти как AI-driven разработчик</b>
+        <b style="font-size:1.05rem;display:block;">Открыт к проектам и командам</b>
         <small>Контакты будут добавлены здесь.</small>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
@@ -381,9 +271,7 @@ obbyStore.__grantDeveloperProduct(userId, purchaseId, newCrystals, receipt);
     </div>
   </section>
 
-  <footer>
-    Репозиторий проекта и полный код показываю на созвоне.
-  </footer>
+  <footer>Полный код и репозиторий — на созвоне, по запросу.</footer>
 
 </div>
 
