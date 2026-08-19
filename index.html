@@ -1,117 +1,428 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roblox Developer | Портфолио</title>
-    <style>
-        :root {
-            --bg-color: #0f1115;
-            --card-bg: #1a1d24;
-            --accent-color: #00a2ff;
-            --text-color: #ffffff;
-            --text-muted: #9aa0a6;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .container {
-            max-width: 800px;
-            width: 100%;
-        }
-        header {
-            text-align: center;
-            padding: 40px 0;
-        }
-        h1 { margin: 0 0 10px 0; color: var(--accent-color); }
-        .tag {
-            background: #252932;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 14px;
-            margin: 5px;
-            display: inline-block;
-        }
-        .section-title {
-            border-bottom: 2px solid #252932;
-            padding-bottom: 10px;
-            margin-top: 40px;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .card {
-            background: var(--card-bg);
-            border-radius: 8px;
-            padding: 20px;
-            border: 1px solid #252932;
-            transition: transform 0.2s;
-        }
-        .card:hover { transform: translateY(-5px); }
-        .card h3 { margin-top: 0; color: var(--accent-color); }
-        .card p { color: var(--text-muted); font-size: 14px; }
-        .btn {
-            display: inline-block;
-            background: var(--accent-color);
-            color: white;
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-        .links { text-align: center; margin-top: 20px; }
-        .links a { color: var(--text-muted); margin: 0 10px; text-decoration: none; }
-        .links a:hover { color: var(--accent-color); }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roblox Developer | Портфолио</title>
+  <style>
+    /* ===== Глобальные переменные ===== */
+    :root {
+      --bg: #0b0d11;
+      --card: #161a22;
+      --border: #252b36;
+      --accent: #00a8ff;
+      --accent-glow: rgba(0, 168, 255, 0.25);
+      --text: #f0f2f5;
+      --muted: #8e95a3;
+      --radius: 14px;
+      --shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 24px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    /* ===== Шапка ===== */
+    header {
+      text-align: center;
+      padding: 48px 20px 32px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+      animation: fadeDown 0.8s ease;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 30px var(--accent-glow);
+      margin: 0 auto 16px;
+      overflow: hidden;
+      transition: transform 0.4s;
+    }
+    .avatar:hover {
+      transform: scale(1.05);
+    }
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, var(--accent), #66d0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin: 6px 0 12px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin: 12px 0 18px;
+    }
+    .tag {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      transition: all 0.25s;
+    }
+    .tag:hover {
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .social-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.25s;
+      border-bottom: 1px solid transparent;
+    }
+    .social-links a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ===== Секции ===== */
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin: 48px 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 12px;
+    }
+    .section-title span {
+      background: var(--accent);
+      width: 6px;
+      height: 32px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+
+    /* ===== Сетка проектов ===== */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 1px solid var(--border);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.6s forwards;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 40px rgba(0, 168, 255, 0.15);
+    }
+
+    .card-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #1e2430;
+      margin-bottom: 14px;
+      transition: transform 0.4s;
+    }
+    .card:hover .card-img {
+      transform: scale(1.02);
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      flex-grow: 1;
+      margin-bottom: 12px;
+    }
+    .card-meta {
+      display: flex;
+      gap: 16px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .card-meta i {
+      font-style: normal;
+    }
+    .card-meta .online {
+      color: #4caf50;
+    }
+
+    .btn {
+      align-self: flex-start;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background 0.25s, box-shadow 0.25s;
+      box-shadow: 0 4px 12px rgba(0, 168, 255, 0.25);
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #0090e0;
+      box-shadow: 0 6px 20px rgba(0, 168, 255, 0.4);
+    }
+
+    /* ===== Контакты ===== */
+    .contacts {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      margin: 32px 0 16px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .contacts .status {
+      color: #4caf50;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .contacts .status::before {
+      content: "●";
+      font-size: 1.2rem;
+      animation: pulse-dot 1.8s infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .contacts .discord {
+      background: #5865f2;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-block;
+    }
+
+    /* ===== Анимации ===== */
+    @keyframes fadeDown {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Задержки для карточек */
+    .card:nth-child(1) { animation-delay: 0.05s; }
+    .card:nth-child(2) { animation-delay: 0.15s; }
+    .card:nth-child(3) { animation-delay: 0.25s; }
+    .card:nth-child(4) { animation-delay: 0.35s; }
+
+    /* ===== Адаптив ===== */
+    @media (max-width: 640px) {
+      h1 { font-size: 1.8rem; }
+      .container { padding: 0 4px; }
+      .grid { grid-template-columns: 1fr; }
+      .contacts { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
 </head>
 <body>
 
 <div class="container">
-    <header>
-        <h1>[Ваш Ник / Имя]</h1>
-        <p style="color: var(--text-muted);">Roblox Developer (Скриптер / Билдер / Моделлер)</p>
-        <div>
-            <span class="tag">Luau</span>
-            <span class="tag">Roblox Studio</span>
-            <span class="tag">Blender</span>
-        </div>
-        <div class="links">
-            <a href="[Ссылка на профиль Roblox]" target="_blank">Roblox Profile</a> | 
-            <a href="https://github.com[Ваш гитхаб]" target="_blank">GitHub</a>
-        </div>
-    </header>
 
-    <h2 class="section-title">🎮 Мои Проекты</h2>
-    <div class="grid">
-        <!-- Карточка проекта 1 -->
-        <div class="card">
-            <h3>Название Игры 1</h3>
-            <p>Краткое описание вашей работы: какие системы написали, что построили или оптимизировали.</p>
-            <a href="[Ссылка на плейс]" class="btn" target="_blank">Играть</a>
-        </div>
-        <!-- Карточка проекта 2 -->
-        <div class="card">
-            <h3>Название Игры 2</h3>
-            <p>Описание второго проекта. Можно добавить инфу про механики, UI или датасторы.</p>
-            <a href="[Ссылка на плейс]" class="btn" target="_blank">Играть</a>
-        </div>
+  <!-- ===== ШАПКА ===== -->
+  <header>
+    <div class="avatar">
+      <!-- Сюда можно поставить ссылку на аватарку, например с Roblox: https://www.roblox.com/headshot-thumbnail/image?userId=ТВОЙ_ID&width=420&height=420 -->
+      <img src="https://www.roblox.com/headshot-thumbnail/image?userId=123456789&width=420&height=420" alt="Avatar">
     </div>
+    <h1>Твой Ник</h1>
+    <div class="subtitle">🛠️ Roblox Developer — Скриптер / Билдер</div>
+    <div class="tags">
+      <span class="tag">Luau</span>
+      <span class="tag">Roblox Studio</span>
+      <span class="tag">Blender</span>
+      <span class="tag">UI/UX</span>
+    </div>
+    <div class="social-links">
+      <a href="https://www.roblox.com/users/ТВОЙ_ID/profile" target="_blank">📌 Roblox</a>
+      <a href="https://github.com/ТВОЙ_НИК" target="_blank">🐙 GitHub</a>
+      <a href="https://discord.com/users/ТВОЙ_DISCORD_ID" target="_blank">💬 Discord</a>
+    </div>
+  </header>
 
-    <h2 class="section-title">💼 Контакты</h2>
-    <p>Открыт для предложений и заказов (Commissions: OPEN).</p>
-    <p>💬 Discord: <strong>[Ваш Дискорд Тег]</strong></p>
+  <!-- ===== ПРОЕКТЫ ===== -->
+  <div class="section-title">
+    <span></span> 🎮 Мои игры
+  </div>
+  <div class="grid" id="projects-grid">
+    <!-- Карточки будут вставлены через JavaScript -->
+  </div>
+
+  <!-- ===== КОНТАКТЫ ===== -->
+  <div class="section-title">
+    <span></span> 📬 Связь
+  </div>
+  <div class="contacts">
+    <div class="status">Открыт к заказам (Commissions: OPEN)</div>
+    <div>
+      <span class="discord">Discord: твой_тег#1234</span>
+      <span style="margin-left: 12px; color: var(--muted);">или</span>
+      <a href="mailto:твоя@почта.ru" style="color: var(--accent); text-decoration: none; margin-left: 8px;">твоя@почта.ru</a>
+    </div>
+  </div>
+
+  <footer style="text-align: center; margin-top: 40px; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 20px;">
+    © 2026 Твой Ник · Сделано с ❤️ на чистом HTML + CSS + JS
+  </footer>
 </div>
+
+<script>
+  // ============================================================
+  // 1. ТВОИ ИГРЫ – список UniverseId (ID вселенной)
+  //    Найди их в адресной строке игры: ?universeId=XXXXXXXXX
+  //    Или через Roblox Creator Dashboard.
+  // ============================================================
+  const UNIVERSE_IDS = [
+    1234567890,  // Замени на ID своей первой игры
+    9876543210   // Замени на ID второй игры (можно больше)
+  ];
+
+  // ============================================================
+  // 2. Функция запроса к Roblox API
+  // ============================================================
+  async function fetchGames(universeIds) {
+    if (!universeIds.length) return [];
+    const url = `https://games.roblox.com/v1/games?universeIds=${universeIds.join(',')}`;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      return data.data || [];
+    } catch (err) {
+      console.warn('Не удалось загрузить данные с Roblox API:', err);
+      return [];
+    }
+  }
+
+  // ============================================================
+  // 3. Рендер карточек
+  // ============================================================
+  function renderCards(games) {
+    const grid = document.getElementById('projects-grid');
+    grid.innerHTML = '';
+
+    if (!games.length) {
+      grid.innerHTML = `<p style="color: var(--muted);">Не удалось загрузить проекты. Проверь UniverseId.</p>`;
+      return;
+    }
+
+    games.forEach((game, index) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      // Задержка анимации задаётся через CSS-класс, но мы можем добавить inline-стиль для уникальности
+      card.style.animationDelay = `${0.05 + index * 0.1}s`;
+
+      // Данные из API
+      const name = game.name || 'Без названия';
+      const description = game.description || 'Описание отсутствует';
+      const visits = game.visits?.toLocaleString() || '0';
+      const playing = game.playing?.toLocaleString() || '0';
+      const favorites = game.favoritedCount?.toLocaleString() || '0';
+      const imageUrl = game.rootPlace?.imageUrl || '';
+      const placeId = game.rootPlace?.id || null;
+      const gameUrl = placeId ? `https://www.roblox.com/games/${placeId}` : '#';
+
+      card.innerHTML = `
+        ${imageUrl ? `<img class="card-img" src="${imageUrl}" alt="${name}" loading="lazy">` : ''}
+        <h3>${name}</h3>
+        <p>${description}</p>
+        <div class="card-meta">
+          <i>👁️ ${visits}</i>
+          <i class="online">🟢 ${playing}</i>
+          <i>❤️ ${favorites}</i>
+        </div>
+        <a href="${gameUrl}" class="btn" target="_blank">Играть</a>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  // ============================================================
+  // 4. Запуск
+  // ============================================================
+  (async function init() {
+    const games = await fetchGames(UNIVERSE_IDS);
+    renderCards(games);
+  })();
+</script>
 
 </body>
 </html>
