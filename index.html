@@ -3,426 +3,750 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Roblox Developer | Портфолио</title>
+  <title>AI-native Roblox Engineer | Портфолио</title>
   <style>
-    /* ===== Глобальные переменные ===== */
+    /* ===== Токены ===== */
     :root {
-      --bg: #0b0d11;
-      --card: #161a22;
-      --border: #252b36;
+      --bg: #0a0c10;
+      --bg-soft: #0f1218;
+      --card: #141922;
+      --card-hover: #18202c;
+      --border: #232b38;
+      --border-strong: #2f3a4d;
       --accent: #00a8ff;
-      --accent-glow: rgba(0, 168, 255, 0.25);
-      --text: #f0f2f5;
-      --muted: #8e95a3;
-      --radius: 14px;
-      --shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+      --accent-2: #6ee7ff;
+      --accent-dim: rgba(0, 168, 255, 0.12);
+      --success: #34d399;
+      --warning: #fbbf24;
+      --text: #eef2f7;
+      --muted: #93a0b3;
+      --muted-2: #6b7788;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+      --font-mono: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
+      line-height: 1.65;
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      padding: 24px;
-      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    .container {
-      max-width: 1000px;
-      width: 100%;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(900px 400px at 80% -10%, rgba(0,168,255,0.12), transparent 60%),
+        radial-gradient(700px 500px at -10% 30%, rgba(110,231,255,0.06), transparent 60%);
+      pointer-events: none;
+      z-index: 0;
     }
 
-    /* ===== Шапка ===== */
-    header {
-      text-align: center;
-      padding: 48px 20px 32px;
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== Навигация ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(10, 12, 16, 0.75);
       border-bottom: 1px solid var(--border);
-      margin-bottom: 32px;
-      animation: fadeDown 0.8s ease;
     }
-
-    .avatar {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: var(--card);
-      border: 3px solid var(--accent);
-      box-shadow: 0 0 30px var(--accent-glow);
-      margin: 0 auto 16px;
-      overflow: hidden;
-      transition: transform 0.4s;
-    }
-    .avatar:hover {
-      transform: scale(1.05);
-    }
-    .avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    h1 {
-      font-size: 2.4rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      background: linear-gradient(135deg, var(--accent), #66d0ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .subtitle {
-      color: var(--muted);
-      font-size: 1.1rem;
-      margin: 6px 0 12px;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin: 12px 0 18px;
-    }
-    .tag {
-      background: var(--card);
-      border: 1px solid var(--border);
-      padding: 4px 14px;
-      border-radius: 30px;
-      font-size: 0.85rem;
-      color: var(--muted);
-      transition: all 0.25s;
-    }
-    .tag:hover {
-      border-color: var(--accent);
-      color: #fff;
-      box-shadow: 0 0 16px var(--accent-glow);
-    }
-
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-    .social-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: color 0.25s;
-      border-bottom: 1px solid transparent;
-    }
-    .social-links a:hover {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
-    }
-
-    /* ===== Секции ===== */
-    .section-title {
-      font-size: 1.8rem;
-      font-weight: 600;
-      margin: 48px 0 20px;
+    .nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 14px 24px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      border-bottom: 2px solid var(--border);
-      padding-bottom: 12px;
-    }
-    .section-title span {
-      background: var(--accent);
-      width: 6px;
-      height: 32px;
-      border-radius: 8px;
-      display: inline-block;
-    }
-
-    /* ===== Сетка проектов ===== */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 24px;
-      margin-top: 16px;
-    }
-
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 20px;
-      border: 1px solid var(--border);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeUp 0.6s forwards;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      display: flex;
-      flex-direction: column;
-    }
-    .card:hover {
-      transform: translateY(-6px);
-      border-color: var(--accent);
-      box-shadow: 0 12px 40px rgba(0, 168, 255, 0.15);
-    }
-
-    .card-img {
-      width: 100%;
-      aspect-ratio: 16/9;
-      object-fit: cover;
-      border-radius: 8px;
-      background: #1e2430;
-      margin-bottom: 14px;
-      transition: transform 0.4s;
-    }
-    .card:hover .card-img {
-      transform: scale(1.02);
-    }
-
-    .card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 6px;
-      color: #fff;
-    }
-    .card p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      flex-grow: 1;
-      margin-bottom: 12px;
-    }
-    .card-meta {
-      display: flex;
+      justify-content: space-between;
       gap: 16px;
-      font-size: 0.85rem;
+    }
+    .brand {
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 14px var(--accent);
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    .nav-links a {
       color: var(--muted);
-      margin-bottom: 12px;
+      text-decoration: none;
+      font-size: 0.92rem;
+      transition: color 0.2s;
     }
-    .card-meta i {
-      font-style: normal;
-    }
-    .card-meta .online {
-      color: #4caf50;
-    }
+    .nav-links a:hover { color: var(--accent-2); }
 
     .btn {
-      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       background: var(--accent);
-      color: #fff;
+      color: #04131f;
       text-decoration: none;
-      padding: 8px 20px;
-      border-radius: 30px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      transition: background 0.25s, box-shadow 0.25s;
-      box-shadow: 0 4px 12px rgba(0, 168, 255, 0.25);
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.92rem;
       border: none;
       cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      box-shadow: 0 6px 24px rgba(0, 168, 255, 0.3);
+      white-space: nowrap;
     }
-    .btn:hover {
-      background: #0090e0;
-      box-shadow: 0 6px 20px rgba(0, 168, 255, 0.4);
+    .btn:hover { transform: translateY(-2px); background: var(--accent-2); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-strong);
+      box-shadow: none;
+      font-weight: 600;
+    }
+    .btn-ghost:hover { border-color: var(--accent); background: var(--accent-dim); }
+
+    /* ===== Hero ===== */
+    header {
+      padding: 72px 0 40px;
+      text-align: left;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border-strong);
+      background: var(--accent-dim);
+      color: var(--accent-2);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .badge .pulse {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      animation: pulse-dot 1.8s infinite;
+    }
+    @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+    h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.08;
+      margin-bottom: 18px;
+    }
+    h1 .grad {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .lead {
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      max-width: 720px;
+      margin-bottom: 28px;
+    }
+    .lead strong { color: var(--text); font-weight: 600; }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
     }
 
-    /* ===== Контакты ===== */
-    .contacts {
+    .fact-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 14px;
+      max-width: 860px;
+    }
+    .fact {
       background: var(--card);
-      border-radius: var(--radius);
-      padding: 24px 28px;
-      margin: 32px 0 16px;
       border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+    }
+    .fact b {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent-2);
+      display: block;
+      font-family: var(--font-mono);
+      letter-spacing: -0.5px;
+    }
+    .fact span { color: var(--muted); font-size: 0.82rem; }
+
+    /* ===== Секции ===== */
+    section { padding: 56px 0; }
+
+    .kicker {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      color: var(--muted);
+      max-width: 720px;
+      margin-bottom: 32px;
+    }
+
+    /* ===== Карточки ===== */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: transform 0.25s, border-color 0.25s, background 0.25s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+      background: var(--card-hover);
+    }
+    .card .icon {
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      background: var(--accent-dim);
+      border: 1px solid var(--border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      color: var(--accent-2);
+    }
+    .card h3 { font-size: 1.12rem; margin-bottom: 8px; }
+    .card p { color: var(--muted); font-size: 0.94rem; }
+
+    .card .mono {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--accent-2);
+      background: var(--accent-dim);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      margin: 2px 4px 0 0;
+    }
+
+    /* ===== Список решённых проблем ===== */
+    .prob {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg-soft);
+      margin-bottom: 14px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .prob:hover { border-color: var(--border-strong); }
+    .prob-head {
+      padding: 18px 22px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      cursor: pointer;
+      user-select: none;
+    }
+    .prob-head .idx {
+      font-family: var(--font-mono);
+      color: var(--accent);
+      font-size: 0.9rem;
+      padding-top: 3px;
+      flex-shrink: 0;
+    }
+    .prob-head h3 { font-size: 1.04rem; margin-bottom: 2px; }
+    .prob-head .tagline { color: var(--muted); font-size: 0.88rem; }
+    .prob-body {
+      display: none;
+      padding: 0 22px 20px 58px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .prob.open .prob-body { display: block; }
+    .prob-body ul { padding-left: 18px; }
+    .prob-body li { margin-bottom: 6px; }
+
+    /* ===== Стек ===== */
+    .stack {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
+      gap: 10px;
+      margin-bottom: 24px;
     }
-    .contacts .status {
-      color: #4caf50;
-      font-weight: 600;
+    .chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .chip:hover { border-color: var(--accent); color: var(--accent-2); }
+    .chip.primary { border-color: var(--accent); background: var(--accent-dim); color: var(--accent-2); }
+
+    /* ===== Метрики тестов ===== */
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .metric {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      text-align: center;
+    }
+    .metric b {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #fff;
+      font-family: var(--font-mono);
+    }
+    .metric span { color: var(--muted); font-size: 0.8rem; }
+
+    /* ===== AI workflow ===== */
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      counter-reset: step;
+    }
+    .step {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      position: relative;
+    }
+    .step::before {
+      counter-increment: step;
+      content: "0" counter(step);
+      font-family: var(--font-mono);
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--border-strong);
+    }
+    .step h3 { font-size: 1.05rem; margin-bottom: 8px; color: var(--accent-2); }
+    .step p { color: var(--muted); font-size: 0.92rem; }
+
+    /* ===== Контакты ===== */
+    .contact-card {
+      background: linear-gradient(135deg, var(--card), var(--bg-soft));
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 34px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+    }
+    .status-line {
+      color: var(--success);
+      font-weight: 700;
       display: flex;
       align-items: center;
       gap: 8px;
+      margin-bottom: 8px;
     }
-    .contacts .status::before {
-      content: "●";
-      font-size: 1.2rem;
+    .status-line::before {
+      content: "";
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 12px var(--success);
       animation: pulse-dot 1.8s infinite;
     }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
+    .contact-card .big { font-size: 1.3rem; font-weight: 700; }
+    .contact-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .contacts .discord {
-      background: #5865f2;
-      padding: 6px 18px;
-      border-radius: 30px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      display: inline-block;
+    footer {
+      text-align: center;
+      color: var(--muted-2);
+      font-size: 0.82rem;
+      padding: 36px 0 48px;
+      border-top: 1px solid var(--border);
     }
 
-    /* ===== Анимации ===== */
-    @keyframes fadeDown {
-      0% { opacity: 0; transform: translateY(-20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
+    code {
+      font-family: var(--font-mono);
+      background: var(--accent-dim);
+      color: var(--accent-2);
+      border: 1px solid var(--border);
+      padding: 1px 7px;
+      border-radius: 6px;
+      font-size: 0.85em;
+      white-space: nowrap;
     }
 
-    /* Задержки для карточек */
-    .card:nth-child(1) { animation-delay: 0.05s; }
-    .card:nth-child(2) { animation-delay: 0.15s; }
-    .card:nth-child(3) { animation-delay: 0.25s; }
-    .card:nth-child(4) { animation-delay: 0.35s; }
+    a.inline { color: var(--accent-2); text-decoration: none; border-bottom: 1px solid var(--border-strong); }
+    a.inline:hover { border-color: var(--accent); }
 
-    /* ===== Адаптив ===== */
-    @media (max-width: 640px) {
-      h1 { font-size: 1.8rem; }
-      .container { padding: 0 4px; }
-      .grid { grid-template-columns: 1fr; }
-      .contacts { flex-direction: column; align-items: flex-start; }
+    @media (max-width: 720px) {
+      .nav-links { display: none; }
+      header { padding: 48px 0 28px; }
+      .prob-head { padding: 16px; }
+      .prob-body { padding: 0 16px 16px 16px; }
     }
   </style>
 </head>
 <body>
 
-<div class="container">
+<nav>
+  <div class="nav-inner">
+    <div class="brand"><span class="brand-dot"></span> AI-native Roblox Engineer</div>
+    <div class="nav-links">
+      <a href="#project">Проект</a>
+      <a href="#problems">Решения</a>
+      <a href="#workflow">AI-процесс</a>
+      <a href="#contact">Связаться</a>
+    </div>
+  </div>
+</nav>
 
-  <!-- ===== ШАПКА ===== -->
+<div class="wrap">
+
+  <!-- ================= HERO ================= -->
   <header>
-    <div class="avatar">
-      <!-- Сюда можно поставить ссылку на аватарку, например с Roblox: https://www.roblox.com/headshot-thumbnail/image?userId=ТВОЙ_ID&width=420&height=420 -->
-      <img src="https://www.roblox.com/headshot-thumbnail/image?userId=123456789&width=420&height=420" alt="Avatar">
+    <div class="badge"><span class="pulse"></span> открыт к проектам / заказам</div>
+    <h1>Проектирую архитектуру Roblox-игр.<br /><span class="grad">Код пишут агенты — отвечаю я.</span></h1>
+    <p class="lead">
+      Я <strong>AI-нативный разработчик Roblox</strong>: сам держу всю техническую часть —
+      проектирую систему, задаю контракты, направляю AI-агентов, ревьюю их код и довожу до
+      working-состояния с тестами. Основной стек — <strong>roblox-ts</strong> (6 месяцев боевого
+      применения в продакшн-проекте), свободно перехожу и на чистый <strong>Luau</strong>.
+    </p>
+    <div class="hero-actions">
+      <a class="btn" href="#contact">Обсудить проект</a>
+      <a class="btn btn-ghost" href="#project">Смотреть кейс →</a>
     </div>
-    <h1>Твой Ник</h1>
-    <div class="subtitle">🛠️ Roblox Developer — Скриптер / Билдер</div>
-    <div class="tags">
-      <span class="tag">Luau</span>
-      <span class="tag">Roblox Studio</span>
-      <span class="tag">Blender</span>
-      <span class="tag">UI/UX</span>
-    </div>
-    <div class="social-links">
-      <a href="https://www.roblox.com/users/ТВОЙ_ID/profile" target="_blank">📌 Roblox</a>
-      <a href="https://github.com/ТВОЙ_НИК" target="_blank">🐙 GitHub</a>
-      <a href="https://discord.com/users/ТВОЙ_DISCORD_ID" target="_blank">💬 Discord</a>
+
+    <div class="fact-row">
+      <div class="fact"><b>6 мес.</b><span>боевой разработки на roblox-ts</span></div>
+      <div class="fact"><b>>20</b><span>взаимосвязанных игровых систем</span></div>
+      <div class="fact"><b>304</b><span>автотеста, все зелёные</span></div>
+      <div class="fact"><b>1</b><span>цельный production-архитектурный стандарт</span></div>
     </div>
   </header>
 
-  <!-- ===== ПРОЕКТЫ ===== -->
-  <div class="section-title">
-    <span></span> 🎮 Мои игры
-  </div>
-  <div class="grid" id="projects-grid">
-    <!-- Карточки будут вставлены через JavaScript -->
-  </div>
-
-  <!-- ===== КОНТАКТЫ ===== -->
-  <div class="section-title">
-    <span></span> 📬 Связь
-  </div>
-  <div class="contacts">
-    <div class="status">Открыт к заказам (Commissions: OPEN)</div>
-    <div>
-      <span class="discord">Discord: твой_тег#1234</span>
-      <span style="margin-left: 12px; color: var(--muted);">или</span>
-      <a href="mailto:твоя@почта.ru" style="color: var(--accent); text-decoration: none; margin-left: 8px;">твоя@почта.ru</a>
-    </div>
-  </div>
-
-  <footer style="text-align: center; margin-top: 40px; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 20px;">
-    © 2026 Твой Ник · Сделано с ❤️ на чистом HTML + CSS + JS
-  </footer>
-</div>
-
-<script>
-  // ============================================================
-  // 1. ТВОИ ИГРЫ – список UniverseId (ID вселенной)
-  //    Найди их в адресной строке игры: ?universeId=XXXXXXXXX
-  //    Или через Roblox Creator Dashboard.
-  // ============================================================
-  const UNIVERSE_IDS = [
-    1234567890,  // Замени на ID своей первой игры
-    9876543210   // Замени на ID второй игры (можно больше)
-  ];
-
-  // ============================================================
-  // 2. Функция запроса к Roblox API
-  // ============================================================
-  async function fetchGames(universeIds) {
-    if (!universeIds.length) return [];
-    const url = `https://games.roblox.com/v1/games?universeIds=${universeIds.join(',')}`;
-    try {
-      const res = await fetch(url);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      return data.data || [];
-    } catch (err) {
-      console.warn('Не удалось загрузить данные с Roblox API:', err);
-      return [];
-    }
-  }
-
-  // ============================================================
-  // 3. Рендер карточек
-  // ============================================================
-  function renderCards(games) {
-    const grid = document.getElementById('projects-grid');
-    grid.innerHTML = '';
-
-    if (!games.length) {
-      grid.innerHTML = `<p style="color: var(--muted);">Не удалось загрузить проекты. Проверь UniverseId.</p>`;
-      return;
-    }
-
-    games.forEach((game, index) => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      // Задержка анимации задаётся через CSS-класс, но мы можем добавить inline-стиль для уникальности
-      card.style.animationDelay = `${0.05 + index * 0.1}s`;
-
-      // Данные из API
-      const name = game.name || 'Без названия';
-      const description = game.description || 'Описание отсутствует';
-      const visits = game.visits?.toLocaleString() || '0';
-      const playing = game.playing?.toLocaleString() || '0';
-      const favorites = game.favoritedCount?.toLocaleString() || '0';
-      const imageUrl = game.rootPlace?.imageUrl || '';
-      const placeId = game.rootPlace?.id || null;
-      const gameUrl = placeId ? `https://www.roblox.com/games/${placeId}` : '#';
-
-      card.innerHTML = `
-        ${imageUrl ? `<img class="card-img" src="${imageUrl}" alt="${name}" loading="lazy">` : ''}
-        <h3>${name}</h3>
-        <p>${description}</p>
-        <div class="card-meta">
-          <i>👁️ ${visits}</i>
-          <i class="online">🟢 ${playing}</i>
-          <i>❤️ ${favorites}</i>
+  <!-- ================= ЧТО Я ДЕЛАЮ ================= -->
+  <section id="about">
+    <div class="kicker">Роль</div>
+    <h2 class="section-title">Что я делаю</h2>
+    <p class="section-sub">
+      Не «скриптер по ТЗ», а инженер, который отвечает за систему целиком: от схемы данных
+      и серверной экономики до оптимизированного React-UI — и умеет делать это через агентов
+      со скоростью команды.
+    </p>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
         </div>
-        <a href="${gameUrl}" class="btn" target="_blank">Играть</a>
-      `;
-      grid.appendChild(card);
-    });
-  }
+        <h3>Архитектура игровых систем</h3>
+        <p>Проектирую сервер-авторитетную архитектуру: единый источник истины, слои domain/state/UI, контракты импортов, исключения от круглых зависимостей.</p>
+      </div>
+      <div class="card">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
+        </div>
+        <h3>AI-пайплайн разработки</h3>
+        <p>Сам не «общаюсь» с ИИ — я управляю им: архитектурный рулбук, контракты, чекпоинты, автотесты как ворота. Агенты пишут, я — критерии качества и контроль.</p>
+      </div>
+      <div class="card">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
+        </div>
+        <h3>Полный стек производства</h3>
+        <p>Схема данных, миграции, санитайзер, против-чит rate-limits, оптимизация под 60 FPS, виртуализация списков, продакшн-жизненный цикл сохранений.</p>
+      </div>
+    </div>
+  </section>
 
-  // ============================================================
-  // 4. Запуск
-  // ============================================================
-  (async function init() {
-    const games = await fetchGames(UNIVERSE_IDS);
-    renderCards(games);
-  })();
-</script>
+  <!-- ================= ПРОЕКТ ================= -->
+  <section id="project">
+    <div class="kicker">Кейс</div>
+    <h2 class="section-title">Idle-Clicker на roblox-ts</h2>
+    <p class="section-sub">
+      Полноценная сервер-авторитетная idle-игра: экономика, бой, прогрессия. Нижняя оценка — не «демка»,
+      а production-система, где каждая из систем защищена от читов, масштабирования чисел и потери данных.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Два стора (SSoT + mirror)</h3>
+        <p>Серверный <code>obbyStore</code> — единственная правда; клиент <code>clientStore</code> — зеркало + монстр + сессии. Синхронизация через Broadcaster с контрактами аргументов.</p>
+      </div>
+      <div class="card">
+        <h3>Экономика на BigNum-строках</h3>
+        <p>Все игровые числа — строки с мантиссой и экспонентой: без потери точности за пределами 2⁵³, overflow-защита, кэши парсинга и форматирования.</p>
+      </div>
+      <div class="card">
+        <h3>Бой: оптимистик + валидация</h3>
+        <p>Клики идут мгновенно (оптимистично), сервер считает DPS, комбо и капы, а Broadcaster исправляет расхождения. Античит тихо отсекает спам.</p>
+      </div>
+      <div class="card">
+        <h3>20+ мета-систем</h3>
+        <p>Артефакты и миссии, сейджи, кланы с боссами, кристаллы с трансферами и подтверждёнными покупками, асценсия, резонанс, навыки, оффлайн-прогресс, лидерборды, ачивки.</p>
+      </div>
+      <div class="card">
+        <h3>Полный цикл данных</h3>
+        <p>Миграции схемы, глубокий санитайзер повреждённых/читерских данных, профильное сохранение с handshake и защитой от утечки сессий, автосейв с троттлингом.</p>
+      </div>
+      <div class="card">
+        <h3>UI: React + 60 FPS</h3>
+        <p>Виртуализация списков, объектный пул, апдейты через refs, react-reflex selectors без лишних ре-рендеров, токены по дизайн-системе без bare-чисел.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= РЕШЁННЫЕ ПРОБЛЕМЫ ================= -->
+  <section id="problems">
+    <div class="kicker">Инжиниринг</div>
+    <h2 class="section-title">Реальные проблемы, которые я закрыл</h2>
+    <p class="section-sub">
+      Не маркетинговые бейджи, а конкретные технические кейсы с обоснованием решений. Кликни — раскроется деталь.
+      (Все цифры и файлы реальны, в этом репозитории.)
+    </p>
+
+    <div class="prob" onclick="this.classList.toggle('open')">
+      <div class="prob-head"><span class="idx">01</span><div><h3>Точность чисел на масштабе idle-игры</h3><div class="tagline">BigNum-строки вместо number, которые ломались на 2⁵³</div></div></div>
+      <div class="prob-body">
+        <ul>
+          <li>Игровые числа хранятся как строки <code>"1.23e15"</code> и живут в математике без потери точности;</li>
+          <li>Случай с 32-битным побитовым wrap-around, который уронил бы сервер на степенях 3e9+, решён арифметическим <code>powerBinary</code> + overflow-стражем;</li>
+          <li>Parse-кэш (512) и готовые суффиксы <code>K/M/B/…</code> — читабельно и не нагружает GC на хот-пате.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prob" onclick="this.classList.toggle('open')">
+      <div class="prob-head"><span class="idx">02</span><div><h3>Сервер-авторитетность и античит</h3><div class="tagline">Клиент шлёт только намерения, сервер считает всё</div></div></div>
+      <div class="prob-body">
+        <ul>
+          <li>Единый 5-шаговый паттерн хендлеров: guard → валидация конфига → расчёт на сервере → проверка условий → атомарный dispatch;</li>
+          <li>Типизированный middleware на <code>@flamework/networking</code>: per-player/event окна, мягкий дроп пакетов (без киков, false-positive не накажут винта);</li>
+          <li>Лимиты согласованы с реальной скоростью игры (напр. клики 60/с против реального CPS + кликеров).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prob" onclick="this.classList.toggle('open')">
+      <div class="prob-head"><span class="idx">03</span><div><h3>Оптимистик-клики против пессимистик-покупок</h3><div class="tagline">Две разные стратегии синхронизации в одном клиенте</div></div></div>
+      <div class="prob-body">
+        <ul>
+          <li>Клики — optimistic: мгновенный отклик + серверный расчёт и коррекция от Broadcaster (окно не «тормозит»);</li>
+          <li>Покупки — pessimistic: селектор/кнопка блокируются до подтверждения сервера + таймаут на потерянный пакет;</li>
+          <li>Комбо считается локально (click momentum) и унифицируется с серверными значениями без рассинхронов.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prob" onclick="this.classList.toggle('open')">
+      <div class="prob-head"><span class="idx">04</span><div><h3>Синхронизация без «дыр» в данных</h3><div class="tagline">Контракт аргументов каждого broadcast-действия</div></div></div>
+      <div class="prob-body">
+        <ul>
+          <li><code>BROADCAST_ACTION_CONTRACTS</code> — единый реестр типов аргументов для всех ~80 экшенов стора;</li>
+          <li>Защита от сабой ошибки Luau-один nil в середине списка → сдвиг всех аргументов → коррапт на клиенте;</li>
+          <li>Реестр генерирует список userId-first экшенов — рассинхрон списков физически невозможен.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prob" onclick="this.classList.toggle('open')">
+      <div class="prob-head"><span class="idx">05</span><div><h3>DataStore-жизненный цикл без утечек</h3><div class="tagline">ProfileStore + cancellation-флаги вместо Promise.race</div></div></div>
+      <div class="prob-body">
+        <ul>
+          <li>Таймаут через флаг отмены (а не через утечку сессии в <code>Promise.race</code>);</li>
+          <li>Force-sync <code>profile.Data</code> перед каждым <code>Release()</code>; автосейв через троттлинг-подписку (5 c), а не while(true);</li>
+          <li>Обработка выхода игрока в окне загрузки (<code>pendingCancellations</code>), <code>BindToClose</code> с флешем всех профилей.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prob" onclick="this.classList.toggle('open')">
+      <div class="prob-head"><span class="idx">06</span><div><h3>Производительность: UI и тяжёлые расчеты</h3><div class="tagline">Списки не рендерят лишнего, расчёты не крадут кадр</div></div></div>
+      <div class="prob-body">
+        <ul>
+          <li><code>useVirtualList</code> — виртуализация по обеим осям, overscan и поддержка переменной высоты элементов;</li>
+          <li><code>purchaseScheduler</code> — очередь тяжёлых вычислений с бюджетом 4 мс/кадр на Heartbeat (без дедлоков <code>Wait()</code>), LRU-кэш с лимитом;</li>
+          <li>Пул объектов, апдейты горячих значений через refs (dirty-flag), селекторы без лишних ре-рендеров.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prob" onclick="this.classList.toggle('open')">
+      <div class="prob-head"><span class="idx">07</span><div><h3>Повреждённые данные не убьют прогресс</h3><div class="tagline">Санитайзер + миграции + проверка конфига на старте</div></div></div>
+      <div class="prob-body">
+        <ul>
+          <li>Глубокая валидация при загрузке: NaN/Inf, типы, диапазоны, консистентность BigNum-строк;</li>
+          <li>Версионирование схемы <code>Production_v25</code> + инкрементальные миграции (отдельная ось от имени DataStore);</li>
+          <li>Фатальная проверка конфига при старте: расхождение дефолтов с кодом ловится до продакшена.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= СТЕК ================= -->
+  <section id="stack">
+    <div class="kicker">Стек</div>
+    <h2 class="section-title">Технологии</h2>
+    <div class="stack">
+      <span class="chip primary">roblox-ts 3.0</span>
+      <span class="chip primary">TypeScript ~5.5</span>
+      <span class="chip primary">Luau</span>
+      <span class="chip">Flamework (DI)</span>
+      <span class="chip">Reflex (Redux-паттерн)</span>
+      <span class="chip">React + react-reflex</span>
+      <span class="chip">@flamework/networking</span>
+      <span class="chip">ProfileStore</span>
+      <span class="chip">Sift (immutability)</span>
+      <span class="chip">Rojo</span>
+      <span class="chip">Biome (lint/format)</span>
+      <span class="chip">tsx + node:test (тесты)</span>
+    </div>
+    <p class="section-sub" style="margin:0;max-width:720px;">
+      Ключевой навык — не знание библиотеки, а <strong>проектирование контрактов</strong>: import-matrix,
+      слои, исключения от круговых зависимостей. Это работает в любом стеке.
+    </p>
+  </section>
+
+  <!-- ================= ТЕСТЫ ================= -->
+  <section id="tests">
+    <div class="kicker">Качество</div>
+    <h2 class="section-title">Тесты — мои ворота качества</h2>
+    <p class="section-sub">
+      Верить агентам на слово нельзя. Поэтому каждый модуль домена покрыт тестами,
+      а новый код не проходит, пока тесты зелёные. Это то, что отличает «пишу код» от «поставляю готовое».
+    </p>
+    <div class="metrics">
+      <div class="metric"><b>304</b><span>автотестов</span></div>
+      <div class="metric"><b>30+</b><span>файлов тестов</span></div>
+      <div class="metric"><b>100%</b><span>математики и экономики</span></div>
+      <div class="metric"><b>yes</b><span>rate-limit / scheduler / миграции</span></div>
+    </div>
+    <p class="section-sub" style="margin-top:24px;margin-bottom:0;">
+      Тесты: <code>bignum</code>, <code>damageEngine</code>, <code>formulae</code>, <code>zoneCalculator</code>,
+      <code>upgradeEffects</code>, <code>playerService</code>, <code>combatService</code>, <code>clanCombat</code>,
+      <code>purchaseScheduler</code>, <code>dataSanitizer</code>, <code>migrations</code>, <code>useVirtualList</code> и др.
+    </p>
+  </section>
+
+  <!-- ================= AI WORKFLOW ================= -->
+  <section id="workflow">
+    <div class="kicker">Что отличает меня</div>
+    <h2 class="section-title">Как я работаю с AI-агентами</h2>
+    <p class="section-sub">
+      «Я пользуюсь Cursor» — говорят все. Я проектирую <strong>процесс</strong>, в котором агенты
+      производят код, а я отвечаю за архитектуру и результат. Быстро, но без хаоса.
+    </p>
+    <div class="flow">
+      <div class="step">
+        <h3>Архитектурный контракт</h3>
+        <p>Рулбук: слои, import-matrix, запреты, паттерны, чекпоинты. Агент в узких рамках не «накодит лишнего».</p>
+      </div>
+      <div class="step">
+        <h3>Управление агентами</h3>
+        <p>Разбиваю задачу на изолированные юниты, ставлю ограничения и критерии готовности. Не «улучшай всё» — а конкретные правила.</p>
+      </div>
+      <div class="step">
+        <h3>Тесты как ворота</h3>
+        <p>Каждый юнит проходит автотесты. Ревьюю диффы сам, не доверяю формулировкам «я это починил».</p>
+      </div>
+      <div class="step">
+        <h3>Держу техчасть целиком</h3>
+        <p>Схема данных, сервер, сеть, UI, сборка, деплой-путь роблокса — всё в одной голове, агенты исполняют по плану.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= КОНТАКТЫ ================= -->
+  <section id="contact">
+    <div class="kicker">Связь</div>
+    <h2 class="section-title">Давайте обсудим ваш проект</h2>
+    <div class="contact-card">
+      <div>
+        <div class="status-line">Свободен под проекты</div>
+        <div class="big">Беру как одиночные задачи, так и ведение игровой системы целиком</div>
+        <p style="color:var(--muted);margin-top:8px;">
+          Могу работать в вашей команде (техчасть за мной) или собрать систему под ваш дизайн-док.
+        </p>
+      </div>
+      <div class="contact-links">
+        <a class="btn" href="https://github.com/ВАШ_НИК" target="_blank">GitHub</a>
+        <a class="btn btn-ghost" href="https://discord.com/users/ВАШ_ID" target="_blank">Discord: ваш_тег</a>
+        <a class="btn btn-ghost" href="mailto:ваша@почта.ru">Почта</a>
+      </div>
+    </div>
+    <p style="color:var(--muted-2);font-size:0.85rem;margin-top:14px;">
+      Код кейса доступен по запросу (репозиторий с реальными файлами и тестами). Могу провести короткий
+      колл, показать архитектуру и как агенты встроены в процесс — без общих слов, по коду.
+    </p>
+  </section>
+
+  <footer>
+    © 2026 · AI-native Roblox Engineer · Чистый HTML + CSS + JS · Данные о стеке и тестах — из реального репозитория
+  </footer>
+
+</div>
 
 </body>
 </html>
