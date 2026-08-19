@@ -293,8 +293,10 @@ obbyStore.upgradePurchased(userId, upgradeId, nextLevel, nextCost, purchaseCost)
 
 <span class="k">const</span> existing = playerData.processedReceipts[purchaseId];
 <span class="k">if</span> (existing !== undefined) {
-  <span class="k">if</span> (existing.productId !== productId) <span class="k">return</span> NotProcessedYet; <span class="cm">// расхождение чека</span>
-  <span class="k">return</span> PurchaseGranted; <span class="cm">// уже выдано — просто подтверждаем</span>
+  <span class="k">if</span> (existing.productId !== productId || existing.crystals !== pack.crystals)
+    <span class="k">return</span> NotProcessedYet; <span class="cm">// расхождение чека</span>
+  <span class="k">return</span> this.dataService.synchronizePlayersNow([userId])
+    ? PurchaseGranted : NotProcessedYet; <span class="cm">// уже выдано — подтверждаем без выдачи</span>
 }
 
 obbyStore.__grantDeveloperProduct(userId, purchaseId, newCrystals, receipt);
@@ -415,7 +417,7 @@ bossMap.UpdateAsync(STATE_KEY, fn, STATE_TTL_SECONDS);
 queueBossPersistence(runtime.id, updatedBoss);
 
 <span class="cm">// присутствие игрока протухает само, без ручной очистки</span>
-presenceMap.SetAsync(userId, JSONEncode(record), PRESENCE_TTL_SECONDS, record.updatedAt);
+presenceMap.SetAsync(userId, JSONEncode(record), PRESENCE_TTL_SECONDS);
 
 <span class="cm">// перевод с дедлайном: expired -> откат через леджер</span>
 <span class="k">if</span> (pending.expiresAt &lt;= os.time()) <span class="k">return</span> this.cancelPendingTransfer(...);</code></pre>
@@ -543,7 +545,7 @@ timer = task.delay(PROFILE_RELEASE_TIMEOUT_SECONDS, () => {
     <h2>304 теста — не чтобы «было», а чтобы не было сюрпризов</h2>
     <p class="sub">
       Каждая функция экономики и математики покрыта тестами. Моки Roblox-сервисов и полифиллы Luau позволяют
-      гонять юнит-тесты на чистом Node без эмулятора. Новый код не засчитывается, пока тесты зелёные —
+      гонять юнит-тесты на чистом Node без эмулятора. Новый код не засчитывается, пока тесты не зелёные —
       это касается и кода, который пишут агенты.
     </p>
     <div class="metrics">
