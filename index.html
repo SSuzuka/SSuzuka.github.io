@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Roblox Engineer — server-side, AI-first</title>
+  <title>Roblox-разработчик — AI-driven</title>
   <style>
     :root {
       --bg: #0a0d12;
@@ -23,6 +23,7 @@
       --code-n: #d8a657;
       --code-cm: #5d6b7e;
       --ok: #3ddc97;
+      --warn: #e0a94c;
       --radius: 14px;
       --shadow: 0 18px 50px rgba(0,0,0,.4);
     }
@@ -43,6 +44,7 @@
       --code-s: #a5d6ff;
       --code-n: #e3b341;
       --code-cm: #7d8590;
+      --warn: #a06a15;
       --shadow: 0 18px 50px rgba(30,45,80,.12);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -53,9 +55,8 @@
       line-height: 1.6;
       transition: background .25s, color .25s;
     }
-    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 22px; }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 0 22px; }
 
-    /* навбар */
     nav {
       position: sticky; top: 0; z-index: 50;
       backdrop-filter: blur(10px);
@@ -63,7 +64,7 @@
       border-bottom: 1px solid var(--border);
     }
     .nav-inner {
-      max-width: 1060px; margin: 0 auto; padding: 12px 22px;
+      max-width: 1000px; margin: 0 auto; padding: 12px 22px;
       display: flex; align-items: center; justify-content: space-between; gap: 14px;
     }
     .brand { font-weight: 700; font-size: .95rem; display: flex; align-items: center; gap: 9px; }
@@ -76,111 +77,83 @@
     .nav-links a { color: var(--muted); text-decoration: none; font-size: .9rem; }
     .nav-links a:hover { color: var(--accent-2); }
 
-    .theme-switch {
-      display: flex; gap: 2px; background: var(--card); border: 1px solid var(--border);
-      border-radius: 999px; padding: 3px;
-    }
-    .theme-switch button {
-      border: none; background: transparent; color: var(--muted); cursor: pointer;
-      padding: 4px 10px; border-radius: 999px; font-size: .78rem; font-weight: 600;
-      transition: background .2s, color .2s;
-    }
+    .theme-switch { display: flex; gap: 2px; background: var(--card); border: 1px solid var(--border); border-radius: 999px; padding: 3px; }
+    .theme-switch button { border: none; background: transparent; color: var(--muted); cursor: pointer; padding: 4px 10px; border-radius: 999px; font-size: .78rem; font-weight: 600; transition: background .2s, color .2s; }
     .theme-switch button.active { background: var(--accent); color: #fff; }
 
-    /* hero */
-    header { padding: 64px 0 36px; }
-    .badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      border: 1px solid var(--border-2); background: var(--card);
-      border-radius: 999px; padding: 5px 14px;
-      font-size: .78rem; font-weight: 600; color: var(--ok); margin-bottom: 20px;
-    }
-    .badge i {
-      width: 7px; height: 7px; border-radius: 50%; background: var(--ok);
-      animation: pulse 1.8s infinite;
-    }
+    header { padding: 60px 0 34px; }
+    .badge { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border-2); background: var(--card); border-radius: 999px; padding: 5px 14px; font-size: .78rem; font-weight: 600; color: var(--ok); margin-bottom: 20px; }
+    .badge i { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); animation: pulse 1.8s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
-    h1 { font-size: clamp(1.9rem, 5vw, 3.1rem); font-weight: 800; letter-spacing: -.5px; line-height: 1.12; margin-bottom: 16px; }
+    h1 { font-size: clamp(1.8rem, 4.6vw, 2.7rem); font-weight: 800; letter-spacing: -.5px; line-height: 1.18; margin-bottom: 16px; }
     h1 em { font-style: normal; color: var(--accent); }
-    .lead { color: var(--muted); max-width: 720px; font-size: clamp(1rem, 2vw, 1.15rem); margin-bottom: 26px; }
+    .lead { color: var(--muted); max-width: 700px; font-size: clamp(1rem, 2vw, 1.1rem); margin-bottom: 10px; }
     .lead b { color: var(--text); }
 
-    .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 26px; }
-    .fact { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
-    .fact b { font-family: ui-monospace, Consolas, monospace; font-size: 1.3rem; color: var(--accent-2); display: block; }
-    .fact span { color: var(--muted); font-size: .8rem; }
-
-    section { padding: 46px 0; }
+    section { padding: 40px 0; border-top: 1px solid var(--border); }
+    header + section { border-top: none; }
     .kicker { text-transform: uppercase; letter-spacing: 2px; font-size: .75rem; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
-    h2 { font-size: clamp(1.4rem, 3.5vw, 1.9rem); font-weight: 700; letter-spacing: -.3px; margin-bottom: 10px; }
-    .sub { color: var(--muted); max-width: 740px; margin-bottom: 26px; }
+    h2 { font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: 700; letter-spacing: -.3px; margin-bottom: 10px; }
+    .sub { color: var(--muted); max-width: 720px; margin-bottom: 22px; }
 
-    /* стек */
     .stack { display: flex; flex-wrap: wrap; gap: 8px; }
-    .chip {
-      background: var(--card); border: 1px solid var(--border); color: var(--text);
-      padding: 6px 14px; border-radius: 999px; font-size: .82rem;
-      font-family: ui-monospace, Consolas, monospace;
-    }
+    .chip { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 6px 14px; border-radius: 999px; font-size: .82rem; font-family: ui-monospace, Consolas, monospace; }
     .chip.hot { border-color: var(--accent); color: var(--accent-2); background: color-mix(in srgb, var(--accent) 10%, transparent); }
 
-    /* инженерия: проблема -> код */
-    .case {
-      border: 1px solid var(--border); border-radius: var(--radius);
-      background: var(--card); margin-bottom: 16px; overflow: hidden;
-    }
-    .case-head { padding: 18px 22px; display: grid; grid-template-columns: 44px 1fr; gap: 14px; }
-    .case-num {
-      font-family: ui-monospace, Consolas, monospace; font-size: .9rem; color: var(--accent);
-      background: color-mix(in srgb, var(--accent) 10%, transparent);
-      border: 1px solid var(--border); height: 30px; width: 38px;
-      display: flex; align-items: center; justify-content: center; border-radius: 8px;
-    }
-    .case h3 { font-size: 1.02rem; margin-bottom: 3px; }
-    .case .why { color: var(--muted); font-size: .9rem; margin-bottom: 12px; }
-    .case .why b { color: var(--text); }
-
-    pre {
-      background: var(--code-bg); color: var(--code-c);
-      padding: 16px 22px; overflow-x: auto; font-size: .82rem; line-height: 1.55;
-      font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
-      border-top: 1px solid var(--border);
-    }
-    pre code { font-family: inherit; }
-    .k { color: var(--code-k); }
-    .s { color: var(--code-s); }
-    .n { color: var(--code-n); }
-    .cm { color: var(--code-cm); font-style: italic; }
-    .file {
-      font-size: .75rem; color: var(--code-cm); font-family: ui-monospace, Consolas, monospace;
-      padding: 8px 22px 0; display: block;
-    }
-
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
     .card h3 { font-size: 1rem; margin-bottom: 6px; }
     .card p { color: var(--muted); font-size: .9rem; }
 
-    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 24px; }
+    /* честный блок умею/не умею */
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 700px) { .split { grid-template-columns: 1fr; } }
+    .split-col { border-radius: var(--radius); padding: 20px; border: 1px solid var(--border); background: var(--card); }
+    .split-col.yes { border-color: color-mix(in srgb, var(--ok) 40%, var(--border)); }
+    .split-col.no { border-color: color-mix(in srgb, var(--warn) 40%, var(--border)); }
+    .split-col h3 { font-size: .95rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .split-col.yes h3 { color: var(--ok); }
+    .split-col.no h3 { color: var(--warn); }
+    .split-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .split-col li { color: var(--muted); font-size: .88rem; padding-left: 18px; position: relative; }
+    .split-col li::before { content: "—"; position: absolute; left: 0; color: var(--border-2); }
+
+    /* кейсы */
+    .case { border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); margin-bottom: 16px; overflow: hidden; }
+    .case-head { padding: 18px 22px; display: grid; grid-template-columns: 44px 1fr; gap: 14px; }
+    .case-num { font-family: ui-monospace, Consolas, monospace; font-size: .9rem; color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); border: 1px solid var(--border); height: 30px; width: 38px; display: flex; align-items: center; justify-content: center; border-radius: 8px; }
+    .case h3 { font-size: 1.02rem; margin-bottom: 3px; }
+    .case .why { color: var(--muted); font-size: .9rem; margin-bottom: 4px; }
+    .case .why b { color: var(--text); }
+    .case .my-words { font-size: .85rem; color: var(--accent-2); background: color-mix(in srgb, var(--accent) 8%, transparent); border: 1px dashed var(--border-2); border-radius: 8px; padding: 10px 12px; margin-top: 10px; }
+    .case .my-words b { color: var(--accent-2); }
+
+    pre { background: var(--code-bg); color: var(--code-c); padding: 16px 22px; overflow-x: auto; font-size: .8rem; line-height: 1.55; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; border-top: 1px solid var(--border); }
+    pre code { font-family: inherit; }
+    .k { color: var(--code-k); } .s { color: var(--code-s); } .n { color: var(--code-n); } .cm { color: var(--code-cm); font-style: italic; }
+    .file { font-size: .75rem; color: var(--code-cm); font-family: ui-monospace, Consolas, monospace; padding: 8px 22px 0; display: block; }
+
+    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 20px; }
     .metric { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
-    .metric b { font-family: ui-monospace, Consolas, monospace; font-size: 1.5rem; display: block; }
+    .metric b { font-family: ui-monospace, Consolas, monospace; font-size: 1.4rem; display: block; }
     .metric span { color: var(--muted); font-size: .8rem; }
 
-    .contact {
-      background: var(--card); border: 1px solid var(--border-2); border-radius: var(--radius);
-      padding: 26px 28px; display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between;
-    }
+    .terms { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .term { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+    .term .yn { font-size: .75rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; display: inline-block; margin-bottom: 8px; }
+    .term .yn.ok { background: color-mix(in srgb, var(--ok) 18%, transparent); color: var(--ok); }
+    .term .yn.no { background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); }
+    .term p { font-size: .88rem; color: var(--muted); }
+
+    .contact { background: var(--card); border: 1px solid var(--border-2); border-radius: var(--radius); padding: 26px 28px; display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; }
     .contact .avail { color: var(--ok); font-weight: 700; display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
     .contact .avail::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 10px var(--ok); }
-    .contact b.big { font-size: 1.15rem; display: block; }
+    .contact b.big { font-size: 1.05rem; display: block; }
     .contact small { color: var(--muted); }
-    .btn {
-      display: inline-block; background: var(--accent); color: #fff; text-decoration: none;
-      padding: 9px 20px; border-radius: 999px; font-weight: 700; font-size: .9rem;
-      transition: transform .15s, filter .15s;
-    }
+    .btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; padding: 9px 20px; border-radius: 999px; font-weight: 700; font-size: .9rem; transition: transform .15s, filter .15s; }
     .btn:hover { transform: translateY(-1px); filter: brightness(1.08); }
     .btn.ghost { background: transparent; border: 1px solid var(--border-2); color: var(--text); font-weight: 600; }
+    .btn.placeholder { opacity: .45; pointer-events: none; }
 
     code.i { font-family: ui-monospace, Consolas, monospace; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent-2); border: 1px solid var(--border); padding: 1px 6px; border-radius: 6px; font-size: .85em; }
 
@@ -197,12 +170,13 @@
 
 <nav>
   <div class="nav-inner">
-    <div class="brand"><i></i>Server-side Roblox Engineer</div>
+    <div class="brand"><i></i>Roblox-разработчик · AI-driven</div>
     <div class="nav-right">
       <div class="nav-links">
-        <a href="#stack">Стек</a>
-        <a href="#eng">Разбор</a>
-        <a href="#tests">Тесты</a>
+        <a href="#honest">Честно о себе</a>
+        <a href="#process">Как работаю</a>
+        <a href="#cases">Код</a>
+        <a href="#terms">Условия</a>
         <a href="#contact">Контакты</a>
       </div>
       <div class="theme-switch" id="themeSwitch">
@@ -216,325 +190,132 @@
 <div class="wrap">
 
   <header>
-    <span class="badge"><i></i>открыт к проектам</span>
-    <h1>Roblox-игры, где сервер — <em>единственная правда</em></h1>
+    <span class="badge"><i></i>ищу проект / команду</span>
+    <h1>Делаю рабочие системы для Roblox через <em>AI-агентов</em> — и отвечаю за результат</h1>
     <p class="lead">
-      Разрабатываю на <b>roblox-ts</b> (6 месяцев в проде, перехожу на Luau без проблем).
-      Проектирую систему, пишу контракты, работаю через AI-агентов — но отвечаю за результат сам.
-      Код ниже — из моего проекта, не из учебника.
+      5 месяцев в разработке. Не пишу код руками с нуля — веду AI-агентов по чёткому плану,
+      проверяю тестами, разбираюсь в багах и в том, <b>что и почему получилось в итоге</b>.
+      Не сеньор, не претендую им быть. Но система, которую я довёл до продакшна, реально работает —
+      ниже настоящий код из проекта, не выдуманный.
     </p>
-    <div class="facts">
-      <div class="fact"><b>304</b><span>автотеста, все зелёные</span></div>
-      <div class="fact"><b>15</b><span>Flamework-сервисов</span></div>
-      <div class="fact"><b>80+</b><span>действий стора под контрактом типов</span></div>
-      <div class="fact"><b>2</b><span>взаимозависимых сервера: MemoryStore + DataStore</span></div>
-    </div>
   </header>
 
-  <!-- СТЕК -->
-  <section id="stack">
-    <div class="kicker">Стек</div>
-    <h2>Чем работаю</h2>
-    <div class="stack">
-      <span class="chip hot">roblox-ts 3.0</span>
-      <span class="chip hot">TypeScript 5.5</span>
-      <span class="chip hot">Luau</span>
-      <span class="chip">Flamework</span>
-      <span class="chip">Reflex</span>
-      <span class="chip">React + react-reflex</span>
-      <span class="chip">ProfileStore</span>
-      <span class="chip">Sift</span>
-      <span class="chip">Rojo</span>
-      <span class="chip">Biome</span>
-      <span class="chip">tsx + node:test</span>
+  <!-- ЧЕСТНО -->
+  <section id="honest">
+    <div class="kicker">Сразу к делу</div>
+    <h2>Что я реально умею, а что нет</h2>
+    <p class="sub">Пишу это осознанно, чтобы не тратить ничьё время на созвоне. Лучше честно сейчас, чем неловко на собеседовании.</p>
+    <div class="split">
+      <div class="split-col yes">
+        <h3>✓ Умею</h3>
+        <ul>
+          <li>Спроектировать систему данных для игры (экономика, профили, кланы) и объяснить, зачем она устроена именно так</li>
+          <li>Разбить фичу на задачи для агента, задать рамки (что нельзя трогать, какие паттерны использовать)</li>
+          <li>Найти дыру — где эксплойтер сломает экономику, где гонка данных, где дублирование покупки</li>
+          <li>Требовать тесты на каждое изменение и не принимать код, пока тесты не зелёные</li>
+          <li>Читать логи, воспроизводить баг, находить причину и формулировать агенту точную задачу на фикс</li>
+          <li>Снять видео теста / показать код / сделать тестовое задание в разумный срок</li>
+        </ul>
+      </div>
+      <div class="split-col no">
+        <h3>✕ Пока не умею / не буду</h3>
+        <ul>
+          <li>Живое кодирование на созвоне под таймером — не мой формат, честно скажу «нет» на такое приглашение</li>
+          <li>Ответить с ходу на вопрос про редкий edge-case конкретного API без возможности проверить — предпочту сказать «не знаю, посмотрю» вместо угадывания</li>
+          <li>Писать большой объём кода вообще без ИИ — это не то, как я работаю, и не буду это изображать</li>
+          <li>Объяснить абсолютно каждую строчку в проекте на уровне внутренней механики Luau/Roblox — но логику и «зачем» — да</li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <!-- ИНЖЕНЕРИЯ -->
-  <section id="eng">
-    <div class="kicker">Разбор</div>
-    <h2>Проблемы, которые я реально решал</h2>
+  <!-- ПРОЦЕСС -->
+  <section id="process">
+    <div class="kicker">Процесс</div>
+    <h2>Как я работаю с агентами</h2>
+    <p class="sub">Это не «включил Cursor и жду». Есть процесс, который я выстроил сам за 5 месяцев, методом набитых шишек.</p>
+    <div class="cards">
+      <div class="card"><h3>Сначала план, потом код</h3><p>Прежде чем агент что-то пишет, я формулирую: что должно получиться, какие данные приходят от клиента (и почему им нельзя верить), что нельзя ломать.</p></div>
+      <div class="card"><h3>Маленькие задачи</h3><p>Не «сделай экономику», а «добавь проверку X в этом файле, не трогая остальное». Большие правки агент делает хуже и незаметнее ломает соседний код.</p></div>
+      <div class="card"><h3>Тесты как ворота</h3><p>304 теста в проекте. Новый код агента не принимается, пока прогон не зелёный — для меня самого это правило, а не для галочки в портфолио.</p></div>
+      <div class="card"><h3>Я разбираю, что вышло</h3><p>После того как агент написал код — я читаю диф, прошу объяснить логику, ищу, где он мог схитрить (заглушка вместо реальной проверки — частый грех агентов).</p></div>
+    </div>
+  </section>
+
+  <!-- КОД -->
+  <section id="cases">
+    <div class="kicker">Код из проекта</div>
+    <h2>Несколько реальных решений — с объяснением своими словами</h2>
     <p class="sub">
-      Формат: проблема — как решал. Ниже куски кода из проекта (файл указан), не выдумка.
+      Взял не все 15 сервисов, а несколько, логику которых могу пересказать и защитить сам, без подсказок.
+      Полный код — на созвоне или по запросу.
     </p>
 
     <div class="case">
       <div class="case-head">
         <span class="case-num">01</span>
         <div>
-          <h3>Эксплойтер подделывает RemoteEvent — клиенту верить нельзя</h3>
-          <p class="why">Игрок может вызвать покупку с любыми аргументами. Поэтому <b>клиент шлёт только id</b>, а цену, баланс, лимиты и макс-уровень сервер пересчитывает из своего состояния.</p>
+          <h3>Клиенту нельзя верить — цену считает сервер</h3>
+          <p class="why">Игрок мог бы вызвать покупку с любыми аргументами через эксплойт. Поэтому <b>от клиента идёт только id апгрейда</b>, а цену, баланс и лимиты сервер пересчитывает сам из своих данных.</p>
         </div>
       </div>
       <span class="file">server/services/EconomyService.ts</span>
-      <pre><code><span class="cm">// purchaseUpgrade(upgradeId) — от клиента пришёл только id</span>
+      <pre><code><span class="cm">// от клиента пришёл только upgradeId</span>
 <span class="k">const</span> playerData = selectServerPlayerData(state, userId);
-<span class="k">if</span> (!playerData) <span class="k">return</span>;                            <span class="cm">// гвард</span>
+<span class="k">if</span> (!playerData) <span class="k">return</span>;
 <span class="k">const</span> template = UPGRADES[upgradeId];
-<span class="k">if</span> (!template) <span class="k">return</span>;                              <span class="cm">// валидация конфига</span>
+<span class="k">if</span> (!template) <span class="k">return</span>;
 
 <span class="k">const</span> purchaseCost = getScaledCost(template.baseCost, template.costMultiplier, upgrade.level);
-<span class="k">if</span> (!isRepresentableCost(purchaseCost)) <span class="k">return</span>;    <span class="cm">// нереальный ценник</span>
-<span class="k">if</span> (!bnGte(playerData.currency, purchaseCost)) <span class="k">return</span>; <span class="cm">// мало денег</span>
+<span class="k">if</span> (!bnGte(playerData.currency, purchaseCost)) <span class="k">return</span>; <span class="cm">// денег не хватает</span>
 
 obbyStore.upgradePurchased(userId, upgradeId, nextLevel, nextCost, purchaseCost);</code></pre>
+      <div class="my-words"><b>Своими словами:</b> смысл простой — сервер никогда не доверяет цифрам от игрока, только его намерению («хочу купить X»). Всё, что влияет на баланс, пересчитывается заново на сервере. Это база анти-чит логики, тут я разбираюсь уверенно.</div>
     </div>
 
     <div class="case">
       <div class="case-head">
         <span class="case-num">02</span>
         <div>
-          <h3>Roblox приносит чеки покупки минимум один раз — повторная выдача = бесплатные кристаллы</h3>
-          <p class="why">Receipt не должен выдать награду дважды. Решение: <b>идемпотентность по purchaseId</b> — чек запоминается в данных игрока, повторный приход чека подтверждается без выдачи.</p>
+          <h3>Чек за покупку может прийти дважды — награда не должна выдаться дважды</h3>
+          <p class="why">Roblox может прислать один и тот же чек повторно. Если просто выдавать награду при получении чека — получится дублирование кристаллов.</p>
         </div>
       </div>
       <span class="file">server/services/PurchaseService.ts</span>
-      <pre><code><span class="k">if</span> (this.inFlightPurchaseIds.has(purchaseId)) <span class="k">return</span> NotProcessedYet; <span class="cm">// чек уже крутится</span>
-
-<span class="k">const</span> existing = playerData.processedReceipts[purchaseId];
+      <pre><code><span class="k">const</span> existing = playerData.processedReceipts[purchaseId];
 <span class="k">if</span> (existing !== undefined) {
-  <span class="k">if</span> (existing.productId !== productId || existing.crystals !== pack.crystals)
-    <span class="k">return</span> NotProcessedYet; <span class="cm">// расхождение чека</span>
+  <span class="cm">// чек уже обработан — просто подтверждаем, ничего не выдаём заново</span>
   <span class="k">return</span> this.dataService.synchronizePlayersNow([userId])
-    ? PurchaseGranted : NotProcessedYet; <span class="cm">// уже выдано — подтверждаем без выдачи</span>
+    ? PurchaseGranted : NotProcessedYet;
 }
 
 obbyStore.__grantDeveloperProduct(userId, purchaseId, newCrystals, receipt);
-<span class="cm">// подтверждаем роблоксу только ПОСЛЕ записи в профиль:</span>
 <span class="k">return</span> this.dataService.synchronizePlayersNow([userId])
   ? PurchaseGranted : NotProcessedYet;</code></pre>
+      <div class="my-words"><b>Своими словами:</b> каждый чек запоминается по id. Если он приходит снова — сервер не выдаёт награду ещё раз, а просто говорит «да, всё ок, уже выдано». Это то, что называется идемпотентностью: одна и та же операция, выполненная N раз, не должна дать разный результат.</div>
     </div>
 
     <div class="case">
       <div class="case-head">
         <span class="case-num">03</span>
         <div>
-          <h3>TOCTOU: между «проверил» и «записал» данные могут измениться</h3>
-          <p class="why">Перевод кристаллов трогает два профиля. Между проверкой и записью не должно быть ни одного yield — иначе вклинится конкурентная операция. <b>Проверка без await + запись всех участников одним пакетом.</b></p>
-        </div>
-      </div>
-      <span class="file">server/data/DataService.ts</span>
-      <pre><code><span class="cm">// проверка: ни одного await/yield внутри</span>
-<b>public</b> canSynchronizePlayers(userIds: string[]): <span class="k">boolean</span> {
-  <span class="k">for</span> (<span class="k">const</span> userId <span class="k">of</span> userIds) {
-    <span class="k">const</span> session = this.activeSessions.get(userId);
-    <span class="k">if</span> (!session || session.isReleasingLocally || !session.profile.IsActive()) <span class="k">return</span> false;
-  }
-  <span class="k">return</span> true;
-}
-
-<span class="cm">// двухфазный коммит: всем профилям сразу Data, потом всем Save</span>
-<span class="k">for</span> (<span class="k">const</span> [session, data] <span class="k">of</span> snapshots) session.profile.Data = data;
-<span class="k">for</span> (<span class="k">const</span> [session] <span class="k">of</span> snapshots) session.profile.Save();</code></pre>
-    </div>
-
-    <div class="case">
-      <div class="case-head">
-        <span class="case-num">04</span>
-        <div>
-          <h3>Клановый босс: 10 серверов бьют одновременно — кто напишет HP последним?</h3>
-          <p class="why">Решение: босс живёт в MemoryStore, и <b>UpdateAsync сериализует все удары со всех серверов</b>. Оверкилл физически не может открыть следующего босса раньше времени, потому что каждое обновление видит свежее состояние.</p>
+          <h3>Межсерверный босс: 10 серверов бьют одновременно</h3>
+          <p class="why">У босса есть <b>revision</b> — номер версии его состояния. Каждый удар проверяет, что бьёт по актуальной версии, а не по устаревшей, которую сервер получил секунду назад.</p>
         </div>
       </div>
       <span class="file">server/services/ClanService.ts</span>
       <pre><code>runtime.bossMap.UpdateAsync(STATE_KEY, (rawState) => {
   <span class="k">const</span> current = this.decodeBossState(rawState) ?? runtime.boss;
-  <span class="k">const</span> activeBoss = this.expireBoss(current, now); <span class="cm">// проверка периода</span>
-  <span class="k">if</span> (activeBoss.isDefeated) <span class="k">return</span> undefined;     <span class="cm">// уже убит — не трогаем</span>
+  <span class="k">if</span> (current.isDefeated) <span class="k">return</span> undefined; <span class="cm">// уже убит — не трогаем</span>
 
-  <span class="k">const</span> dealt = math.min(activeBoss.currentHP, damage);
+  <span class="k">const</span> dealt = math.min(current.currentHP, damage);
   <span class="k">return</span> JSONEncode({
-    ...activeBoss,
-    currentHP: activeBoss.currentHP - dealt,
-    revision: activeBoss.revision + 1,        <span class="cm">// каждая запись версионируется</span>
+    ...current,
+    currentHP: current.currentHP - dealt,
+    revision: current.revision + 1,
   });
 }, STATE_TTL_SECONDS);</code></pre>
-    </div>
-
-    <div class="case">
-      <div class="case-head">
-        <span class="case-num">05</span>
-        <div>
-          <h3>После UpdateAsync нельзя слепо писать в DataStore — ретрай продублирует побочный эффект</h3>
-          <p class="why">Сохранение босса в DataStore — идемпотентное: ключ ретрая включает <b>generation и revision</b>, а сама запись пропускается, если в базе уже лежит более свежая версия.</p>
-        </div>
-      </div>
-      <span class="file">server/services/ClanService.ts</span>
-      <pre><code><span class="cm">// ключ ретрая уникален для каждого поколения/ревизии → повтор не дублирует</span>
-safeDataStoreCall(`boss-progress:${clanId}:${boss.generation}:${boss.revision}`, () =>
-  this.clanStore.UpdateAsync(clanId, (rawRecord) => {
-    <span class="k">const</span> stored = record.bossProgress;
-    <span class="cm">// в базе уже новее — наша запись устарела, выходим без перезаписи</span>
-    <span class="k">if</span> (
-      stored.generation &gt; boss.generation ||
-      (stored.generation === boss.generation && stored.revision &gt; boss.revision)
-    ) <span class="k">return</span> record;
-    record.bossProgress = { ...boss, revision: boss.revision };
-    <span class="k">return</span> record;
-  })
-);</code></pre>
-    </div>
-
-    <div class="case">
-      <div class="case-head">
-        <span class="case-num">06</span>
-        <div>
-          <h3>Конфликт версий: старый сервер перезаписывает прогресс, сделанный новым</h3>
-          <p class="why">У босса явные <b>generation (жизненный цикл) и revision (каждая правка)</b>. Восстановление после рестарта идёт от большего к меньшему: свежая ревизия побеждает, HP пересчитывается пропорционально конфигу уровня.</p>
-        </div>
-      </div>
-      <span class="file">server/services/ClanService.ts</span>
-      <pre><code>restoreBossFromProgress(progress: StoredClanBossProgress): ClanBossState {
-  <span class="k">const</span> configuredMaxHP = getClanBossMaxHP(progress.level);
-  <span class="cm">// баланс HP: храним % от старого максимума, применяем к новому конфигу</span>
-  <span class="k">const</span> currentHP = math.clamp(
-    math.floor(progress.currentHP / storedMaxHP * configuredMaxHP + 0.5),
-    0, configuredMaxHP
-  );
-  <span class="k">return</span> {
-    level: progress.level,
-    currentHP,
-    generation: progress.generation,
-    revision: progress.revision,
-    ...
-  };
-}</code></pre>
-    </div>
-
-    <div class="case">
-      <div class="case-head">
-        <span class="case-num">07</span>
-        <div>
-          <h3>Горячее состояние протухает, каноничное — вечное</h3>
-          <p class="why">Боевое состояние босса — в <b>MemoryStore с TTL</b> (быстрые атомарные UpdateAsync), а постоянная копия — в DataStore. То же для перевода кристаллов: присутствие игрока живёт с TTL, время жизни перевода задаётся expiresAt и проверяется при каждом шаге.</p>
-        </div>
-      </div>
-      <span class="file">CrystalShopService.ts / ClanService.ts</span>
-      <pre><code><span class="cm">// горячее: атомарные удары, TTL</span>
-bossMap.UpdateAsync(STATE_KEY, fn, STATE_TTL_SECONDS);
-
-<span class="cm">// персистентность: каноничная копия в DataStore</span>
-queueBossPersistence(runtime.id, updatedBoss);
-
-<span class="cm">// присутствие игрока протухает само, без ручной очистки</span>
-presenceMap.SetAsync(userId, JSONEncode(record), PRESENCE_TTL_SECONDS);
-
-<span class="cm">// перевод с дедлайном: expired -> откат через леджер</span>
-<span class="k">if</span> (pending.expiresAt &lt;= os.time()) <span class="k">return</span> this.cancelPendingTransfer(...);</code></pre>
-    </div>
-
-    <div class="case">
-      <div class="case-head">
-        <span class="case-num">08</span>
-        <div>
-          <h3>Спам по RemoteEvent: дабл-файр, макросы, «убить монстра» 1000 раз в секунду</h3>
-          <p class="why">Rate limit на каждое событие с оглядкой на реальную скорость игры: клики 60/с, покупки 5/с. Превышение — <b>тихое отбрасывание пакета, без кика</b>: кик даёт ложные срабатывания и банит ни в чём не виноватых.</p>
-        </div>
-      </div>
-      <span class="file">server/middleware/rateLimit.ts</span>
-      <pre><code><span class="k">return</span> (player, ...args) => {
-  <span class="k">const</span> currentTime = Workspace.GetServerTimeNow();
-  <span class="k">let</span> data = eventTraffic.get(config.eventKey);
-
-  <span class="k">if</span> (!data) { ... processNext(player, ...args); <span class="k">return</span>; }
-  <span class="k">if</span> (currentTime - data.lastResetTime &gt;= config.windowSeconds) {
-    data.packetCount = 1; data.lastResetTime = currentTime;  <span class="cm">// окно истекло</span>
-    processNext(player, ...args); <span class="k">return</span>;
-  }
-
-  data.packetCount += 1;
-  <span class="k">if</span> (data.packetCount &gt; config.maxPackets) <span class="k">return</span>; <span class="cm">// тихо дропаем</span>
-  processNext(player, ...args);
-};</code></pre>
-    </div>
-
-    <div class="case">
-      <div class="case-head">
-        <span class="case-num">09</span>
-        <div>
-          <h3>Переводы кристаллов: повторный клик тот же запрос — и деньги списаны дважды</h3>
-          <p class="why">Пока перевод в полёте, игрок <b>заблокирован (session lock)</b>. Клиент генерирует requestId: одна и та же транзакция с одним id никогда не пройдёт дважды, а результат дубликата — «pending», не повторная выдача.</p>
-        </div>
-      </div>
-      <span class="file">server/services/CrystalShopService.ts</span>
-      <pre><code><span class="k">if</span> (!this.tryLockUser(senderUserId)) {
-  <span class="cm">// тот же запрос уже крутится → pending, а не вторая транзакция</span>
-  <span class="k">const</span> sameRequest =
-    this.activeTransferRequestIds.get(senderUserId) === requestId ||
-    senderData?.pendingCrystalTransfers[requestId] !== undefined;
-  sendTransferResult(player, requestId, sameRequest ? "pending" : "rejected", ...);
-  <span class="k">return</span>;
-}
-
-<span class="cm">// если перевод уже прошёл — сразу completed, без списания</span>
-<span class="k">if</span> (senderData.completedCrystalTransfers[transferId] !== undefined) <span class="k">return</span> COMPLETED;</code></pre>
-    </div>
-
-    <div class="case">
-      <div class="case-head">
-        <span class="case-num">10</span>
-        <div>
-          <h3>NaN, бесконечность, дробные, отрицательные — что угодно может прийти от клиента</h3>
-          <p class="why">Каждый входящий параметр проходит нормализацию <b>до</b> любых расчётов: NaN, ±Inf, floor, диапазон. Кривой ввод молча отсекается, а не валит расчёт.</p>
-        </div>
-      </div>
-      <span class="file">server/services/EconomyService.ts</span>
-      <pre><code><span class="k">function</span> normalizeBatchCount(count: number): number | undefined {
-  <span class="k">if</span> (count === -1) <span class="k">return</span> -1; <span class="cm">// «купить максимум»</span>
-  <span class="k">if</span> (count !== count || count === math.huge || count === -math.huge ||
-      count &lt; 1 || count % 1 !== 0) <span class="k">return</span> undefined; <span class="cm">// NaN/Inf/дробные/0</span>
-  <span class="k">if</span> (count &gt; MAX_CLIENT_BATCH_COUNT) <span class="k">return</span> undefined;
-  <span class="k">return</span> count;
-}</code></pre>
-    </div>
-
-    <div class="case">
-      <div class="case-head">
-        <span class="case-num">11</span>
-        <div>
-          <h3>Утечки: незакрытые Connect и забытые подписки съедают память сервера</h3>
-          <p class="why">Всё, что подключается — кладётся в Janitor и освобождается: подписки на события, обсерверы стора, таймеры. На выходе игрока очищаются все его следы: кэши, подписки, трафик rate-лимита.</p>
-        </div>
-      </div>
-      <span class="file">EconomyService.ts / rateLimit.ts</span>
-      <pre><code><span class="k">this</span>.janitor.Add(serverEvents.purchaseUpgrade.connect(...));
-<span class="k">this</span>.janitor.Add(Players.PlayerRemoving.Connect((player) => {
-  <span class="k">const</span> userId = tostring(player.UserId);
-  cleanupPlayerZone(userId);            <span class="cm">// отписки стора</span>
-  this.paidRandomItemsAllowed.delete(userId);
-}));
-<span class="k">this</span>.janitor.Add(() => { <span class="cm">// даже скрытые подписки — под контролем</span>
-  <span class="k">for</span> (<span class="k">const</span> [, unsub] <span class="k">of</span> this.zoneSubscriptions) unsub();
-  this.zoneSubscriptions.clear();
-});
-
-<span class="cm">// rate limit тоже чистит следы игрока:</span>
-Players.PlayerRemoving.Connect((player) => playerTraffic.delete(player));</code></pre>
-    </div>
-
-    <div class="case">
-      <div class="case-head">
-        <span class="case-num">12</span>
-        <div>
-          <h3>DataStore упал — сервер должен жить дальше</h3>
-          <p class="why">Все обращения к стораджам обёрнуты в pcall. Не записался лидерборд — не беда, повторится при следующем flush. Профиль занят другим сервером — игрок мягко выводится с объяснением. Ошибка записи — warn + ретрай, а не крэш.</p>
-        </div>
-      </div>
-      <span class="file">LeaderboardService.ts / DataService.ts</span>
-      <pre><code><span class="cm">// лидерборд: не вышло — просто пропускаем, flush повторит позже</span>
-<span class="k">const</span> [ok, setError] = pcall(() => zoneStore.SetAsync(userId, maxZone));
-<span class="k">if</span> (!ok) { warn(...); <span class="k">return</span>; }
-
-<span class="cm">// профиль занят другим сервером (StartSessionAsync == undefined)</span>
-<span class="k">if</span> (!profile) {
-  player.Kick(<span class="s">"Профиль уже используется другим сервером. Перезайдите."</span>);
-  <span class="k">return</span>;
-}
-
-<span class="cm">// выход из профиля ждём не вечно: 14с и EndSession-фолбэк</span>
-timer = task.delay(PROFILE_RELEASE_TIMEOUT_SECONDS, () => {
-  pcall(() => profile.EndSession());
-  ...</code></pre>
+      <div class="my-words"><b>Своими словами:</b> босс общий на все сервера, а не свой на каждом. Если бы каждый сервер тупо вычитал урон из своей копии HP — можно было бы дважды посчитать один и тот же удар или, наоборот, потерять урон другого сервера. UpdateAsync гарантирует, что изменение всегда идёт от актуального состояния, а revision — просто счётчик, чтобы было видно, что состояние точно свежее, а не залежавшееся. Могу объяснить логику, но не готов на лету разбирать все тонкости API MemoryStore — это смотрел вместе с агентом при отладке гонки, которая реально была на проде.</div>
     </div>
 
   </section>
@@ -542,59 +323,66 @@ timer = task.delay(PROFILE_RELEASE_TIMEOUT_SECONDS, () => {
   <!-- ТЕСТЫ -->
   <section id="tests">
     <div class="kicker">Проверка</div>
-    <h2>304 теста — не чтобы «было», а чтобы не было сюрпризов</h2>
+    <h2>304 теста — не для красоты в портфолио</h2>
     <p class="sub">
-      Каждая функция экономики и математики покрыта тестами. Моки Roblox-сервисов и полифиллы Luau позволяют
-      гонять юнит-тесты на чистом Node без эмулятора. Новый код не засчитывается, пока тесты не зелёные —
-      это касается и кода, который пишут агенты.
+      Правило простое: код (мой или агента) не считается готовым, пока прогон не зелёный. Это единственный способ
+      контролировать качество, когда сам не пишешь каждую строку руками.
     </p>
     <div class="metrics">
       <div class="metric"><b>304</b><span>теста</span></div>
       <div class="metric"><b>30+</b><span>файлов</span></div>
-      <div class="metric"><b>100%</b><span>математики и экономики</span></div>
       <div class="metric"><b>~60c</b><span>полный прогон</span></div>
     </div>
-    <p style="color:var(--muted);font-size:.86rem;margin-top:18px;">
-      Покрыто: <code class="i">bignum</code>, <code class="i">damageEngine</code>, <code class="i">formulae</code>,
-      <code class="i">zoneCalculator</code>, <code class="i">upgradeEffects</code>, <code class="i">playerService</code>,
-      <code class="i">combatService</code>, <code class="i">clanCombat</code>, <code class="i">purchaseScheduler</code>,
-      <code class="i">dataSanitizer</code>, <code class="i">migrations</code>, <code class="i">useVirtualList</code> и другие.
-    </p>
   </section>
 
-  <!-- AI -->
-  <section id="ai">
-    <div class="kicker">Процесс</div>
-    <h2>Как в это вписаны AI-агенты</h2>
-    <p class="sub">Я не «пользуюсь Cursor» — я управляю агентами по правилам, которые сам написал. Это даёт скорость без развала архитектуры.</p>
+  <!-- УЧУСЬ -->
+  <section id="learning">
+    <div class="kicker">Сейчас</div>
+    <h2>Чем занимаюсь помимо проекта</h2>
+    <p class="sub">
+      Я не считаю, что «пять месяцев — и всё, дальше только код». Индустрия AI-инструментов меняется быстрее,
+      чем классический стек, и я слежу за этим осознанно, а не жду, что кто-то расскажет.
+    </p>
     <div class="cards">
-      <div class="card"><h3>Контракт до кода</h3><p>Слои, import-матрица, запреты и паттерны описаны заранее. Агент не может «наулучшать всё» — у него есть рамки.</p></div>
-      <div class="card"><h3>Задача = юнит</h3><p>Крупная фича бьётся на изолированные задачи с критериями готовности. Диффы не больше сотен строк.</p></div>
-      <div class="card"><h3>Тесты — ворота</h3><p>Код агента проходит те же 304 теста, что и мой. Слово «починил» без зелёного прогона не засчитывается.</p></div>
-      <div class="card"><h3>Техчасть — за мной</h3><p>Схема данных, сервер, сеть, UI, сборка. Агенты исполняют план, я отвечаю за архитектуру и результат.</p></div>
+      <div class="card"><h3>Новые модели и агентские пайплайны</h3><p>Слежу, какие модели и харнессы реально дают прирост в качестве кода, а не только в маркетинге.</p></div>
+      <div class="card"><h3>Как ставить агенту задачу лучше</h3><p>Работа с контекстом, декомпозиция, промпты-контракты — это отдельный навык, и я его целенаправленно прокачиваю.</p></div>
+      <div class="card"><h3>Разбор своего же кода</h3><p>Периодически возвращаюсь к старым модулям проекта и заставляю себя объяснить их заново — без агента под рукой.</p></div>
+    </div>
+  </section>
+
+  <!-- УСЛОВИЯ -->
+  <section id="terms">
+    <div class="kicker">Условия</div>
+    <h2>Как со мной удобнее работать</h2>
+    <div class="terms">
+      <div class="term"><span class="yn ok">ок</span><p>Тестовое задание с разумным сроком (не за 2 часа) — сделаю, покажу код и видео результата.</p></div>
+      <div class="term"><span class="yn ok">ок</span><p>Асинхронное общение (текст, задача в таск-трекере) — комфортнее, чем спонтанный созвон с вопросами на лету.</p></div>
+      <div class="term"><span class="yn ok">ок</span><p>Показать реальный репозиторий и историю работы над проектом на созвоне.</p></div>
+      <div class="term"><span class="yn no">нет</span><p>Live-coding интервью / алгоритмические задачи под таймером — честно откажусь, это не покажет ничего полезного про мою реальную работу.</p></div>
+      <div class="term"><span class="yn no">нет</span><p>Блиц-вопросы по редким деталям API без возможности проверить — предпочту сказать «не знаю навскидку, посмотрю» вместо гадания.</p></div>
     </div>
   </section>
 
   <!-- КОНТАКТ -->
   <section id="contact">
     <div class="kicker">Связь</div>
-    <h2>Заказ, оффер, разбор проекта</h2>
+    <h2>Тестовое, вопросы, предложения</h2>
     <div class="contact">
       <div>
         <div class="avail">открыт к проектам</div>
-        <b class="big">Беру целиком систему или отдельный блок: сервер, экономика, сеть, данные</b>
-        <small>Нужен дизайн-док или текущий код — сделать «как надо» с тестами.</small>
+        <b class="big">Ищу первую команду / проект, где можно расти как AI-driven разработчик</b>
+        <small>Контакты будут добавлены здесь.</small>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <a class="btn" href="https://github.com/ВАШ_НИК" target="_blank">GitHub</a>
-        <a class="btn ghost" href="https://discord.com/users/ВАШ_ID" target="_blank">Discord</a>
-        <a class="btn ghost" href="mailto:ваша@почта.ru">Почта</a>
+        <a class="btn placeholder" href="#">GitHub</a>
+        <a class="btn ghost placeholder" href="#">Discord</a>
+        <a class="btn ghost placeholder" href="#">Почта</a>
       </div>
     </div>
   </section>
 
   <footer>
-    Репозиторий проекта можно показать на созвоне — все файлы и тесты из этого текста настоящие.
+    Репозиторий проекта и полный код показываю на созвоне.
   </footer>
 
 </div>
@@ -604,11 +392,7 @@ timer = task.delay(PROFILE_RELEASE_TIMEOUT_SECONDS, () => {
     var switchEl = document.getElementById('themeSwitch');
     var saved = null;
     try { saved = localStorage.getItem('pf-theme'); } catch (e) {}
-
-    if (saved === 'light') {
-      document.documentElement.setAttribute('data-theme', 'light');
-    }
-
+    if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
     switchEl.addEventListener('click', function (e) {
       var btn = e.target.closest('button');
       if (!btn) return;
@@ -616,9 +400,7 @@ timer = task.delay(PROFILE_RELEASE_TIMEOUT_SECONDS, () => {
       document.documentElement.setAttribute('data-theme', theme);
       try { localStorage.setItem('pf-theme', theme); } catch (err) {}
       var buttons = switchEl.querySelectorAll('button');
-      for (var i = 0; i < buttons.length; i++) {
-        buttons[i].classList.toggle('active', buttons[i] === btn);
-      }
+      for (var i = 0; i < buttons.length; i++) buttons[i].classList.toggle('active', buttons[i] === btn);
     });
   })();
 </script>
