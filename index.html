@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Roblox-разработчик — собираю игры целиком</title>
+  <title>Roblox-разработчик</title>
   <style>
     :root {
       --bg: #0a0d12; --card: #141a23; --border: #232c3a; --border-2: #2e3a4d;
@@ -17,10 +17,10 @@
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-    .wrap { max-width: 960px; margin: 0 auto; padding: 0 22px; }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 0 22px; }
 
     nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(10px); background: color-mix(in srgb, var(--bg) 78%, transparent); border-bottom: 1px solid var(--border); }
-    .nav-inner { max-width: 960px; margin: 0 auto; padding: 12px 22px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .nav-inner { max-width: 920px; margin: 0 auto; padding: 12px 22px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
     .brand { font-weight: 700; font-size: .95rem; display: flex; align-items: center; gap: 9px; }
     .brand i { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
     .nav-links { display: flex; gap: 20px; }
@@ -43,28 +43,21 @@
     .btn.ghost { background: transparent; border: 1px solid var(--border-2); color: var(--text); font-weight: 600; }
     .btn.placeholder { opacity: .45; pointer-events: none; }
 
-    header { padding: 40px 0 18px; }
-    h1 { font-size: clamp(1.65rem, 4.2vw, 2.4rem); font-weight: 800; letter-spacing: -.5px; line-height: 1.22; margin-bottom: 14px; }
+    header { padding: 40px 0 20px; }
+    h1 { font-size: clamp(1.6rem, 4.2vw, 2.3rem); font-weight: 800; letter-spacing: -.5px; line-height: 1.24; margin-bottom: 14px; }
     h1 em { font-style: normal; color: var(--accent); }
-    .lead { color: var(--muted); max-width: 680px; font-size: clamp(1rem, 2vw, 1.05rem); }
+    .lead { color: var(--muted); max-width: 660px; font-size: clamp(1rem, 2vw, 1.05rem); }
     .lead b { color: var(--text); }
 
-    section { padding: 36px 0; border-top: 1px solid var(--border); }
+    section { padding: 34px 0; border-top: 1px solid var(--border); }
     header + section { border-top: none; }
     .kicker { text-transform: uppercase; letter-spacing: 2px; font-size: .75rem; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
-    h2 { font-size: clamp(1.2rem, 3vw, 1.55rem); font-weight: 700; letter-spacing: -.3px; margin-bottom: 10px; }
-    .sub { color: var(--muted); max-width: 700px; margin-bottom: 18px; }
+    h2 { font-size: clamp(1.15rem, 3vw, 1.45rem); font-weight: 700; letter-spacing: -.3px; margin-bottom: 10px; }
+    .sub { color: var(--muted); max-width: 680px; margin-bottom: 18px; }
 
-    .highlight {
-      background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, var(--card)), var(--card));
-      border: 1px solid var(--accent); border-radius: var(--radius); padding: 22px 24px;
-    }
-    .highlight p { color: var(--text); font-size: .96rem; }
-    .highlight p + p { margin-top: 10px; color: var(--muted); }
-
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
-    .card h3 { font-size: .98rem; margin-bottom: 6px; }
+    .card h3 { font-size: .96rem; margin-bottom: 6px; }
     .card p { color: var(--muted); font-size: .89rem; }
 
     .split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -72,35 +65,34 @@
     .split-col { border-radius: var(--radius); padding: 20px; border: 1px solid var(--border); background: var(--card); }
     .split-col.yes { border-color: color-mix(in srgb, var(--ok) 40%, var(--border)); }
     .split-col.no { border-color: color-mix(in srgb, var(--warn) 40%, var(--border)); }
-    .split-col h3 { font-size: .95rem; margin-bottom: 12px; }
+    .split-col h3 { font-size: .92rem; margin-bottom: 12px; }
     .split-col.yes h3 { color: var(--ok); }
     .split-col.no h3 { color: var(--warn); }
     .split-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
-    .split-col li { color: var(--muted); font-size: .88rem; padding-left: 18px; position: relative; }
+    .split-col li { color: var(--muted); font-size: .87rem; padding-left: 18px; position: relative; }
     .split-col li::before { content: "—"; position: absolute; left: 0; color: var(--border-2); }
 
-    .flow { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 18px 0 6px; }
-    .flow-step { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 9px 15px; font-size: .86rem; font-family: ui-monospace, Consolas, monospace; }
-    .flow-arrow { color: var(--border-2); font-size: 1.05rem; }
-
-    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-top: 16px; }
+    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-top: 14px; }
     .metric { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
-    .metric b { font-family: ui-monospace, Consolas, monospace; font-size: 1.35rem; display: block; color: var(--accent-2); }
+    .metric b { font-family: ui-monospace, Consolas, monospace; font-size: 1.3rem; display: block; color: var(--accent-2); }
     .metric span { color: var(--muted); font-size: .78rem; }
 
     .problem { border: 1px solid var(--border); border-radius: 12px; background: var(--card); padding: 16px 18px; }
     .problem .p-tag { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--warn); margin-bottom: 6px; display: block; }
     .problem .s-tag { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--ok); margin: 10px 0 4px; display: block; }
-    .problem p { font-size: .88rem; color: var(--muted); }
+    .problem p { font-size: .87rem; color: var(--muted); }
     .problem p.p-text { color: var(--text); }
-    .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 14px; }
+    .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+
+    .stack { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 6px 14px; border-radius: 999px; font-size: .82rem; font-family: ui-monospace, Consolas, monospace; }
 
     .terms { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
     .term { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
     .term .yn { font-size: .75rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; display: inline-block; margin-bottom: 8px; }
     .term .yn.ok { background: color-mix(in srgb, var(--ok) 18%, transparent); color: var(--ok); }
     .term .yn.no { background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); }
-    .term p { font-size: .88rem; color: var(--muted); }
+    .term p { font-size: .87rem; color: var(--muted); }
 
     .contact { background: var(--card); border: 1px solid var(--border-2); border-radius: var(--radius); padding: 24px 26px; display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; }
     .contact small { color: var(--muted); }
@@ -113,13 +105,12 @@
 
 <nav>
   <div class="nav-inner">
-    <div class="brand"><i></i>Roblox-разработчик · собираю игры целиком</div>
+    <div class="brand"><i></i>Roblox-разработчик</div>
     <div class="nav-right" style="display:flex;align-items:center;gap:18px;">
       <div class="nav-links">
-        <a href="#format">Формат работы</a>
-        <a href="#process">Как работаю</a>
+        <a href="#about">О себе</a>
         <a href="#project">Проект</a>
-        <a href="#patterns">Что решал</a>
+        <a href="#solved">Что решал</a>
         <a href="#terms">Условия</a>
       </div>
       <div class="theme-switch" id="themeSwitch">
@@ -135,8 +126,8 @@
   <div class="top-cta">
     <div>
       <div class="avail">открыт к проектам</div>
-      <b>Ищу оплачиваемую работу / команду, формат — async и task-based</b>
-      <small>Задачи в тикетах, видео результата, фрагменты кода по запросу.</small>
+      <b>Ищу задачи / команду — работаю с ИИ, отвечаю за результат</b>
+      <small>Формат — переписка и тикеты, без звонков.</small>
     </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
       <a class="btn placeholder" href="#">GitHub</a>
@@ -146,126 +137,117 @@
   </div>
 
   <header>
-    <h1>Собираю <em>целые игры</em> для Roblox — от идеи до релиза, один, через AI-агентов</h1>
+    <h1>Делаю игровые системы для Roblox с помощью ИИ — от задачи до рабочего решения</h1>
     <p class="lead">
-      5 месяцев соло-разработки одной игры: <b>~50 000 строк кода, 170+ файлов, 15+ связанных механик</b>.
-      Не "AI-pipeline разработчик" как отдельная роль — просто человек, который доводит игру до состояния,
-      когда она реально работает, используя тот способ работы, который сейчас работает лучше всего.
+      5 месяцев разработки одного проекта: экономика, данные игрока, кланы, межсерверные механики.
+      Пишу код через ИИ, но задачу веду сам — формулирую, что нужно, проверяю результат, довожу до рабочего состояния.
+      Игра почти готова к релизу — ссылка появится здесь.
     </p>
   </header>
 
-  <!-- ФОРМАТ -->
-  <section id="format">
-    <div class="kicker">Главное</div>
-    <h2>Мой формат работы</h2>
-    <div class="highlight">
-      <p>В задачах с нормальным сроком, в переписке, с возможностью разобраться и перепроверить решение — я довожу задачу до рабочего состояния и отвечаю за результат. Именно этот формат мне подходит, и именно здесь я силён.</p>
-      <p>Формат в реальном времени (звонки, лайв-кодинг, мгновенные ответы по API) — не моя сильная сторона. Я это не скрываю и не изображаю, что умею.</p>
-    </div>
-  </section>
-
-  <!-- ЧЕСТНО -->
-  <section id="capabilities">
-    <div class="kicker">Прямо</div>
-    <h2>Что умею, а что нет</h2>
+  <!-- О СЕБЕ -->
+  <section id="about">
+    <div class="kicker">Коротко</div>
+    <h2>Как я работаю</h2>
+    <p class="sub">
+      Не пишу код руками с нуля — работаю через ИИ. Но не как "нажал кнопку и жду": формулирую задачу, проверяю результат
+      на конкретных сценариях (что будет при обрыве связи, повторном клике, одновременном действии двух игроков),
+      если что-то не устраивает — прошу переделать заново, пока не буду уверен, что работает.
+      Большие универсальные инструкции для ИИ на моей практике часто дают более слабый результат, чем чёткая
+      постановка конкретной задачи — так и работаю.
+    </p>
     <div class="split">
       <div class="split-col yes">
-        <h3>✓ Умею</h3>
+        <h3>✓ Что умею</h3>
         <ul>
-          <li>Собрать целую игру с кучей связанных механик и довести её до играбельного состояния</li>
-          <li>Спроектировать систему (экономика, профили, межсерверные механики) и довести до рабочей реализации</li>
-          <li>Заранее продумывать, что может сломать систему: гонки данных, дубли операций, разрыв соединения, спам действий</li>
-          <li>Дожимать решение, если первая версия не закрывает найденный случай</li>
-          <li>Следить за новыми моделями/агентскими инструментами и адаптировать процесс по мере их появления</li>
+          <li>Спроектировать систему и довести реализацию до рабочего состояния</li>
+          <li>Найти, что может сломать систему: гонки данных, повторные запросы, обрыв соединения, спам действий</li>
+          <li>Работать с существующим большим кодом, не переписывая всё с нуля</li>
+          <li>Смотреть на производительность: искать узкие места, а не просто "работает — и ладно"</li>
+          <li>Проверять и переделывать результат, если первая версия не устраивает</li>
         </ul>
       </div>
       <div class="split-col no">
-        <h3>✕ Не мой формат</h3>
+        <h3>✕ Что нет</h3>
         <ul>
-          <li>Звонки и лайв-кодинг под таймером</li>
-          <li>Мгновенный ответ по редкой детали API без возможности свериться — честно скажу «дай проверю»</li>
-          <li>Писать много кода вообще без ИИ — не изображаю это</li>
+          <li>Живое кодирование и интервью в реальном времени</li>
+          <li>Мгновенный ответ по редкой детали API без возможности свериться</li>
+          <li>5 месяцев в разработке — учусь, не выдаю себя за большее</li>
         </ul>
       </div>
-    </div>
-  </section>
-
-  <!-- ПРОЦЕСС -->
-  <section id="process">
-    <div class="kicker">Процесс</div>
-    <h2>Как выглядит работа над задачей</h2>
-    <div class="flow">
-      <div class="flow-step">задача</div><div class="flow-arrow">→</div>
-      <div class="flow-step">что может пойти не так?</div><div class="flow-arrow">→</div>
-      <div class="flow-step">рамки для агента</div><div class="flow-arrow">→</div>
-      <div class="flow-step">реализация</div><div class="flow-arrow">→</div>
-      <div class="flow-step">проверка сценария</div><div class="flow-arrow">→</div>
-      <div class="flow-step">доработка при необходимости</div>
-    </div>
-    <div class="cards">
-      <div class="card"><h3>Первая версия — черновик</h3><p>Реализация почти всегда рабочая, но не идеальная с первого раза — где-то упущен редкий случай. Это часть процесса, а не провал.</p></div>
-      <div class="card"><h3>Критичные места — отдельно</h3><p>Деньги, прогресс, сетевые операции — отдельно продумываю сценарии сбоя, не полагаясь на "наверное само сработает".</p></div>
-      <div class="card"><h3>Тесты там, где ошибка дорого стоит</h3><p>Плотное покрытие на экономике и расчётах. Не гонюсь за цифрой покрытия ради цифры — у игры есть и менее критичный код без тестов.</p></div>
     </div>
   </section>
 
   <!-- ПРОЕКТ -->
   <section id="project">
     <div class="kicker">Проект</div>
-    <h2>Что я построил за 5 месяцев соло</h2>
-    <p class="sub">Играбельная версия пока не в открытом доступе — это следующий шаг, ссылка появится здесь.</p>
+    <h2>Что построено</h2>
+    <p class="sub">Соло-разработка. Готовится к релизу — ссылка на игру появится здесь.</p>
     <div class="metrics">
       <div class="metric"><b>~50 000</b><span>строк кода</span></div>
       <div class="metric"><b>170+</b><span>файлов</span></div>
       <div class="metric"><b>15+</b><span>механик</span></div>
-      <div class="metric"><b>~300</b><span>тестов на критичных модулях</span></div>
       <div class="metric"><b>5</b><span>месяцев</span></div>
+    </div>
+    <div class="stack" style="margin-top:18px;">
+      <span class="chip">roblox-ts</span>
+      <span class="chip">TypeScript</span>
+      <span class="chip">Luau</span>
+      <span class="chip">Flamework</span>
+      <span class="chip">Reflex</span>
+      <span class="chip">React</span>
+      <span class="chip">ProfileStore</span>
+      <span class="chip">MemoryStore</span>
     </div>
   </section>
 
-  <!-- ПАТТЕРНЫ -->
-  <section id="patterns">
+  <!-- ЧТО РЕШАЛ -->
+  <section id="solved">
     <div class="kicker">Что решал</div>
-    <h2>Проблемы, с которыми реально столкнулся</h2>
-    <p class="sub">Без кода — в чём была проблема и в какую сторону решена. Детали и фрагменты кода — в переписке, если заказчик реальный.</p>
+    <h2>Проблемы, с которыми столкнулся в проекте</h2>
+    <p class="sub">Без кода — суть проблемы и в какую сторону решено. Код и детали — по запросу.</p>
     <div class="problem-grid">
       <div class="problem">
         <span class="p-tag">проблема</span>
-        <p class="p-text">Roblox может прислать один и тот же чек оплаты повторно — риск выдать награду дважды.</p>
+        <p class="p-text">Оплата может подтвердиться Roblox-ом повторно — риск выдать награду дважды.</p>
         <span class="s-tag">решение</span>
-        <p>Каждый чек запоминается по id; повторный приход подтверждается без повторной выдачи (идемпотентность).</p>
+        <p>Каждая оплата запоминается по id; повторное подтверждение не выдаёт награду заново.</p>
       </div>
       <div class="problem">
         <span class="p-tag">проблема</span>
-        <p class="p-text">Общий межсерверный босс: несколько серверов одновременно наносят урон одному состоянию.</p>
+        <p class="p-text">Общий межсерверный босс: несколько серверов бьют одно состояние одновременно.</p>
         <span class="s-tag">решение</span>
-        <p>Состояние живёт в общем хранилище с атомарным обновлением — удар применяется строго к актуальной версии, не к устаревшей копии.</p>
+        <p>Урон применяется через атомарное обновление общего состояния, а не через отдельные копии на каждом сервере.</p>
       </div>
       <div class="problem">
         <span class="p-tag">проблема</span>
-        <p class="p-text">Игрок выходит и тут же заходит снова, пока его данные ещё не дозагрузились — риск гонки за один профиль.</p>
+        <p class="p-text">Игрок выходит и тут же заходит снова, пока данные ещё загружаются — риск получить два процесса на один профиль.</p>
         <span class="s-tag">решение</span>
-        <p>Отмена загрузки отслеживается явным флагом, повторный вход ждёт завершения предыдущей операции, а не стартует параллельно.</p>
+        <p>Повторный вход ждёт завершения предыдущей операции вместо запуска параллельно.</p>
       </div>
       <div class="problem">
         <span class="p-tag">проблема</span>
-        <p class="p-text">Сервер может упасть или перезапуститься в середине операции с деньгами — риск потери прогресса или дублирования.</p>
+        <p class="p-text">Сервер может упасть в середине операции с валютой — риск потери прогресса или дублирования.</p>
         <span class="s-tag">решение</span>
-        <p>При остановке сервер дожидается завершения всех активных сохранений вместо мгновенного отключения.</p>
+        <p>При остановке сервер дожидается завершения активных сохранений, а не отключается мгновенно.</p>
       </div>
       <div class="problem">
         <span class="p-tag">проблема</span>
-        <p class="p-text">Дабл-клик / макрос на действие — риск провести операцию несколько раз за один клик игрока.</p>
+        <p class="p-text">Дабл-клик или спам одного действия — риск провести операцию несколько раз.</p>
         <span class="s-tag">решение</span>
-        <p>Пока операция игрока не завершена — повторный такой же запрос не запускает новую, а получает статус «в процессе».</p>
+        <p>Пока операция не завершена, повторный такой же запрос игрока не запускает новую.</p>
       </div>
       <div class="problem">
         <span class="p-tag">проблема</span>
-        <p class="p-text">Клиенту нельзя доверять данные о цене/балансе — эксплойтер может отправить любые аргументы.</p>
+        <p class="p-text">Клиенту нельзя доверять цену/баланс — можно подменить данные при отправке запроса.</p>
         <span class="s-tag">решение</span>
-        <p>От клиента принимается только намерение («хочу купить X»), все цифры пересчитываются заново на сервере.</p>
+        <p>От клиента принимается только само действие, все цифры пересчитываются на сервере заново.</p>
       </div>
     </div>
+    <p class="sub" style="margin-top:20px;">
+      Падение одного модуля (например, отдельной механики) не должно ронять всю игру — критичные по деньгам/данным
+      места отдельно проверены на отказ, остальное — обычная разработка без переусложнения.
+    </p>
   </section>
 
   <!-- УСЛОВИЯ -->
@@ -273,24 +255,21 @@
     <div class="kicker">Условия</div>
     <h2>Как со мной удобнее работать</h2>
     <div class="terms">
-      <div class="term"><span class="yn ok">ок</span><p>Тикет/задача с описанием и разумным сроком — отчитаюсь текстом + видео результата.</p></div>
+      <div class="term"><span class="yn ok">ок</span><p>Задача/тикет с описанием — сделаю, отчитаюсь текстом и видео результата.</p></div>
       <div class="term"><span class="yn ok">ок</span><p>Оплачиваемое тестовое задание.</p></div>
-      <div class="term"><span class="yn ok">ок</span><p>Фрагменты кода и объяснение решений — в переписке, если заказчик реальный (не для скрипт-серфинга).</p></div>
-      <div class="term"><span class="yn no">нет</span><p>Звонки и лайв-кодинг.</p></div>
+      <div class="term"><span class="yn ok">ок</span><p>Показать код и объяснить решение — в переписке, по конкретному вопросу.</p></div>
+      <div class="term"><span class="yn no">нет</span><p>Live-coding и интервью в реальном времени.</p></div>
       <div class="term"><span class="yn no">нет</span><p>Мгновенный ответ по тонкостям API без возможности свериться.</p></div>
     </div>
-    <p class="sub" style="margin-top:16px;">
-      Публичной истории коммитов пока нет — проект делался соло, пушил напрямую. Планирую открыть игру и репозиторий позже — ссылки появятся здесь.
-    </p>
   </section>
 
   <!-- КОНТАКТ -->
   <section id="contact">
     <div class="kicker">Связь</div>
-    <h2>Задача, тестовое, вопросы — в переписку</h2>
+    <h2>Задача, тестовое, вопросы</h2>
     <div class="contact">
       <div>
-        <b style="font-size:1.02rem;display:block;">Открыт к задачам и командам, формат — async</b>
+        <b style="font-size:1.02rem;display:block;">Открыт к задачам и командам</b>
         <small>Контакты будут добавлены здесь.</small>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
@@ -301,7 +280,7 @@
     </div>
   </section>
 
-  <footer>Играбельная версия и репозиторий — появятся здесь позже.</footer>
+  <footer>Ссылка на игру появится здесь после релиза.</footer>
 
 </div>
 
