@@ -6,21 +6,21 @@
   <title>Roblox-разработчик</title>
   <style>
     :root {
-      --bg: #0a0d12; --card: #141a23; --border: #232c3a; --border-2: #2e3a4d;
-      --text: #eef2f7; --muted: #96a2b5; --accent: #00a8ff; --accent-2: #7fd8ff;
+      --bg: #0c0f14; --card: #161b23; --border: #242c38; --border-2: #313c4d;
+      --text: #eef1f6; --muted: #98a3b5; --accent: #ff8a3d; --accent-2: #ffb27a;
       --ok: #3ddc97; --warn: #e0a94c; --radius: 14px;
     }
     html[data-theme="light"] {
-      --bg: #f4f6fa; --card: #ffffff; --border: #dde3ec; --border-2: #c6cedb;
-      --text: #16202e; --muted: #5a6677; --accent: #0077cc; --accent-2: #005fa3;
+      --bg: #f6f4f0; --card: #ffffff; --border: #e3ddd2; --border-2: #cfc6b5;
+      --text: #1c1a16; --muted: #6b6355; --accent: #c9631f; --accent-2: #a34f18;
       --warn: #a06a15;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-    .wrap { max-width: 920px; margin: 0 auto; padding: 0 22px; }
+    body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 0 22px; }
 
-    nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(10px); background: color-mix(in srgb, var(--bg) 78%, transparent); border-bottom: 1px solid var(--border); }
-    .nav-inner { max-width: 920px; margin: 0 auto; padding: 12px 22px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(10px); background: color-mix(in srgb, var(--bg) 80%, transparent); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 880px; margin: 0 auto; padding: 12px 22px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
     .brand { font-weight: 700; font-size: .95rem; display: flex; align-items: center; gap: 9px; }
     .brand i { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
     .nav-links { display: flex; gap: 20px; }
@@ -28,32 +28,35 @@
     .nav-links a:hover { color: var(--accent-2); }
     .theme-switch { display: flex; gap: 2px; background: var(--card); border: 1px solid var(--border); border-radius: 999px; padding: 3px; }
     .theme-switch button { border: none; background: transparent; color: var(--muted); cursor: pointer; padding: 4px 10px; border-radius: 999px; font-size: .78rem; font-weight: 600; }
-    .theme-switch button.active { background: var(--accent); color: #fff; }
+    .theme-switch button.active { background: var(--accent); color: #17110a; }
+
+    header { padding: 44px 0 8px; }
+    .hello { color: var(--accent-2); font-weight: 700; font-size: .9rem; margin-bottom: 10px; }
+    h1 { font-size: clamp(1.7rem, 4.4vw, 2.4rem); font-weight: 800; letter-spacing: -.5px; line-height: 1.28; margin-bottom: 16px; max-width: 700px; }
+    .lead { color: var(--muted); max-width: 620px; font-size: clamp(1rem, 2vw, 1.06rem); }
+    .lead b { color: var(--text); }
+    .lead + .lead { margin-top: 10px; }
 
     .top-cta {
-      margin-top: 26px; background: var(--card); border: 1px solid var(--accent);
-      border-radius: var(--radius); padding: 20px 24px; display: flex; flex-wrap: wrap;
+      margin: 26px 0 8px; background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px 22px; display: flex; flex-wrap: wrap;
       gap: 14px; align-items: center; justify-content: space-between;
     }
-    .top-cta .avail { color: var(--ok); font-weight: 700; display: flex; align-items: center; gap: 8px; margin-bottom: 4px; font-size: .82rem; }
+    .top-cta .avail { color: var(--ok); font-weight: 700; display: flex; align-items: center; gap: 8px; margin-bottom: 3px; font-size: .82rem; }
     .top-cta .avail::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 10px var(--ok); }
-    .top-cta b { font-size: 1.02rem; }
     .top-cta small { color: var(--muted); display:block; margin-top:2px; }
-    .btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; padding: 9px 20px; border-radius: 999px; font-weight: 700; font-size: .9rem; }
+    .btn { display: inline-block; background: var(--accent); color: #17110a; text-decoration: none; padding: 9px 20px; border-radius: 999px; font-weight: 700; font-size: .9rem; }
     .btn.ghost { background: transparent; border: 1px solid var(--border-2); color: var(--text); font-weight: 600; }
     .btn.placeholder { opacity: .45; pointer-events: none; }
 
-    header { padding: 40px 0 20px; }
-    h1 { font-size: clamp(1.6rem, 4.2vw, 2.3rem); font-weight: 800; letter-spacing: -.5px; line-height: 1.24; margin-bottom: 14px; }
-    h1 em { font-style: normal; color: var(--accent); }
-    .lead { color: var(--muted); max-width: 660px; font-size: clamp(1rem, 2vw, 1.05rem); }
-    .lead b { color: var(--text); }
+    section { padding: 36px 0; border-top: 1px solid var(--border); }
+    header + .top-cta + section { border-top: none; }
+    .kicker { text-transform: uppercase; letter-spacing: 2px; font-size: .74rem; font-weight: 700; color: var(--accent-2); margin-bottom: 8px; }
+    h2 { font-size: clamp(1.15rem, 3vw, 1.4rem); font-weight: 700; letter-spacing: -.3px; margin-bottom: 12px; }
+    .sub { color: var(--muted); max-width: 640px; margin-bottom: 18px; }
 
-    section { padding: 34px 0; border-top: 1px solid var(--border); }
-    header + section { border-top: none; }
-    .kicker { text-transform: uppercase; letter-spacing: 2px; font-size: .75rem; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
-    h2 { font-size: clamp(1.15rem, 3vw, 1.45rem); font-weight: 700; letter-spacing: -.3px; margin-bottom: 10px; }
-    .sub { color: var(--muted); max-width: 680px; margin-bottom: 18px; }
+    p.story { color: var(--text); max-width: 660px; margin-bottom: 12px; }
+    p.story b { color: var(--accent-2); }
 
     .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
@@ -63,8 +66,8 @@
     .split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     @media (max-width: 700px) { .split { grid-template-columns: 1fr; } }
     .split-col { border-radius: var(--radius); padding: 20px; border: 1px solid var(--border); background: var(--card); }
-    .split-col.yes { border-color: color-mix(in srgb, var(--ok) 40%, var(--border)); }
-    .split-col.no { border-color: color-mix(in srgb, var(--warn) 40%, var(--border)); }
+    .split-col.yes { border-color: color-mix(in srgb, var(--ok) 35%, var(--border)); }
+    .split-col.no { border-color: color-mix(in srgb, var(--warn) 35%, var(--border)); }
     .split-col h3 { font-size: .92rem; margin-bottom: 12px; }
     .split-col.yes h3 { color: var(--ok); }
     .split-col.no h3 { color: var(--warn); }
@@ -108,10 +111,10 @@
     <div class="brand"><i></i>Roblox-разработчик</div>
     <div class="nav-right" style="display:flex;align-items:center;gap:18px;">
       <div class="nav-links">
-        <a href="#about">О себе</a>
+        <a href="#about">Обо мне</a>
         <a href="#project">Проект</a>
         <a href="#solved">Что решал</a>
-        <a href="#terms">Условия</a>
+        <a href="#terms">Как работаем</a>
       </div>
       <div class="theme-switch" id="themeSwitch">
         <button data-theme="dark" class="active">Тёмная</button>
@@ -123,11 +126,21 @@
 
 <div class="wrap">
 
+  <header>
+    <div class="hello">Привет 👋</div>
+    <h1>Я один делаю игровые системы для Roblox — и умею объяснять человеческим языком, что и зачем сделал.</h1>
+    <p class="lead">
+      Последние 5 месяцев — один проект: экономика, данные игрока, кланы, межсерверные механики.
+      Не показываю красивую картинку вместо результата — ниже реальные проблемы, с которыми
+      столкнулся, и как я их закрыл. Хочешь код или подробности — спрашивай, покажу и объясню.
+    </p>
+  </header>
+
   <div class="top-cta">
     <div>
       <div class="avail">открыт к проектам</div>
-      <b>Ищу задачи / команду — работаю с ИИ, отвечаю за результат</b>
-      <small>Формат — переписка и тикеты, без звонков.</small>
+      <b>Готов взять задачу, багфикс или тестовое</b>
+      <small>Пишу текстом, отвечаю быстро, без пропаданий.</small>
     </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
       <a class="btn placeholder" href="#">GitHub</a>
@@ -136,45 +149,41 @@
     </div>
   </div>
 
-  <header>
-    <h1>Делаю игровые системы для Roblox с помощью ИИ — от задачи до рабочего решения</h1>
-    <p class="lead">
-      5 месяцев разработки одного проекта: экономика, данные игрока, кланы, межсерверные механики.
-      Пишу код через ИИ, но задачу веду сам — формулирую, что нужно, проверяю результат, довожу до рабочего состояния.
-      Игра почти готова к релизу — ссылка появится здесь.
-    </p>
-  </header>
-
    <!-- О СЕБЕ -->
   <section id="about">
-    <div class="kicker">Коротко</div>
-    <h2>Как я работаю</h2>
-    <p class="sub">
-      Не пишу код руками с нуля — работаю через ИИ. Но не отношусь к нему как к волшебной кнопке:
-      агент регулярно ошибается, придумывает несуществующее поведение API, упрощает там, где нельзя.
-      Моя работа — не верить результату на слово, а проверять его на реальных сценариях
-      (обрыв связи, повторный клик, одновременное действие двух игроков) и переделывать, пока не станет
-      понятно, что оно правда работает, а не выглядит рабочим на первый взгляд.
+    <div class="kicker">Коротко обо мне</div>
+    <h2>Кто я и почему мне можно доверить задачу</h2>
+    <p class="story">
+      Я в разработке 5 месяцев — это честно и не буду делать вид, что дольше. Но за это время
+      я один довёл проект от идеи до состояния, близкого к релизу, и по пути столкнулся почти
+      со всем, с чем сталкивается любой Roblox-разработчик: гонки данных, обрывы соединения,
+      деньги, которые нельзя случайно задублировать, спам действий от игроков, которые всегда
+      найдут способ сломать то, что кажется надёжным.
+    </p>
+    <p class="story">
+      Я не боюсь разбираться в чужом или старом коде без документации — читаю, что реально
+      происходит, а не что должно быть по идее. И не делаю вид, что знаю то, чего не знаю:
+      если задача — редкая тонкость API, честно скажу, что нужно свериться, а не выдумаю ответ.
     </p>
     <div class="split">
       <div class="split-col yes">
-        <h3>✓ Что умею</h3>
+        <h3>✓ Что я умею</h3>
         <ul>
-          <li>Спроектировать систему и довести реализацию до рабочего состояния</li>
+          <li>Спроектировать систему и довести реализацию до рабочего, а не «вроде работающего» состояния</li>
           <li>Найти, что может сломать систему: гонки данных, повторные запросы, обрыв соединения, спам действий</li>
           <li>Чинить баги в чужом или старом коде, не переписывая всё с нуля</li>
           <li>Собрать быстрый рабочий прототип, если нужно проверить идею, а не отполировать архитектуру</li>
-          <li>Работать с уже запущенным проектом — где нельзя всё сломать экспериментом, только аккуратно править</li>
-          <li>Смотреть на производительность: искать узкие места, а не просто "работает — и ладно"</li>
+          <li>Аккуратно работать с уже запущенным проектом, где нельзя всё сломать экспериментом</li>
+          <li>Смотреть на производительность: искать узкие места, а не просто «работает — и ладно»</li>
         </ul>
       </div>
       <div class="split-col no">
-        <h3>✕ Что нет</h3>
+        <h3>✕ Чего пока нет</h3>
         <ul>
-          <li>Живое кодирование и интервью в реальном времени</li>
-          <li>Мгновенный ответ по редкой детали API без возможности свериться</li>
+          <li>Опыта в команде — пока работал соло, но открыт к этому</li>
           <li>5 месяцев в разработке — учусь, не выдаю себя за большее</li>
-          <li>Не верю, что ИИ-агент сам по себе гарантирует хороший результат — без проверки он одинаково уверенно выдаёт и рабочий код, и рабочий на вид</li>
+          <li>Live-кодинга на созвоне под давлением — мне удобнее спокойно разобраться и показать результат</li>
+          <li>Готовности врать про сроки или скрывать, если что-то пошло не так</li>
         </ul>
       </div>
     </div>
@@ -187,16 +196,16 @@
     <div class="cards">
       <div class="card"><h3>Багфиксы</h3><p>Разобраться в чужом коде, найти причину, а не симптом, починить не сломав рядом лежащее.</p></div>
       <div class="card"><h3>Быстрые MVP</h3><p>Сделать рабочий прототип механики или фичи под проверку гипотезы — без переинжиниринга.</p></div>
-      <div class="card"><h3>Работа с рантайм-проектами</h3><p>Правки в проекте, который уже живёт и его нельзя просто снести и переписать заново.</p></div>
-      <div class="card"><h3>Легаси-код</h3><p>Спокойно разбираюсь в старом/чужом коде без документации — читаю, что реально происходит, а не что должно быть по идее.</p></div>
+      <div class="card"><h3>Работа с живым проектом</h3><p>Правки в проекте, который уже работает и его нельзя просто снести и переписать заново.</p></div>
+      <div class="card"><h3>Легаси-код</h3><p>Спокойно разбираюсь в старом/чужом коде без документации — читаю, что реально происходит.</p></div>
     </div>
   </section>
 
   <!-- ПРОЕКТ -->
   <section id="project">
-    <div class="kicker">Проект</div>
-    <h2>Что построено</h2>
-    <p class="sub">Соло-разработка. Готовится к релизу — ссылка на игру появится здесь.</p>
+    <div class="kicker">Мой проект</div>
+    <h2>Что я построил за эти 5 месяцев</h2>
+    <p class="sub">Соло-разработка, от начала и до сих пор веду сам. Готовится к релизу — ссылка на игру появится здесь.</p>
     <div class="metrics">
       <div class="metric"><b>~50 000</b><span>строк кода</span></div>
       <div class="metric"><b>170+</b><span>файлов</span></div>
@@ -218,8 +227,8 @@
   <!-- ЧТО РЕШАЛ -->
   <section id="solved">
     <div class="kicker">Что решал</div>
-    <h2>Проблемы, с которыми столкнулся в проекте</h2>
-    <p class="sub">Без кода — суть проблемы и в какую сторону решено. Код и детали — по запросу.</p>
+    <h2>Реальные проблемы из проекта — не абстрактные навыки</h2>
+    <p class="sub">Без кода — суть проблемы и в какую сторону решено. Код и детали — по запросу, покажу и объясню на пальцах.</p>
     <div class="problem-grid">
       <div class="problem">
         <span class="p-tag">проблема</span>
@@ -259,32 +268,32 @@
       </div>
     </div>
     <p class="sub" style="margin-top:20px;">
-      Падение одного модуля (например, отдельной механики) не должно ронять всю игру — критичные по деньгам/данным
-      места отдельно проверены на отказ, остальное — обычная разработка без переусложнения.
+      Падение одной механики не должно ронять всю игру — места, где на кону деньги или данные
+      игрока, я отдельно проверяю на отказ, остальное — обычная разработка без переусложнения.
     </p>
   </section>
 
-  <!-- УСЛОВИЯ -->
+  <!-- КАК РАБОТАЕМ -->
   <section id="terms">
     <div class="kicker">Условия</div>
     <h2>Как со мной удобнее работать</h2>
     <div class="terms">
-      <div class="term"><span class="yn ok">ок</span><p>Задача/тикет с описанием — сделаю, отчитаюсь текстом и видео результата.</p></div>
-      <div class="term"><span class="yn ok">ок</span><p>Оплачиваемое тестовое задание.</p></div>
-      <div class="term"><span class="yn ok">ок</span><p>Показать код и объяснить решение — в переписке, по конкретному вопросу.</p></div>
+      <div class="term"><span class="yn ok">ок</span><p>Задача или тикет с описанием — сделаю, отчитаюсь текстом и видео результата.</p></div>
+      <div class="term"><span class="yn ok">ок</span><p>Оплачиваемое тестовое задание — нормальная практика, готов.</p></div>
+      <div class="term"><span class="yn ok">ок</span><p>Показать код и объяснить решение в переписке, по конкретному вопросу.</p></div>
       <div class="term"><span class="yn no">нет</span><p>Live-coding и интервью в реальном времени.</p></div>
-      <div class="term"><span class="yn no">нет</span><p>Мгновенный ответ по тонкостям API без возможности свериться.</p></div>
+      <div class="term"><span class="yn no">нет</span><p>Работа за проценты будущей прибыли без ясного объёма задач.</p></div>
     </div>
   </section>
 
   <!-- КОНТАКТ -->
   <section id="contact">
     <div class="kicker">Связь</div>
-    <h2>Задача, тестовое, вопросы</h2>
+    <h2>Есть задача, тестовое или просто вопрос?</h2>
     <div class="contact">
       <div>
         <b style="font-size:1.02rem;display:block;">Открыт к задачам и командам</b>
-        <small>Контакты будут добавлены здесь.</small>
+        <small>Отвечаю быстро. Контакты будут добавлены здесь.</small>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
         <a class="btn placeholder" href="#">GitHub</a>
