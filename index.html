@@ -23,8 +23,8 @@
     .nav-inner { max-width: 880px; margin: 0 auto; padding: 12px 22px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
     .brand { font-weight: 700; font-size: .95rem; display: flex; align-items: center; gap: 9px; }
     .brand i { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
-    .nav-links { display: flex; gap: 20px; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: .9rem; }
+    .nav-links { display: flex; gap: 18px; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: .88rem; white-space: nowrap; }
     .nav-links a:hover { color: var(--accent-2); }
     .theme-switch { display: flex; gap: 2px; background: var(--card); border: 1px solid var(--border); border-radius: 999px; padding: 3px; }
     .theme-switch button { border: none; background: transparent; color: var(--muted); cursor: pointer; padding: 4px 10px; border-radius: 999px; font-size: .78rem; font-weight: 600; }
@@ -32,8 +32,8 @@
 
     header { padding: 44px 0 8px; }
     .hello { color: var(--accent-2); font-weight: 700; font-size: .9rem; margin-bottom: 10px; }
-    h1 { font-size: clamp(1.7rem, 4.4vw, 2.4rem); font-weight: 800; letter-spacing: -.5px; line-height: 1.28; margin-bottom: 16px; max-width: 700px; }
-    .lead { color: var(--muted); max-width: 620px; font-size: clamp(1rem, 2vw, 1.06rem); }
+    h1 { font-size: clamp(1.7rem, 4.4vw, 2.35rem); font-weight: 800; letter-spacing: -.5px; line-height: 1.28; margin-bottom: 16px; max-width: 700px; }
+    .lead { color: var(--muted); max-width: 640px; font-size: clamp(1rem, 2vw, 1.06rem); }
     .lead b { color: var(--text); }
     .lead + .lead { margin-top: 10px; }
 
@@ -53,6 +53,7 @@
     header + .top-cta + section { border-top: none; }
     .kicker { text-transform: uppercase; letter-spacing: 2px; font-size: .74rem; font-weight: 700; color: var(--accent-2); margin-bottom: 8px; }
     h2 { font-size: clamp(1.15rem, 3vw, 1.4rem); font-weight: 700; letter-spacing: -.3px; margin-bottom: 12px; }
+    h3.proj-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
     .sub { color: var(--muted); max-width: 640px; margin-bottom: 18px; }
 
     p.story { color: var(--text); max-width: 660px; margin-bottom: 12px; }
@@ -74,11 +75,27 @@
     .split-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
     .split-col li { color: var(--muted); font-size: .87rem; padding-left: 18px; position: relative; }
     .split-col li::before { content: "—"; position: absolute; left: 0; color: var(--border-2); }
+    .note { color: var(--muted); font-size: .87rem; margin-top: 14px; max-width: 660px; }
+    .note b { color: var(--text); }
 
-    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-top: 14px; }
-    .metric { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
-    .metric b { font-family: ui-monospace, Consolas, monospace; font-size: 1.3rem; display: block; color: var(--accent-2); }
-    .metric span { color: var(--muted); font-size: .78rem; }
+    /* Project cells */
+    .proj-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    .proj-tab { border: 1px solid var(--border); background: var(--card); color: var(--muted); padding: 7px 16px; border-radius: 999px; font-size: .84rem; font-weight: 600; cursor: pointer; }
+    .proj-tab.active { color: var(--text); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, var(--card)); }
+    .proj-pane { display: none; }
+    .proj-pane.active { display: block; }
+    .proj-block { border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); padding: 22px 24px; margin-bottom: 16px; }
+    .proj-block .role { display: inline-block; font-size: .74rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--accent-2); background: color-mix(in srgb, var(--accent) 16%, transparent); padding: 3px 10px; border-radius: 999px; margin-bottom: 10px; }
+    .proj-block p.desc { color: var(--muted); font-size: .92rem; max-width: 640px; margin-bottom: 14px; }
+    .empty-block { border: 1px dashed var(--border-2); border-radius: var(--radius); padding: 22px 24px; color: var(--muted); font-size: .89rem; }
+
+    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 6px; }
+    .metric { background: color-mix(in srgb, var(--card) 60%, var(--bg)); border: 1px solid var(--border); border-radius: 10px; padding: 13px; text-align: center; }
+    .metric b { font-family: ui-monospace, Consolas, monospace; font-size: 1.15rem; display: block; color: var(--accent-2); }
+    .metric span { color: var(--muted); font-size: .74rem; }
+
+    .stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .chip { background: color-mix(in srgb, var(--card) 60%, var(--bg)); border: 1px solid var(--border); color: var(--text); padding: 6px 14px; border-radius: 999px; font-size: .8rem; font-family: ui-monospace, Consolas, monospace; }
 
     .problem { border: 1px solid var(--border); border-radius: 12px; background: var(--card); padding: 16px 18px; }
     .problem .p-tag { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--warn); margin-bottom: 6px; display: block; }
@@ -86,9 +103,6 @@
     .problem p { font-size: .87rem; color: var(--muted); }
     .problem p.p-text { color: var(--text); }
     .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
-
-    .stack { display: flex; flex-wrap: wrap; gap: 8px; }
-    .chip { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 6px 14px; border-radius: 999px; font-size: .82rem; font-family: ui-monospace, Consolas, monospace; }
 
     .terms { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
     .term { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
@@ -112,7 +126,7 @@
     <div class="nav-right" style="display:flex;align-items:center;gap:18px;">
       <div class="nav-links">
         <a href="#about">Обо мне</a>
-        <a href="#project">Проект</a>
+        <a href="#project">Проекты</a>
         <a href="#solved">Что решал</a>
         <a href="#terms">Как работаем</a>
       </div>
@@ -128,18 +142,20 @@
 
   <header>
     <div class="hello">Привет 👋</div>
-    <h1>Я один делаю игровые системы для Roblox — и умею объяснять человеческим языком, что и зачем сделал.</h1>
+    <h1>За 5 месяцев один прошёл путь, на который команда обычно закладывает год-полтора.</h1>
     <p class="lead">
-      Последние 5 месяцев — один проект: экономика, данные игрока, кланы, межсерверные механики.
-      Не показываю красивую картинку вместо результата — ниже реальные проблемы, с которыми
-      столкнулся, и как я их закрыл. Хочешь код или подробности — спрашивай, покажу и объясню.
+      Проектирую и довожу до продакшн-состояния игровые системы для Roblox: экономику,
+      данные игрока, боевые механики, межсерверную синхронизацию. За это время
+      столкнулся с огромным количеством реальных рантайм-проблем — от особенностей самого
+      Roblox API до архитектурных развилок вроде ООП vs модульность, SSoT, иммутабельность стора.
+      Ниже — конкретные проекты и конкретные проблемы, без воды.
     </p>
   </header>
 
   <div class="top-cta">
     <div>
       <div class="avail">открыт к проектам</div>
-      <b>Готов взять задачу, багфикс или тестовое</b>
+      <b>Готов взять что угодно — от архитектуры с нуля до починки прод-рантайма</b>
       <small>Пишу текстом, отвечаю быстро, без пропаданий.</small>
     </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
@@ -154,39 +170,38 @@
     <div class="kicker">Коротко обо мне</div>
     <h2>Кто я и почему мне можно доверить задачу</h2>
     <p class="story">
-      Я в разработке 5 месяцев — это честно и не буду делать вид, что дольше. Но за это время
-      я один довёл проект от идеи до состояния, близкого к релизу, и по пути столкнулся почти
-      со всем, с чем сталкивается любой Roblox-разработчик: гонки данных, обрывы соединения,
-      деньги, которые нельзя случайно задублировать, спам действий от игроков, которые всегда
-      найдут способ сломать то, что кажется надёжным.
+      Я делаю продакшн-архитектуру для Roblox: два независимых стора (сервер — источник истины,
+      клиент — реактивное зеркало), Broadcaster-синхронизация, оптимистичные и пессимистичные
+      обновления UI, BigNum-математика для чисел за пределами точности обычного числа,
+      виртуализация списков, object pooling, троттлинг автосохранения, cancellation-паттерны
+      для ProfileService, rate limiting и античит на сервере. Это не список терминов для галочки —
+      каждый пункт появился потому, что я реально об это споткнулся и разобрался, как делать правильно.
     </p>
     <p class="story">
-      Я не боюсь разбираться в чужом или старом коде без документации — читаю, что реально
-      происходит, а не что должно быть по идее. И не делаю вид, что знаю то, чего не знаю:
-      если задача — редкая тонкость API, честно скажу, что нужно свериться, а не выдумаю ответ.
+      Могу ответить по большинству вопросов архитектуры, сети и перформанса — не выдумываю
+      на ходу и не боюсь сложных вопросов.
     </p>
     <div class="split">
       <div class="split-col yes">
         <h3>✓ Что я умею</h3>
         <ul>
-          <li>Спроектировать систему и довести реализацию до рабочего, а не «вроде работающего» состояния</li>
-          <li>Найти, что может сломать систему: гонки данных, повторные запросы, обрыв соединения, спам действий</li>
-          <li>Чинить баги в чужом или старом коде, не переписывая всё с нуля</li>
-          <li>Собрать быстрый рабочий прототип, если нужно проверить идею, а не отполировать архитектуру</li>
+          <li>Спроектировать архитектуру системы с нуля и довести до рабочего продакшн-состояния</li>
+          <li>Чинить рантайм в уже живом проекте: гонки данных, обрывы соединения, дублирование, спам действий</li>
+          <li>Профилировать игру, если она тормозит — искать реальное узкое место, а не гадать</li>
+          <li>Разбираться в чужом или старом коде без документации и чинить не ломая рядом лежащее</li>
+          <li>Собрать быстрый MVP под проверку гипотезы — без переинжиниринга</li>
           <li>Аккуратно работать с уже запущенным проектом, где нельзя всё сломать экспериментом</li>
-          <li>Смотреть на производительность: искать узкие места, а не просто «работает — и ладно»</li>
         </ul>
       </div>
       <div class="split-col no">
-        <h3>✕ Чего пока нет</h3>
+        <h3>✕ Чего нет</h3>
         <ul>
+          <li>Live-coding на созвоне под давлением — мне удобнее спокойно разобраться и показать результат</li>
           <li>Опыта в команде — пока работал соло, но открыт к этому</li>
-          <li>5 месяцев в разработке — учусь, не выдаю себя за большее</li>
-          <li>Live-кодинга на созвоне под давлением — мне удобнее спокойно разобраться и показать результат</li>
-          <li>Готовности врать про сроки или скрывать, если что-то пошло не так</li>
         </ul>
       </div>
     </div>
+    <p class="note">По срокам — могу дать примерную оценку заранее, если нужно понимать таймлайн до старта.</p>
   </section>
 
   <!-- ЧТО БЕРУ В РАБОТУ -->
@@ -194,40 +209,88 @@
     <div class="kicker">Формат задач</div>
     <h2>Что готов брать</h2>
     <div class="cards">
-      <div class="card"><h3>Багфиксы</h3><p>Разобраться в чужом коде, найти причину, а не симптом, починить не сломав рядом лежащее.</p></div>
-      <div class="card"><h3>Быстрые MVP</h3><p>Сделать рабочий прототип механики или фичи под проверку гипотезы — без переинжиниринга.</p></div>
-      <div class="card"><h3>Работа с живым проектом</h3><p>Правки в проекте, который уже работает и его нельзя просто снести и переписать заново.</p></div>
+      <div class="card"><h3>Архитектура с нуля</h3><p>Спроектировать систему — экономику, данные, сеть — с чистого листа, под конкретную игру и её масштаб.</p></div>
+      <div class="card"><h3>Починка прод-рантайма</h3><p>Живой проект ведёт себя странно под нагрузкой или у части игроков — разбираюсь и чиню без простоя.</p></div>
+      <div class="card"><h3>Профилирование и перформанс</h3><p>Игра моросит, лагает или ест память — нахожу узкое место и убираю его.</p></div>
+      <div class="card"><h3>Быстрые MVP</h3><p>Рабочий прототип механики или фичи под проверку гипотезы — без переинжиниринга.</p></div>
       <div class="card"><h3>Легаси-код</h3><p>Спокойно разбираюсь в старом/чужом коде без документации — читаю, что реально происходит.</p></div>
+      <div class="card"><h3>Экономика и анти-чит</h3><p>Серверная валидация, защита от дублирования, спама и накрутки — деньги игрока не должны утекать.</p></div>
     </div>
   </section>
 
-  <!-- ПРОЕКТ -->
+  <!-- ПРОЕКТЫ -->
   <section id="project">
-    <div class="kicker">Мой проект</div>
-    <h2>Что я построил за эти 5 месяцев</h2>
-    <p class="sub">Соло-разработка, от начала и до сих пор веду сам. Готовится к релизу — ссылка на игру появится здесь.</p>
-    <div class="metrics">
-      <div class="metric"><b>~50 000</b><span>строк кода</span></div>
-      <div class="metric"><b>170+</b><span>файлов</span></div>
-      <div class="metric"><b>15+</b><span>механик</span></div>
-      <div class="metric"><b>5</b><span>месяцев</span></div>
+    <div class="kicker">Проекты</div>
+    <h2>Что я построил</h2>
+
+    <div class="proj-tabs">
+      <button class="proj-tab active" data-tab="own">Мои проекты</button>
+      <button class="proj-tab" data-tab="hired">Проекты по найму</button>
     </div>
-    <div class="stack" style="margin-top:18px;">
-      <span class="chip">roblox-ts</span>
-      <span class="chip">TypeScript</span>
-      <span class="chip">Luau</span>
-      <span class="chip">Flamework</span>
-      <span class="chip">Reflex</span>
-      <span class="chip">React</span>
-      <span class="chip">ProfileStore</span>
-      <span class="chip">MemoryStore</span>
+
+    <div class="proj-pane active" data-pane="own">
+      <div class="proj-block">
+        <span class="role">Соло, с нуля</span>
+        <h3 class="proj-title">Idle Clicker</h3>
+        <p class="desc">
+          Продакшн idle/clicker: игрок бьёт монстров, качает героев и апгрейды, проходит Ascension
+          за осколки. Полное разделение слоёв — клиент никогда не авторитетен, сервер пересчитывает
+          всё сам. Два независимых стора (Reflex), Broadcaster-синхронизация, BigNum-математика
+          под числа за пределами e15, виртуализация списков карточек героев, object pooling для лута,
+          time-sliced планировщик тяжёлых расчётов, чтобы не подвесить кадр.
+        </p>
+        <div class="metrics">
+          <div class="metric"><b>~50 000</b><span>строк кода</span></div>
+          <div class="metric"><b>170+</b><span>файлов</span></div>
+          <div class="metric"><b>15+</b><span>механик</span></div>
+          <div class="metric"><b>5</b><span>месяцев</span></div>
+        </div>
+        <div class="stack">
+          <span class="chip">roblox-ts</span>
+          <span class="chip">TypeScript</span>
+          <span class="chip">Luau</span>
+          <span class="chip">Flamework</span>
+          <span class="chip">Reflex</span>
+          <span class="chip">React</span>
+          <span class="chip">Ripple</span>
+          <span class="chip">ProfileStore / Lapis</span>
+          <span class="chip">Sift</span>
+        </div>
+      </div>
+
+      <div class="proj-block">
+        <span class="role">Соло, с нуля</span>
+        <h3 class="proj-title">Mining Simulator</h3>
+        <p class="desc">
+          Симулятор с миграцией на новую world/chunk-архитектуру для видимости блоков и борьбы
+          с лагом. Кросс-серверные механики — например, перевод кристаллов между серверами через
+          MemoryStore-леджер и MessagingService, где важно не потерять и не задублировать перевод
+          при обрыве связи. Отдельно — санитайзер и миграция сохранённых данных игрока (герои,
+          экспедиции, артефакты, кристаллы, ачивки, клан), чтобы старые сохранения не ломались
+          при обновлении структуры данных.
+        </p>
+        <div class="stack">
+          <span class="chip">roblox-ts</span>
+          <span class="chip">Flamework</span>
+          <span class="chip">Reflex</span>
+          <span class="chip">React</span>
+          <span class="chip">MemoryStore</span>
+          <span class="chip">MessagingService</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-pane" data-pane="hired">
+      <div class="empty-block">
+        Здесь появятся проекты, над которыми я работал по найму — добавлю, как только будет что показать.
+      </div>
     </div>
   </section>
 
   <!-- ЧТО РЕШАЛ -->
   <section id="solved">
     <div class="kicker">Что решал</div>
-    <h2>Реальные проблемы из проекта — не абстрактные навыки</h2>
+    <h2>Реальные рантайм-проблемы — не абстрактные навыки</h2>
     <p class="sub">Без кода — суть проблемы и в какую сторону решено. Код и детали — по запросу, покажу и объясню на пальцах.</p>
     <div class="problem-grid">
       <div class="problem">
@@ -266,6 +329,42 @@
         <span class="s-tag">решение</span>
         <p>От клиента принимается только само действие, все цифры пересчитываются на сервере заново.</p>
       </div>
+      <div class="problem">
+        <span class="p-tag">проблема</span>
+        <p class="p-text">Клик должен ощущаться мгновенным, но экономика не терпит рассинхрона между вкладками/устройствами.</p>
+        <span class="s-tag">решение</span>
+        <p>Клик применяется мгновенно на клиенте (оптимистично), а покупки — только после подтверждения сервера, кнопка блокируется до ответа.</p>
+      </div>
+      <div class="problem">
+        <span class="p-tag">проблема</span>
+        <p class="p-text">Валюта в idle-игре легко уходит за пределы точности обычного числа (e15 и выше) — начинаются округления и баги.</p>
+        <span class="s-tag">решение</span>
+        <p>Все игровые числа — строки в BigNum-формате со своим движком математики, а не встроенные числа.</p>
+      </div>
+      <div class="problem">
+        <span class="p-tag">проблема</span>
+        <p class="p-text">Список из сотен карточек героев в интерфейсе тормозил игру — рендерились все сразу.</p>
+        <span class="s-tag">решение</span>
+        <p>Виртуализация: в памяти живут только видимые карточки, остальные не создаются, пока не понадобятся.</p>
+      </div>
+      <div class="problem">
+        <span class="p-tag">проблема</span>
+        <p class="p-text">Расчёт «купить максимум» перебирает сотни уровней и может подвесить кадр на середине клика.</p>
+        <span class="s-tag">решение</span>
+        <p>Тяжёлые расчёты режутся на порции с бюджетом по времени на кадр, чтобы игра не замирала.</p>
+      </div>
+      <div class="problem">
+        <span class="p-tag">проблема</span>
+        <p class="p-text">Наивная обработка таймаута при загрузке профиля игрока приводила к «утечке» сессии — профиль оставался занят.</p>
+        <span class="s-tag">решение</span>
+        <p>Загрузка отменяется явным флагом, а не гонкой промисов — профиль корректно освобождается в любом сценарии.</p>
+      </div>
+      <div class="problem">
+        <span class="p-tag">проблема</span>
+        <p class="p-text">Нужно было отличать читера с автокликером от игрока с быстрой реакцией, не браня честных игроков.</p>
+        <span class="s-tag">решение</span>
+        <p>Лимит скорости действий с запасом на погрешность и «тихий» отказ вместо кика — без ложных банов.</p>
+      </div>
     </div>
     <p class="sub" style="margin-top:20px;">
       Падение одной механики не должно ронять всю игру — места, где на кону деньги или данные
@@ -281,6 +380,7 @@
       <div class="term"><span class="yn ok">ок</span><p>Задача или тикет с описанием — сделаю, отчитаюсь текстом и видео результата.</p></div>
       <div class="term"><span class="yn ok">ок</span><p>Оплачиваемое тестовое задание — нормальная практика, готов.</p></div>
       <div class="term"><span class="yn ok">ок</span><p>Показать код и объяснить решение в переписке, по конкретному вопросу.</p></div>
+      <div class="term"><span class="yn ok">ок</span><p>Примерная оценка сроков до старта, если это важно для планирования.</p></div>
       <div class="term"><span class="yn no">нет</span><p>Live-coding и интервью в реальном времени.</p></div>
       <div class="term"><span class="yn no">нет</span><p>Работа за проценты будущей прибыли без ясного объёма задач.</p></div>
     </div>
@@ -303,7 +403,7 @@
     </div>
   </section>
 
-  <footer>Ссылка на игру появится здесь после релиза.</footer>
+  <footer>Ссылка на игры появится здесь после релиза.</footer>
 
 </div>
 
@@ -321,6 +421,18 @@
       try { localStorage.setItem('pf-theme', theme); } catch (err) {}
       var buttons = switchEl.querySelectorAll('button');
       for (var i = 0; i < buttons.length; i++) buttons[i].classList.toggle('active', buttons[i] === btn);
+    });
+  })();
+
+  (function () {
+    var tabs = document.querySelectorAll('.proj-tab');
+    var panes = document.querySelectorAll('.proj-pane');
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var target = tab.getAttribute('data-tab');
+        tabs.forEach(function (t) { t.classList.toggle('active', t === tab); });
+        panes.forEach(function (p) { p.classList.toggle('active', p.getAttribute('data-pane') === target); });
+      });
     });
   })();
 </script>
