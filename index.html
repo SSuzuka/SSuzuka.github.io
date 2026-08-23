@@ -97,6 +97,10 @@
     .stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
     .chip { background: color-mix(in srgb, var(--card) 60%, var(--bg)); border: 1px solid var(--border); color: var(--text); padding: 6px 14px; border-radius: 999px; font-size: .8rem; font-family: ui-monospace, Consolas, monospace; }
 
+    .ill { background: color-mix(in srgb, var(--bg) 94%, var(--card)); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; margin-top: 8px; }
+    .ill summary { cursor: pointer; font-size: .78rem; font-weight: 600; color: var(--muted); }
+    .ill pre { font-family: ui-monospace, Consolas, monospace; font-size: .78rem; color: var(--text); margin-top: 8px; white-space: pre; overflow-x: auto; }
+
     .problem { border: 1px solid var(--border); border-radius: 12px; background: var(--card); padding: 16px 18px; }
     .problem .p-tag { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--warn); margin-bottom: 6px; display: block; }
     .problem .s-tag { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--ok); margin: 10px 0 4px; display: block; }
@@ -128,6 +132,7 @@
         <a href="#about">Обо мне</a>
         <a href="#project">Проекты</a>
         <a href="#solved">Что решал</a>
+        <a href="#details">Глубже</a>
         <a href="#terms">Как работаем</a>
       </div>
       <div class="theme-switch" id="themeSwitch">
@@ -187,6 +192,7 @@
           <li>Спроектировать архитектуру системы с нуля и довести до рабочего продакшн-состояния</li>
           <li>Чинить рантайм в уже живом проекте: гонки данных, обрывы соединения, дублирование, спам действий</li>
           <li>Профилировать игру, если она тормозит — искать реальное узкое место, а не гадать</li>
+          <li>Критические пути гоняю в имитации рантайма — моки и полифилы на эдж-кейсах; по запросу — полное покрытие</li>
           <li>Разбираться в чужом или старом коде без документации и чинить не ломая рядом лежащее</li>
           <li>Собрать быстрый MVP под проверку гипотезы — без переинжиниринга</li>
           <li>Аккуратно работать с уже запущенным проектом, где нельзя всё сломать экспериментом</li>
@@ -347,11 +353,173 @@
         <span class="s-tag">решение</span>
         <p>Лимит скорости действий с запасом на погрешность и «тихий» отказ вместо кика — без ложных банов.</p>
       </div>
+      <div class="problem">
+        <span class="p-tag">проблема</span>
+        <p class="p-text">Передача платных кристаллов между игроками через несколько серверов — потеря подтверждения или повторная доставка могут задвоить баланс.</p>
+        <span class="s-tag">решение</span>
+        <p>Внешний журнал операций как единственный маркер коммита: списание и начисление применяются по нему один раз, а не по клиентским подтверждениям.</p>
+      </div>
+      <div class="problem">
+        <span class="p-tag">проблема</span>
+        <p class="p-text">Повреждение данных игрока могло молча обнулить купленные за Robux кристаллы вместе с историей покупок.</p>
+        <span class="s-tag">решение</span>
+        <p>Независимый ledger чеков покупок: при повреждении профиля донатный баланс, история и статус восстанавливаются, а не теряются.</p>
+      </div>
     </div>
     <p class="sub" style="margin-top:20px;">
       Падение одной механики не должно ронять всю игру — места, где на кону деньги или данные
       игрока, я отдельно проверяю на отказ, остальное — обычная разработка без переусложнения.
     </p>
+  </section>
+
+  <!-- ИНЖЕНЕРНЫЕ ДЕТАЛИ -->
+  <section id="details">
+    <div class="kicker">Глубже</div>
+    <h2>Инженерные детали — для тех, кто хочет копнуть глубже</h2>
+    <p class="sub">Ниже — конкретные защитные решения, которые применяю в коде. Не обязательно к прочтению, но если интересно, почему именно так — вот примеры. Под спойлером — упрощённая иллюстрация принципа, а не боевой код из прода.</p>
+
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
+      <summary style="cursor:pointer;font-weight:600;">Совместимость при rolling-деплое</summary>
+      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
+        При обновлении сервера часть игроков какое-то время играет на старой версии, часть — на новой.
+        Один из методов начисления валюты специально держит неиспользуемый параметр в сигнатуре —
+        чтобы порядок остальных аргументов не сдвинулся, пока обновление раскатывается не на всех сразу.
+      </p>
+      <details class="ill"><summary>Иллюстрация</summary>
+        <pre>// Мёртвый параметр сохраняет позиции остальных.
+function grant(amount, _legacy, cumulative) {
+  // _legacy не читается — только держит порядок,
+  // пока старые и новые версии работают одновременно.
+}</pre>
+      </details>
+    </details>
+
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
+      <summary style="cursor:pointer;font-weight:600;">Контракт на аргументы синхронизации</summary>
+      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
+        Каждое действие, которое рассылается между клиентом и сервером, сверяется со строгой схемой:
+        если тип аргумента не совпал с ожидаемым — действие отклоняется целиком, а не выполняется
+        со сдвинутыми значениями. Отдельно проверяется, что действие применяется только тому игроку,
+        которому принадлежит — не может прилететь чужому клиенту.
+      </p>
+      <details class="ill"><summary>Иллюстрация</summary>
+        <pre>const contract = { amount: "number" };
+if (typeof(actual) !== contract.amount) return; // отклонено целиком
+if (owner !== player) return;                    // чужое не летит дальше</pre>
+      </details>
+    </details>
+
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
+      <summary style="cursor:pointer;font-weight:600;">Защита от особенности рантайма Roblox-компилятора</summary>
+      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
+        Один из колбэков технически может не вернуть значение, что в определённых случаях сдвигает
+        аргументы у вызывающего кода. Обёрнуто явно, чтобы такой сдвиг был невозможен в принципе —
+        мелкая деталь, но именно из таких мелочей рождаются самые неприятные баги в проде.
+      </p>
+      <details class="ill"><summary>Иллюстрация</summary>
+        <pre>// Колбэк, который может вернуть ничего, оборачивается
+// в явный кортеж — сдвиг аргументов исключён.
+return tupleValue(result);</pre>
+      </details>
+    </details>
+
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
+      <summary style="cursor:pointer;font-weight:600;">Единый инвариант сортировки для retention-прунинга</summary>
+      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
+        Очистка старых данных и валидация используют одну и ту же функцию сортировки, а не две
+        похожие копии в разных местах — рассинхрон направления сортировки невозможен просто потому,
+        что копии не существует.
+      </p>
+      <details class="ill"><summary>Иллюстрация</summary>
+        <pre>// У прунинга один инвариант, живёт в одном месте.
+const stale = pruneOldest(records, limit, byAge);</pre>
+      </details>
+    </details>
+
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
+      <summary style="cursor:pointer;font-weight:600;">Детерминированный монстр зоны</summary>
+      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
+        Генератор монстра на основе seed от зоны: один и тот же сервер после рестарта всегда выдаёт
+        одного и того же монстра, без необходимости хранить его модель в данных игрока.
+      </p>
+      <details class="ill"><summary>Иллюстрация</summary>
+        <pre>const seed = stableHash(zone);
+const rng = new SeededRandom(seed); // тот же монстр при том же входе</pre>
+      </details>
+    </details>
+
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
+      <summary style="cursor:pointer;font-weight:600;">Ожидание финального сохранения, а не события выхода</summary>
+      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
+        Событие «игрок вышел» в Roblox может сработать раньше, чем реально завершится сохранение
+        профиля. Логика ждёт именно завершения сохранения, а не сам факт выхода — иначе можно
+        начать новую сессию поверх ещё не сохранённой старой.
+      </p>
+      <details class="ill"><summary>Иллюстрация</summary>
+        <pre>// Ждём факт завершения сохранения, а не событие «вышел» —
+// оно может прийти раньше фактической записи.
+await profile.onSaved();</pre>
+      </details>
+    </details>
+
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
+      <summary style="cursor:pointer;font-weight:600;">Коммит награды в конце цепочки действий</summary>
+      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
+        Награда за убийство применяется только после того, как успешно запущен следующий шаг
+        (например, заспавнен следующий монстр). Если по пути произошла ошибка — начисление
+        не происходит, и повторный пакет от клиента не может задвоить награду.
+      </p>
+      <details class="ill"><summary>Иллюстрация</summary>
+        <pre>spawnNextMonster();   // сначала — следующий шаг
+grantReward();        // награда только если всё выше сработало
+// ошибка выше — коммита нет, повтор клиента не задвоит</pre>
+      </details>
+    </details>
+
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
+      <summary style="cursor:pointer;font-weight:600;">Защита BigNum от зависания на аномальных данных</summary>
+      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
+        Внутренние циклы нормализации больших чисел ограничены по количеству итераций с явным
+        предупреждением, а не оставлены открытыми — на редком крайнем случае это могло бы
+        привести к зависанию, а не просто к неверному результату.
+      </p>
+      <details class="ill"><summary>Иллюстрация</summary>
+        <pre>let guard = 0;
+while (cond) {
+  ...
+  guard++;
+  if (guard > 3) { warn("аномальный вход"); break; }
+}</pre>
+      </details>
+    </details>
+
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
+      <summary style="cursor:pointer;font-weight:600;">Защита клиента от старых серверов при обновлении</summary>
+      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
+        Если во время постепенного обновления клиент получил данные со старого сервера, где часть
+        полей отсутствует, эти поля не затирают дефолтные значения клиента пустотой.
+      </p>
+      <details class="ill"><summary>Иллюстрация</summary>
+        <pre>// Поля, которых нет в старом payload, не удаляют
+// дефолты клиента.
+const clean = pickKeys(payload, k => payload[k] !== undefined);</pre>
+      </details>
+    </details>
+
+    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
+      <summary style="cursor:pointer;font-weight:600;">Надёжная проверка структуры данных перед синхронизацией</summary>
+      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
+        Там, где стандартная проверка размера списка не даёт гарантии на редких крайних случаях
+        (например, если в данных образовался пропуск), используется явная проверка каждого
+        элемента — это критично, потому что клиентский стор ожидает строго последовательные данные.
+      </p>
+      <details class="ill"><summary>Иллюстрация</summary>
+        <pre>// Проверяем каждый индекс, а не только размер списка.
+for (i = 1; i <= count; i++)
+  if (arr[i] == null) return invalid;</pre>
+      </details>
+    </details>
+
   </section>
 
   <!-- КАК РАБОТАЕМ -->
