@@ -4,120 +4,163 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Roblox-разработчик</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0c0f14; --card: #161b23; --border: #242c38; --border-2: #313c4d;
-      --text: #eef1f6; --muted: #98a3b5; --accent: #ff8a3d; --accent-2: #ffb27a;
+      --bg: #0a0d12; --card: #12161d; --border: #1f2530; --border-2: #2b3340;
+      --text: #e9edf3; --muted: #8f99ab; --accent: #38c9a3; --accent-2: #7fe3c9;
+      --cta: #ff9a42; --cta-2: #ffb877; --cta-text: #1a1006;
       --ok: #3ddc97; --warn: #e0a94c; --radius: 14px;
     }
     html[data-theme="light"] {
-      --bg: #f6f4f0; --card: #ffffff; --border: #e3ddd2; --border-2: #cfc6b5;
-      --text: #1c1a16; --muted: #6b6355; --accent: #c9631f; --accent-2: #a34f18;
-      --warn: #a06a15;
+      --bg: #f7f5f0; --card: #ffffff; --border: #e4ddd0; --border-2: #d2c9b6;
+      --text: #1c1a16; --muted: #6c6455; --accent: #0f9c7c; --accent-2: #0c7f66;
+      --cta: #c9631f; --cta-2: #a34f18; --cta-text: #ffffff;
+      --ok: #0e9e6c; --warn: #a06a15;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Manrope", system-ui, sans-serif; background: var(--bg); color: var(--text);
+      line-height: 1.65; transition: background-color .25s ease, color .25s ease;
+    }
     .wrap { max-width: 880px; margin: 0 auto; padding: 0 22px; }
+    h1, h2 { font-family: "Unbounded", "Manrope", sans-serif; }
 
-    nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(10px); background: color-mix(in srgb, var(--bg) 80%, transparent); border-bottom: 1px solid var(--border); }
+    nav {
+      position: sticky; top: 0; z-index: 50; backdrop-filter: blur(10px);
+      background: color-mix(in srgb, var(--bg) 80%, transparent); border-bottom: 1px solid var(--border);
+      transition: background-color .25s ease, border-color .25s ease;
+    }
     .nav-inner { max-width: 880px; margin: 0 auto; padding: 12px 22px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
     .brand { font-weight: 700; font-size: .95rem; display: flex; align-items: center; gap: 9px; }
     .brand i { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
     .nav-links { display: flex; gap: 18px; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: .88rem; white-space: nowrap; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: .88rem; white-space: nowrap; transition: color .18s ease; }
     .nav-links a:hover { color: var(--accent-2); }
     .theme-switch { display: flex; gap: 2px; background: var(--card); border: 1px solid var(--border); border-radius: 999px; padding: 3px; }
-    .theme-switch button { border: none; background: transparent; color: var(--muted); cursor: pointer; padding: 4px 10px; border-radius: 999px; font-size: .78rem; font-weight: 600; }
-    .theme-switch button.active { background: var(--accent); color: #17110a; }
+    .theme-switch button { border: none; background: transparent; color: var(--muted); cursor: pointer; padding: 4px 10px; border-radius: 999px; font-size: .78rem; font-weight: 600; transition: background-color .18s ease, color .18s ease; }
+    .theme-switch button.active { background: var(--accent); color: var(--bg); }
 
     header { padding: 44px 0 8px; }
     .hello { color: var(--accent-2); font-weight: 700; font-size: .9rem; margin-bottom: 10px; }
-    h1 { font-size: clamp(1.7rem, 4.4vw, 2.35rem); font-weight: 800; letter-spacing: -.5px; line-height: 1.28; margin-bottom: 16px; max-width: 700px; }
+    h1 { font-size: clamp(1.6rem, 4.2vw, 2.2rem); font-weight: 800; letter-spacing: -.3px; line-height: 1.32; margin-bottom: 16px; max-width: 700px; }
     .lead { color: var(--muted); max-width: 640px; font-size: clamp(1rem, 2vw, 1.06rem); }
     .lead b { color: var(--text); }
-    .lead + .lead { margin-top: 10px; }
+    .persona {
+      max-width: 640px; margin-top: 16px; padding-left: 14px; border-left: 2px solid var(--accent);
+      color: var(--text); font-weight: 600; font-size: .98rem;
+    }
 
     .top-cta {
       margin: 26px 0 8px; background: var(--card); border: 1px solid var(--border);
       border-radius: var(--radius); padding: 18px 22px; display: flex; flex-wrap: wrap;
       gap: 14px; align-items: center; justify-content: space-between;
+      transition: background-color .25s ease, border-color .25s ease;
     }
     .top-cta .avail { color: var(--ok); font-weight: 700; display: flex; align-items: center; gap: 8px; margin-bottom: 3px; font-size: .82rem; }
-    .top-cta .avail::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 10px var(--ok); }
+    .top-cta .avail::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 10px var(--ok); animation: pulse 2.2s ease-in-out infinite; }
     .top-cta small { color: var(--muted); display:block; margin-top:2px; }
-    .btn { display: inline-block; background: var(--accent); color: #17110a; text-decoration: none; padding: 9px 20px; border-radius: 999px; font-weight: 700; font-size: .9rem; }
-    .btn.ghost { background: transparent; border: 1px solid var(--border-2); color: var(--text); font-weight: 600; }
+    .btn { display: inline-block; background: var(--cta); color: var(--cta-text); text-decoration: none; padding: 9px 20px; border-radius: 999px; font-weight: 700; font-size: .9rem; transition: transform .15s ease, box-shadow .15s ease; }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px color-mix(in srgb, var(--cta) 35%, transparent); }
+    .btn.ghost { background: transparent; border: 1px solid var(--border-2); color: var(--text); font-weight: 600; box-shadow: none; }
+    .btn.ghost:hover { border-color: var(--accent-2); box-shadow: none; transform: translateY(-1px); }
     .btn.placeholder { opacity: .45; pointer-events: none; }
 
-    section { padding: 36px 0; border-top: 1px solid var(--border); }
+    section { padding: 36px 0; border-top: 1px solid var(--border); transition: border-color .25s ease; }
     header + .top-cta + section { border-top: none; }
     .kicker { text-transform: uppercase; letter-spacing: 2px; font-size: .74rem; font-weight: 700; color: var(--accent-2); margin-bottom: 8px; }
-    h2 { font-size: clamp(1.15rem, 3vw, 1.4rem); font-weight: 700; letter-spacing: -.3px; margin-bottom: 12px; }
-    h3.proj-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+    h2 { font-size: clamp(1.15rem, 3vw, 1.4rem); font-weight: 700; letter-spacing: -.2px; margin-bottom: 12px; }
+    h3.proj-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; font-family: "Manrope", sans-serif; }
     .sub { color: var(--muted); max-width: 640px; margin-bottom: 18px; }
 
     p.story { color: var(--text); max-width: 660px; margin-bottom: 12px; }
     p.story b { color: var(--accent-2); }
 
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
-    .card h3 { font-size: .96rem; margin-bottom: 6px; }
-    .card p { color: var(--muted); font-size: .89rem; }
-
-    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    @media (max-width: 700px) { .split { grid-template-columns: 1fr; } }
-    .split-col { border-radius: var(--radius); padding: 20px; border: 1px solid var(--border); background: var(--card); }
-    .split-col.yes { border-color: color-mix(in srgb, var(--ok) 35%, var(--border)); }
-    .split-col.no { border-color: color-mix(in srgb, var(--warn) 35%, var(--border)); }
-    .split-col h3 { font-size: .92rem; margin-bottom: 12px; }
-    .split-col.yes h3 { color: var(--ok); }
-    .split-col.no h3 { color: var(--warn); }
-    .split-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
-    .split-col li { color: var(--muted); font-size: .87rem; padding-left: 18px; position: relative; }
-    .split-col li::before { content: "—"; position: absolute; left: 0; color: var(--border-2); }
-    .note { color: var(--muted); font-size: .87rem; margin-top: 14px; max-width: 660px; }
+    /* Skills — a spec-sheet list, deliberately not another card grid */
+    .skill-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; margin-top: 6px; }
+    @media (max-width: 640px) { .skill-list { grid-template-columns: 1fr; } }
+    .skill-row { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: .92rem; color: var(--muted); transition: border-color .25s ease; }
+    .skill-row b { color: var(--text); font-weight: 700; }
+    .note { color: var(--muted); font-size: .87rem; margin-top: 16px; max-width: 660px; }
     .note b { color: var(--text); }
 
     /* Project cells */
     .proj-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-    .proj-tab { border: 1px solid var(--border); background: var(--card); color: var(--muted); padding: 7px 16px; border-radius: 999px; font-size: .84rem; font-weight: 600; cursor: pointer; }
+    .proj-tab { border: 1px solid var(--border); background: var(--card); color: var(--muted); padding: 7px 16px; border-radius: 999px; font-size: .84rem; font-weight: 600; cursor: pointer; transition: border-color .18s ease, background-color .18s ease, color .18s ease; }
     .proj-tab.active { color: var(--text); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, var(--card)); }
     .proj-pane { display: none; }
     .proj-pane.active { display: block; }
-    .proj-block { border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); padding: 22px 24px; margin-bottom: 16px; }
+    .proj-block { border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); padding: 22px 24px; margin-bottom: 16px; transition: background-color .25s ease, border-color .25s ease; }
     .proj-block .role { display: inline-block; font-size: .74rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--accent-2); background: color-mix(in srgb, var(--accent) 16%, transparent); padding: 3px 10px; border-radius: 999px; margin-bottom: 10px; }
     .proj-block p.desc { color: var(--muted); font-size: .92rem; max-width: 640px; margin-bottom: 14px; }
     .empty-block { border: 1px dashed var(--border-2); border-radius: var(--radius); padding: 22px 24px; color: var(--muted); font-size: .89rem; }
 
-    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 6px; }
-    .metric { background: color-mix(in srgb, var(--card) 60%, var(--bg)); border: 1px solid var(--border); border-radius: 10px; padding: 13px; text-align: center; }
-    .metric b { font-family: ui-monospace, Consolas, monospace; font-size: 1.15rem; display: block; color: var(--accent-2); }
-    .metric span { color: var(--muted); font-size: .74rem; }
+    .stat-line { font-size: .92rem; color: var(--muted); margin: 8px 0 16px; }
+    .stat-line .num { font-family: "JetBrains Mono", ui-monospace, monospace; color: var(--accent-2); font-weight: 600; }
 
-    .stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-    .chip { background: color-mix(in srgb, var(--card) 60%, var(--bg)); border: 1px solid var(--border); color: var(--text); padding: 6px 14px; border-radius: 999px; font-size: .8rem; font-family: ui-monospace, Consolas, monospace; }
+    .stack-note { color: var(--muted); font-size: .87rem; max-width: 620px; margin-bottom: 10px; }
+    .stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+    .chip { background: color-mix(in srgb, var(--card) 60%, var(--bg)); border: 1px solid var(--border); color: var(--text); padding: 6px 14px; border-radius: 999px; font-size: .8rem; font-family: "JetBrains Mono", ui-monospace, monospace; }
+    .chip.more { border-style: dashed; border-color: var(--border-2); color: var(--muted); }
 
     .ill { background: color-mix(in srgb, var(--bg) 94%, var(--card)); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; margin-top: 8px; }
-    .ill summary { cursor: pointer; font-size: .78rem; font-weight: 600; color: var(--muted); }
-    .ill pre { font-family: ui-monospace, Consolas, monospace; font-size: .78rem; color: var(--text); margin-top: 8px; white-space: pre; overflow-x: auto; }
+    .ill pre { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .78rem; color: var(--text); margin-top: 8px; white-space: pre; overflow-x: auto; }
 
-    .problem { border: 1px solid var(--border); border-radius: 12px; background: var(--card); padding: 16px 18px; }
+    .problem { border: 1px solid var(--border); border-radius: 12px; background: var(--card); padding: 16px 18px; transition: border-color .25s ease, background-color .25s ease; }
     .problem .p-tag { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--warn); margin-bottom: 6px; display: block; }
     .problem .s-tag { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--ok); margin: 10px 0 4px; display: block; }
     .problem p { font-size: .87rem; color: var(--muted); }
     .problem p.p-text { color: var(--text); }
     .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
 
+    /* Deep-dive accordion */
+    .detail-block { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; margin-bottom: 10px; transition: border-color .2s ease, background-color .25s ease; }
+    .detail-block summary, .ill summary { cursor: pointer; list-style: none; position: relative; padding-left: 22px; }
+    .detail-block summary::-webkit-details-marker, .ill summary::-webkit-details-marker { display: none; }
+    .detail-block summary { font-weight: 600; }
+    .ill summary { font-size: .78rem; font-weight: 600; color: var(--muted); }
+    .detail-block summary::before, .ill summary::before {
+      content: "+"; position: absolute; left: 0; top: -1px; color: var(--accent-2); font-weight: 700;
+      transition: transform .2s ease; display: inline-block;
+    }
+    .detail-block[open] summary::before, .ill[open] summary::before { transform: rotate(45deg); }
+    .detail-block p { color: var(--muted); font-size: .87rem; margin-top: 10px; }
+
     .terms { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-    .term { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+    .term { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; transition: border-color .25s ease, background-color .25s ease; }
     .term .yn { font-size: .75rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; display: inline-block; margin-bottom: 8px; }
     .term .yn.ok { background: color-mix(in srgb, var(--ok) 18%, transparent); color: var(--ok); }
     .term .yn.no { background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); }
     .term p { font-size: .87rem; color: var(--muted); }
 
-    .contact { background: var(--card); border: 1px solid var(--border-2); border-radius: var(--radius); padding: 24px 26px; display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; }
+    .contact { background: var(--card); border: 1px solid var(--border-2); border-radius: var(--radius); padding: 24px 26px; display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; transition: background-color .25s ease, border-color .25s ease; }
     .contact small { color: var(--muted); }
     footer { text-align: center; color: var(--muted); font-size: .8rem; padding: 26px 0 40px; border-top: 1px solid var(--border); }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 10px var(--ok); }
+      50% { opacity: .45; box-shadow: 0 0 4px var(--ok); }
+    }
+    @keyframes heroIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    header .hello, header h1, header .lead, header .persona, .top-cta {
+      animation: heroIn .5s ease both;
+    }
+    header .hello { animation-delay: 0s; }
+    header h1 { animation-delay: .07s; }
+    header .lead { animation-delay: .14s; }
+    header .persona { animation-delay: .21s; }
+    .top-cta { animation-delay: .28s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+    }
 
     @media (max-width: 720px) { .nav-links { display: none; } }
   </style>
@@ -157,13 +200,14 @@
       до архитектурных развилок вроде ООП vs модульность, SSoT, иммутабельность стора.
       Ниже — конкретный проект и конкретные проблемы, без воды.
     </p>
+    <p class="persona">Чем неприятнее баг — тем интереснее в нём разбираться.</p>
   </header>
 
   <div class="top-cta">
     <div>
       <div class="avail">открыт к проектам</div>
       <b>Готов взять что угодно — от архитектуры с нуля до починки прод-рантайма</b>
-      <small>Пишу текстом, отвечаю быстро, без пропаданий.</small>
+      <small>Только текст — без созвонов и войсов. Отвечаю быстро, без пропаданий.</small>
     </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
       <a class="btn placeholder" href="#">GitHub</a>
@@ -188,43 +232,20 @@
       Могу ответить по большинству вопросов архитектуры, сети и перформанса — не выдумываю
       на ходу и не боюсь сложных вопросов.
     </p>
-    <div class="split">
-      <div class="split-col yes">
-        <h3>✓ Что я умею</h3>
-        <ul>
-          <li>Спроектировать архитектуру системы с нуля и довести до рабочего продакшн-состояния</li>
-          <li>Чинить рантайм в уже живом проекте: гонки данных, обрывы соединения, дублирование, спам действий</li>
-          <li>Профилировать игру, если она тормозит — искать реальное узкое место, а не гадать</li>
-          <li>Критические пути гоняю в имитации рантайма — моки и полифилы на эдж-кейсах; по запросу — полное покрытие</li>
-          <li>Разбираться в чужом или старом коде без документации и чинить не ломая рядом лежащее</li>
-          <li>Собрать быстрый MVP под проверку гипотезы — без переинжиниринга</li>
-          <li>Аккуратно работать с уже запущенным проектом, где нельзя всё сломать экспериментом</li>
-        </ul>
-      </div>
-      <div class="split-col no">
-        <h3>✕ Чего нет</h3>
-        <ul>
-          <li>Live-coding на созвоне под давлением — мне удобнее спокойно разобраться и показать результат</li>
-          <li>Опыта в команде — пока работал соло, но открыт к этому</li>
-        </ul>
-      </div>
-    </div>
-    <p class="note">По срокам — могу дать примерную оценку заранее, если нужно понимать таймлайн до старта.</p>
-  </section>
 
-  <!-- ЧТО БЕРУ В РАБОТУ -->
-  <section id="scope">
-    <div class="kicker">Формат задач</div>
-    <h2>Что готов брать</h2>
-    <div class="cards">
-      <div class="card"><h3>Архитектура с нуля</h3><p>Спроектировать систему — экономику, данные, сеть — с чистого листа, под конкретную игру и её масштаб.</p></div>
-      <div class="card"><h3>Починка прод-рантайма</h3><p>Живой проект ведёт себя странно под нагрузкой или у части игроков — разбираюсь и чиню без простоя.</p></div>
-      <div class="card"><h3>Профилирование и перформанс</h3><p>Игра моросит, лагает или ест память — нахожу узкое место и убираю его.</p></div>
-      <div class="card"><h3>Быстрые MVP</h3><p>Рабочий прототип механики или фичи под проверку гипотезы — без переинжиниринга.</p></div>
-      <div class="card"><h3>Легаси-код</h3><p>Спокойно разбираюсь в старом/чужом коде без документации — читаю, что реально происходит.</p></div>
-      <div class="card"><h3>UI / UX</h3><p>Интерфейс как инженерная задача: адаптив, производительность рендера, реактивная связь со стором — на любом стеке, не только «накидать фреймы».</p></div>
-      <div class="card"><h3>Экономика и анти-чит</h3><p>Серверная валидация, защита от дублирования, спама и накрутки — деньги игрока не должны утекать.</p></div>
+    <div class="skill-list">
+      <div class="skill-row"><b>Архитектура с нуля.</b> Спроектировать систему — экономику, данные, сеть — под конкретную игру и её масштаб, и довести до рабочего продакшн-состояния.</div>
+      <div class="skill-row"><b>Починка прод-рантайма.</b> Живой проект ведёт себя странно под нагрузкой или у части игроков: гонки данных, обрывы соединения, дублирование, спам действий.</div>
+      <div class="skill-row"><b>Профилирование и перформанс.</b> Игра тормозит — нахожу реальное узкое место, а не гадаю.</div>
+      <div class="skill-row"><b>Тесты на критических путях.</b> Имитация рантайма — моки и полифилы на эдж-кейсах; по запросу — полное покрытие.</div>
+      <div class="skill-row"><b>Легаси-код.</b> Спокойно разбираюсь в чужом или старом коде без документации и чиню, не ломая рядом лежащее.</div>
+      <div class="skill-row"><b>Быстрые MVP.</b> Рабочий прототип механики под проверку гипотезы — без переинжиниринга.</div>
+      <div class="skill-row"><b>Работа с живым проектом.</b> Аккуратно, там, где нельзя всё сломать экспериментом.</div>
+      <div class="skill-row"><b>UI / UX.</b> Как инженерная задача: адаптив, производительность рендера, реактивная связь со стором — на любом стеке.</div>
+      <div class="skill-row"><b>Экономика и анти-чит.</b> Серверная валидация, защита от дублирования, спама и накрутки — деньги игрока не должны утекать.</div>
     </div>
+
+    <p class="note">По срокам — могу дать примерную оценку заранее, если нужно понимать таймлайн до старта.</p>
   </section>
 
   <!-- ПРОЕКТЫ -->
@@ -250,12 +271,8 @@
           расчётов, чтобы не подвесить кадр. MemoryStore и MessagingService — под кросс-серверный
           рейтинг кланов и синхронизацию боевых данных вроде HP между серверами.
         </p>
-        <div class="metrics">
-          <div class="metric"><b>~50 000</b><span>строк кода</span></div>
-          <div class="metric"><b>170+</b><span>файлов</span></div>
-          <div class="metric"><b>15+</b><span>механик</span></div>
-          <div class="metric"><b>5</b><span>месяцев разработки</span></div>
-        </div>
+        <p class="stat-line"><span class="num">170+</span> файлов · <span class="num">15+</span> игровых механик — весь путь соло: от архитектуры до продакшна.</p>
+        <p class="stack-note">Стек ниже — что использовалось в этом проекте, не ограничение: одинаково беру чистый Luau, roblox-ts или любой другой инструмент — под задачу, а не по привычке.</p>
         <div class="stack">
           <span class="chip">roblox-ts</span>
           <span class="chip">TypeScript</span>
@@ -263,11 +280,11 @@
           <span class="chip">Flamework</span>
           <span class="chip">Reflex</span>
           <span class="chip">React</span>
-          <span class="chip">Ripple</span>
           <span class="chip">ProfileStore / Lapis</span>
           <span class="chip">Sift</span>
           <span class="chip">MemoryStore</span>
           <span class="chip">MessagingService</span>
+          <span class="chip more">+ любой стек под задачу</span>
         </div>
       </div>
     </div>
@@ -381,19 +398,13 @@
     <div class="kicker">UI / UX</div>
     <h2>Интерфейс — это тоже инженерия</h2>
     <p class="sub">
-      Весь UI проекта написан с нуля: ~50 компонентов, адаптив под мобилку и десктоп,
-      реактивная связка со стором. Подход не зависит от стека — те же принципы работают
-      в любом фреймворке. Ниже — решения, которых потребовала производительность
+      UI — не побочный продукт, а такая же инженерная задача, как экономика или сеть. Весь UI проекта
+      написан с нуля, реактивно связан со стором, и подход не зависит от стека — те же принципы
+      работают в любом фреймворке. Ниже — решения, которых потребовала производительность
       и удобство. Не дублирую то, что уже описано выше (виртуализация списков, оптимистичные
       и пессимистичные обновления) — только то, чего там нет.
     </p>
-
-    <div class="metrics" style="margin-bottom:18px;">
-      <div class="metric"><b>~50</b><span>UI-компонентов</span></div>
-      <div class="metric"><b>19</b><span>хуков игровой логики</span></div>
-      <div class="metric"><b>2</b><span>режима: мобилка / ПК</span></div>
-      <div class="metric"><b>60fps</b><span>без ре-рендеров React</span></div>
-    </div>
+    <p class="stat-line"><span class="num">~50</span> UI-компонентов · <span class="num">19</span> хуков игровой логики · адаптив под мобилку и десктоп.</p>
 
     <div class="problem-grid">
       <div class="problem">
@@ -404,7 +415,7 @@
       </div>
       <div class="problem">
         <span class="p-tag">проблема</span>
-        <p class="p-text">Подписка компонента на весь стейд — интерфейс перерисовывается при любом изменении в игре.</p>
+        <p class="p-text">Подписка компонента на весь стейт — интерфейс перерисовывается при любом изменении в игре.</p>
         <span class="s-tag">решение</span>
         <p>Каждый компонент подписан на конкретное значение, а составные данные (статы героев, стоимость покупки) мемоизированы и пересчитываются только когда меняются их входы.</p>
       </div>
@@ -436,31 +447,14 @@
   </section>
 
   <!-- ИНЖЕНЕРНЫЕ ДЕТАЛИ -->
-  <!-- ИНЖЕНЕРНЫЕ ДЕТАЛИ -->
   <section id="details">
     <div class="kicker">Глубже</div>
     <h2>Инженерные детали — для тех, кто хочет копнуть глубже</h2>
     <p class="sub">Ниже — конкретные защитные решения, которые применяю в коде. Не обязательно к прочтению, но если интересно, почему именно так — вот примеры. Под спойлером — упрощённая иллюстрация принципа, а не боевой код из прода.</p>
 
-    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
-      <summary style="cursor:pointer;font-weight:600;">Совместимость при rolling-деплое</summary>
-      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
-        При обновлении сервера часть игроков какое-то время играет на старой версии, часть — на новой.
-        Один из методов начисления валюты специально держит неиспользуемый параметр в сигнатуре —
-        чтобы порядок остальных аргументов не сдвинулся, пока обновление раскатывается не на всех сразу.
-      </p>
-      <details class="ill"><summary>Иллюстрация</summary>
-        <pre>// Мёртвый параметр сохраняет позиции остальных.
-function grant(amount, _legacy, cumulative) {
-  // _legacy не читается — только держит порядок,
-  // пока старые и новые версии работают одновременно.
-}</pre>
-      </details>
-    </details>
-
-    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
-      <summary style="cursor:pointer;font-weight:600;">Контракт на аргументы синхронизации</summary>
-      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
+    <details class="detail-block">
+      <summary>Контракт на аргументы синхронизации</summary>
+      <p>
         Каждое действие, которое рассылается между клиентом и сервером, сверяется со строгой схемой:
         если тип аргумента не совпал с ожидаемым — действие отклоняется целиком, а не выполняется
         со сдвинутыми значениями. Отдельно проверяется, что действие применяется только тому игроку,
@@ -473,36 +467,9 @@ if (owner !== player) return;                    // чужое не летит �
       </details>
     </details>
 
-    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
-      <summary style="cursor:pointer;font-weight:600;">Защита от особенности рантайма Roblox-компилятора</summary>
-      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
-        Один из колбэков технически может не вернуть значение, что в определённых случаях сдвигает
-        аргументы у вызывающего кода. Обёрнуто явно, чтобы такой сдвиг был невозможен в принципе —
-        мелкая деталь, но именно из таких мелочей рождаются самые неприятные баги в проде.
-      </p>
-      <details class="ill"><summary>Иллюстрация</summary>
-        <pre>// Колбэк, который может вернуть ничего, оборачивается
-// в явный кортеж — сдвиг аргументов исключён.
-return tupleValue(result);</pre>
-      </details>
-    </details>
-
-    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
-      <summary style="cursor:pointer;font-weight:600;">Единый инвариант сортировки для retention-прунинга</summary>
-      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
-        Очистка старых данных и валидация используют одну и ту же функцию сортировки, а не две
-        похожие копии в разных местах — рассинхрон направления сортировки невозможен просто потому,
-        что копии не существует.
-      </p>
-      <details class="ill"><summary>Иллюстрация</summary>
-        <pre>// У прунинга один инвариант, живёт в одном месте.
-const stale = pruneOldest(records, limit, byAge);</pre>
-      </details>
-    </details>
-
-    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
-      <summary style="cursor:pointer;font-weight:600;">Детерминированный монстр зоны</summary>
-      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
+    <details class="detail-block">
+      <summary>Детерминированный монстр зоны</summary>
+      <p>
         Генератор монстра на основе seed от зоны: один и тот же сервер после рестарта всегда выдаёт
         одного и того же монстра, без необходимости хранить его модель в данных игрока.
       </p>
@@ -512,9 +479,9 @@ const rng = new SeededRandom(seed); // тот же монстр при том ж
       </details>
     </details>
 
-    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
-      <summary style="cursor:pointer;font-weight:600;">Ожидание финального сохранения, а не события выхода</summary>
-      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
+    <details class="detail-block">
+      <summary>Ожидание финального сохранения, а не события выхода</summary>
+      <p>
         Событие «игрок вышел» в Roblox может сработать раньше, чем реально завершится сохранение
         профиля. Логика ждёт именно завершения сохранения, а не сам факт выхода — иначе можно
         начать новую сессию поверх ещё не сохранённой старой.
@@ -526,9 +493,9 @@ await profile.onSaved();</pre>
       </details>
     </details>
 
-    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
-      <summary style="cursor:pointer;font-weight:600;">Коммит награды в конце цепочки действий</summary>
-      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
+    <details class="detail-block">
+      <summary>Коммит награды в конце цепочки действий</summary>
+      <p>
         Награда за убийство применяется только после того, как успешно запущен следующий шаг
         (например, заспавнен следующий монстр). Если по пути произошла ошибка — начисление
         не происходит, и повторный пакет от клиента не может задвоить награду.
@@ -540,9 +507,9 @@ grantReward();        // награда только если всё выше с
       </details>
     </details>
 
-    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
-      <summary style="cursor:pointer;font-weight:600;">Защита BigNum от зависания на аномальных данных</summary>
-      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
+    <details class="detail-block">
+      <summary>Защита BigNum от зависания на аномальных данных</summary>
+      <p>
         Внутренние циклы нормализации больших чисел ограничены по количеству итераций с явным
         предупреждением, а не оставлены открытыми — на редком крайнем случае это могло бы
         привести к зависанию, а не просто к неверному результату.
@@ -557,33 +524,6 @@ while (cond) {
       </details>
     </details>
 
-    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
-      <summary style="cursor:pointer;font-weight:600;">Защита клиента от старых серверов при обновлении</summary>
-      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
-        Если во время постепенного обновления клиент получил данные со старого сервера, где часть
-        полей отсутствует, эти поля не затирают дефолтные значения клиента пустотой.
-      </p>
-      <details class="ill"><summary>Иллюстрация</summary>
-        <pre>// Поля, которых нет в старом payload, не удаляют
-// дефолты клиента.
-const clean = pickKeys(payload, k => payload[k] !== undefined);</pre>
-      </details>
-    </details>
-
-    <details style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;">
-      <summary style="cursor:pointer;font-weight:600;">Надёжная проверка структуры данных перед синхронизацией</summary>
-      <p style="color:var(--muted);font-size:.87rem;margin-top:10px;">
-        Там, где стандартная проверка размера списка не даёт гарантии на редких крайних случаях
-        (например, если в данных образовался пропуск), используется явная проверка каждого
-        элемента — это критично, потому что клиентский стор ожидает строго последовательные данные.
-      </p>
-      <details class="ill"><summary>Иллюстрация</summary>
-        <pre>// Проверяем каждый индекс, а не только размер списка.
-for (i = 1; i <= count; i++)
-  if (arr[i] == null) return invalid;</pre>
-      </details>
-    </details>
-
   </section>
 
   <!-- КАК РАБОТАЕМ -->
@@ -594,8 +534,9 @@ for (i = 1; i <= count; i++)
       <div class="term"><span class="yn ok">ок</span><p>Работаю через таск-задачи: задача или тикет с описанием — сделал, отчитался текстом и видео результата.</p></div>
       <div class="term"><span class="yn ok">ок</span><p>Оплачиваемое тестовое задание — нормальная практика, готов.</p></div>
       <div class="term"><span class="yn ok">ок</span><p>Показать код и объяснить решение в переписке, по конкретному вопросу.</p></div>
-      <div class="term"><span class="yn ok">ок</span><p>Оплата: крипта или Robux. Формат обсуждаем под задачу — под задачу, поэтапно или после сдачи.</p></div>
-      <div class="term"><span class="yn ok">ок</span><p>График плавающий: время подстраиваю под дедлайн задачи, но не сижу онлайн по расписанию.</p></div>
+      <div class="term"><span class="yn ok">ок</span><p>Всё общение — текстом: задача, статус, вопросы. Без созвонов и войсов.</p></div>
+      <div class="term"><span class="yn ok">ок</span><p>Оплата: крипта или Robux. Формат обсуждаем под задачу — поэтапно или после сдачи.</p></div>
+      <div class="term"><span class="yn ok">ок</span><p>Без фиксированных часов — включаюсь в разное время дня, подстраиваюсь под дедлайн задачи, а не под расписание.</p></div>
       <div class="term"><span class="yn no">нет</span><p>Live-coding и интервью в реальном времени.</p></div>
       <div class="term"><span class="yn no">нет</span><p>Работа за проценты будущей прибыли без ясного объёма задач.</p></div>
     </div>
@@ -608,7 +549,7 @@ for (i = 1; i <= count; i++)
     <div class="contact">
       <div>
         <b style="font-size:1.02rem;display:block;">Открыт к задачам и командам</b>
-        <small>Отвечаю быстро. Контакты будут добавлены здесь.</small>
+        <small>Отвечаю быстро, текстом. Контакты будут добавлены здесь.</small>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
         <a class="btn placeholder" href="#">GitHub</a>
