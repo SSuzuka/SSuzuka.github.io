@@ -94,7 +94,19 @@
     .proj-pane { display: none; }
     .proj-pane.active { display: block; }
     .proj-block { border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); padding: 22px 24px; margin-bottom: 16px; transition: background-color .25s ease, border-color .25s ease; }
-    .proj-block .role { display: inline-block; font-size: .74rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--accent-2); background: color-mix(in srgb, var(--accent) 16%, transparent); padding: 3px 10px; border-radius: 999px; margin-bottom: 10px; }
+    .proj-preview { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding: 12px 14px; border: 1px dashed var(--border-2); border-radius: 12px; background: color-mix(in srgb, var(--bg) 94%, var(--card)); }
+    .proj-preview-thumb { width: 52px; height: 52px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 16%, var(--card)); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; overflow: hidden; }
+    .proj-preview-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .proj-preview-meta { display: flex; flex-direction: column; gap: 2px; }
+    .proj-preview-label { font-size: .78rem; font-weight: 700; color: var(--text); }
+    .proj-preview-note { font-size: .8rem; color: var(--muted); }
+    .desc-short { color: var(--text); font-size: .95rem; max-width: 640px; margin-bottom: 10px; }
+    .proj-more { margin-bottom: 14px; }
+    .proj-more summary { cursor: pointer; list-style: none; position: relative; padding-left: 22px; font-weight: 600; font-size: .88rem; color: var(--accent-2); }
+    .proj-more summary::-webkit-details-marker { display: none; }
+    .proj-more summary::before { content: "+"; position: absolute; left: 0; top: -1px; font-weight: 700; transition: transform .2s ease; }
+    .proj-more[open] summary::before { transform: rotate(45deg); }
+    .proj-more p.desc { margin-top: 10px; }
     .proj-block p.desc { color: var(--muted); font-size: .92rem; max-width: 640px; margin-bottom: 14px; }
     .empty-block { border: 1px dashed var(--border-2); border-radius: var(--radius); padding: 22px 24px; color: var(--muted); font-size: .89rem; }
 
@@ -193,12 +205,10 @@
     <div class="hello">Привет 👋</div>
     <h1>Проектирую и довожу до продакшн-состояния игровые системы для Roblox.</h1>
     <p class="lead">
-      Экономика, данные игрока, боевые механики, UI-фронтенд, межсерверная синхронизация. Стек подбираю
-      под задачу, а не наоборот — не привязан к конкретному фреймворку или языку (TypeScript, Luau, React
-      — просто инструменты, которыми в последний раз решал). По пути —
-      огромное количество реальных рантайм-проблем: от особенностей самого Roblox API
-      до архитектурных развилок вроде ООП vs модульность, SSoT, иммутабельность стора.
-      Ниже — конкретный проект и конкретные проблемы, без воды.
+      Экономика, данные игрока, боевые механики, UI, кросс-серверная синхронизация — беру системы там,
+      где баг стоит не красоты, а денег или прогресса игрока: дубликаты валюты, рассинхрон между
+      серверами, потеря данных при падении сервера, лаг под нагрузкой. Стек — TypeScript, Luau или
+      любой другой — выбираю под задачу, а не наоборот.
     </p>
     <p class="persona">Чем неприятнее баг — тем интереснее в нём разбираться.</p>
   </header>
@@ -207,7 +217,7 @@
     <div>
       <div class="avail">открыт к проектам</div>
       <b>Готов взять что угодно — от архитектуры с нуля до починки прод-рантайма</b>
-      <small>Только текст — без созвонов и войсов. Отвечаю быстро, без пропаданий.</small>
+      <small>Только текст — обсуждение задачи, статус, вопросы, фидбэк — без созвонов и войсов. Отвечаю быстро, без пропаданий.</small>
     </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
       <a class="btn placeholder" href="#">GitHub</a>
@@ -260,17 +270,32 @@
 
     <div class="proj-pane active" data-pane="own">
       <div class="proj-block">
-        <span class="role">Соло, с нуля</span>
+        <div class="proj-preview" id="clickerPreview">
+          <div class="proj-preview-thumb" id="clickerThumb">🔷</div>
+          <div class="proj-preview-meta">
+            <span class="proj-preview-label">Превью проекта</span>
+            <span class="proj-preview-note" id="clickerPreviewNote">подключится через Roblox API после релиза</span>
+          </div>
+        </div>
         <h3 class="proj-title">Clicker</h3>
-        <p class="desc">
-          Продакшн idle/clicker: игрок бьёт монстров, качает героев и апгрейды, проходит Ascension
-          за осколки, разблокирует ShardUpgrades. Полное разделение слоёв — клиент никогда
-          не авторитетен, сервер пересчитывает всё сам. Два независимых стора (Reflex),
-          Broadcaster-синхронизация, BigNum-математика под числа за пределами e15, виртуализация
-          списков карточек героев, object pooling для лута, time-sliced планировщик тяжёлых
-          расчётов, чтобы не подвесить кадр. MemoryStore и MessagingService — под кросс-серверный
-          рейтинг кланов и синхронизацию боевых данных вроде HP между серверами.
-        </p>
+        <p class="desc-short">Продакшн idle-игра: экономика, бои, кросс-серверная синхронизация — под капотом простого клика.</p>
+        <details class="proj-more">
+          <summary>Подробнее о проекте</summary>
+          <p class="desc">
+            Clicker — продакшн idle-игра, где игрок качает героев, бьёт монстров и проходит Ascension
+            за осколки, открывающие новые апгрейды. Полное разделение слоёв — клиент никогда
+            не авторитетен, сервер пересчитывает всё сам. Два независимых стора (Reflex),
+            Broadcaster-синхронизация, BigNum-математика под числа за пределами e15, виртуализация
+            списков карточек героев, object pooling для лута, time-sliced планировщик тяжёлых
+            расчётов, чтобы не подвесить кадр. MemoryStore и MessagingService — под кросс-серверный
+            рейтинг кланов и синхронизацию боевых данных вроде HP между серверами.
+          </p>
+          <p class="desc">
+            Архитектурно — SSoT на сервере, иммутабельный стор на клиенте (Reflex), сервисы и контроллеры
+            через Flamework вместо самодельных синглтонов — событийно, а не поллингом каждый кадр,
+            асинхронщина через Promise, а не callback-цепочки.
+          </p>
+        </details>
         <p class="stat-line"><span class="num">170+</span> файлов · <span class="num">15+</span> игровых механик — весь путь соло: от архитектуры до продакшна.</p>
         <p class="stack-note">Стек ниже — что использовалось в этом проекте, не ограничение: одинаково беру чистый Luau, roblox-ts или любой другой инструмент — под задачу, а не по привычке.</p>
         <div class="stack">
@@ -531,14 +556,12 @@ while (cond) {
     <div class="kicker">Условия</div>
     <h2>Как со мной удобнее работать</h2>
     <div class="terms">
-      <div class="term"><span class="yn ok">ок</span><p>Работаю через таск-задачи: задача или тикет с описанием — сделал, отчитался текстом и видео результата.</p></div>
+      <div class="term"><span class="yn ok">ок</span><p>Работаю через таск-задачи: тикет с описанием в любом трекере (или просто список) — сделал, отчитался текстом.</p></div>
       <div class="term"><span class="yn ok">ок</span><p>Оплачиваемое тестовое задание — нормальная практика, готов.</p></div>
-      <div class="term"><span class="yn ok">ок</span><p>Показать код и объяснить решение в переписке, по конкретному вопросу.</p></div>
-      <div class="term"><span class="yn ok">ок</span><p>Всё общение — текстом: задача, статус, вопросы. Без созвонов и войсов.</p></div>
+      <div class="term"><span class="yn ok">ок</span><p>Показать код и объяснить решение по конкретному вопросу.</p></div>
       <div class="term"><span class="yn ok">ок</span><p>Оплата: крипта или Robux. Формат обсуждаем под задачу — поэтапно или после сдачи.</p></div>
       <div class="term"><span class="yn ok">ок</span><p>Без фиксированных часов — включаюсь в разное время дня, подстраиваюсь под дедлайн задачи, а не под расписание.</p></div>
-      <div class="term"><span class="yn no">нет</span><p>Live-coding и интервью в реальном времени.</p></div>
-      <div class="term"><span class="yn no">нет</span><p>Работа за проценты будущей прибыли без ясного объёма задач.</p></div>
+      <div class="term"><span class="yn no">нет</span><p>Чистый процент от будущей прибыли без фикса и без ясного объёма задач. Процент + фикс — норм.</p></div>
     </div>
   </section>
 
@@ -590,6 +613,23 @@ while (cond) {
         panes.forEach(function (p) { p.classList.toggle('active', p.getAttribute('data-pane') === target); });
       });
     });
+  })();
+  (function () {
+    // Укажи сюда Roblox universeId после релиза — превью подтянется само.
+    var universeId = "";
+    if (!universeId) return;
+    var thumbEl = document.getElementById('clickerThumb');
+    var noteEl = document.getElementById('clickerPreviewNote');
+    fetch('https://thumbnails.roblox.com/v1/games/icons?universeIds=' + universeId + '&size=150x150&format=Png')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var url = data && data.data && data.data[0] && data.data[0].imageUrl;
+        if (url && thumbEl && noteEl) {
+          thumbEl.innerHTML = '<img src="' + url + '" alt="Иконка игры">';
+          noteEl.textContent = 'живое превью из Roblox API';
+        }
+      })
+      .catch(function () { /* Roblox недоступен — остаётся плейсхолдер */ });
   })();
 </script>
 
