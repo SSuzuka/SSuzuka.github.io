@@ -25,6 +25,7 @@
     body {
       font-family: "Manrope", system-ui, sans-serif; background: var(--bg); color: var(--text);
       line-height: 1.65; transition: background-color .25s ease, color .25s ease;
+      overflow-x: hidden;
     }
     .wrap { max-width: 880px; margin: 0 auto; padding: 0 22px; }
     h1, h2 { font-family: "Unbounded", "Manrope", sans-serif; }
@@ -35,18 +36,22 @@
       transition: background-color .25s ease, border-color .25s ease;
     }
     .nav-inner { max-width: 880px; margin: 0 auto; padding: 12px 22px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
-    .brand { font-weight: 700; font-size: .95rem; display: flex; align-items: center; gap: 9px; }
-    .brand i { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+    .brand { font-weight: 700; font-size: .95rem; display: flex; align-items: center; gap: 9px; white-space: nowrap; }
+    .brand i {
+      width: 9px; height: 9px; border-radius: 50%; background: var(--accent);
+      box-shadow: 0 0 10px var(--accent); flex-shrink: 0;
+      animation: pulse 2.2s ease-in-out infinite;
+    }
     .nav-links { display: flex; gap: 18px; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: .88rem; white-space: nowrap; transition: color .18s ease; }
     .nav-links a:hover { color: var(--accent-2); }
-    .theme-switch { display: flex; gap: 2px; background: var(--card); border: 1px solid var(--border); border-radius: 999px; padding: 3px; }
+    .theme-switch { display: flex; gap: 2px; background: var(--card); border: 1px solid var(--border); border-radius: 999px; padding: 3px; flex-shrink: 0; }
     .theme-switch button { border: none; background: transparent; color: var(--muted); cursor: pointer; padding: 4px 10px; border-radius: 999px; font-size: .78rem; font-weight: 600; transition: background-color .18s ease, color .18s ease; }
     .theme-switch button.active { background: var(--accent); color: var(--bg); }
 
     header { padding: 44px 0 8px; }
     .hello { color: var(--accent-2); font-weight: 700; font-size: .9rem; margin-bottom: 10px; }
-    h1 { font-size: clamp(1.6rem, 4.2vw, 2.2rem); font-weight: 800; letter-spacing: -.3px; line-height: 1.32; margin-bottom: 16px; max-width: 700px; }
+    h1 { font-size: clamp(1.5rem, 4.2vw, 2.2rem); font-weight: 800; letter-spacing: -.3px; line-height: 1.32; margin-bottom: 16px; max-width: 700px; }
     .lead { color: var(--muted); max-width: 640px; font-size: clamp(1rem, 2vw, 1.06rem); }
     .lead b { color: var(--text); }
     .persona {
@@ -72,12 +77,14 @@
     section { padding: 36px 0; border-top: 1px solid var(--border); transition: border-color .25s ease; }
     header + .top-cta + section { border-top: none; }
     .kicker { text-transform: uppercase; letter-spacing: 2px; font-size: .74rem; font-weight: 700; color: var(--accent-2); margin-bottom: 8px; }
-    h2 { font-size: clamp(1.15rem, 3vw, 1.4rem); font-weight: 700; letter-spacing: -.2px; margin-bottom: 12px; }
+    h2 { font-size: clamp(1.1rem, 3vw, 1.4rem); font-weight: 700; letter-spacing: -.2px; margin-bottom: 12px; }
     h3.proj-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; font-family: "Manrope", sans-serif; }
     .sub { color: var(--muted); max-width: 640px; margin-bottom: 18px; }
 
     p.story { color: var(--text); max-width: 660px; margin-bottom: 12px; }
     p.story b { color: var(--accent-2); }
+    p.story a { color: var(--accent-2); text-decoration: none; border-bottom: 1px dashed var(--accent-2); }
+    p.story a:hover { color: var(--accent); border-color: var(--accent); }
 
     /* Skills — a spec-sheet list, deliberately not another card grid */
     .skill-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; margin-top: 6px; }
@@ -94,7 +101,7 @@
     .proj-pane { display: none; }
     .proj-pane.active { display: block; }
     .proj-block { border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); padding: 22px 24px; margin-bottom: 16px; transition: background-color .25s ease, border-color .25s ease; }
-    .proj-preview { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding: 12px 14px; border: 1px dashed var(--border-2); border-radius: 12px; background: color-mix(in srgb, var(--bg) 94%, var(--card)); }
+    .proj-preview { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding: 12px 14px; border: 1px dashed var(--border-2); border-radius: 12px; background: color-mix(in srgb, var(--bg) 94%, var(--card)); flex-wrap: wrap; }
     .proj-preview-thumb { width: 52px; height: 52px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 16%, var(--card)); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; overflow: hidden; }
     .proj-preview-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .proj-preview-meta { display: flex; flex-direction: column; gap: 2px; }
@@ -153,9 +160,12 @@
     footer { text-align: center; color: var(--muted); font-size: .8rem; padding: 26px 0 40px; border-top: 1px solid var(--border); }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 10px var(--ok); }
-      50% { opacity: .45; box-shadow: 0 0 4px var(--ok); }
+      0%, 100% { opacity: 1; box-shadow: 0 0 10px currentColor; }
+      50% { opacity: .45; box-shadow: 0 0 4px currentColor; }
     }
+    .brand i { color: var(--accent); }
+    .top-cta .avail::before { color: var(--ok); }
+
     @keyframes heroIn {
       from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
@@ -174,7 +184,30 @@
       *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
     }
 
-    @media (max-width: 720px) { .nav-links { display: none; } }
+    /* Responsive */
+    @media (max-width: 720px) {
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .wrap { padding: 0 16px; }
+      .nav-inner { padding: 10px 16px; }
+      header { padding: 32px 0 6px; }
+      section { padding: 28px 0; }
+      .top-cta { padding: 16px 18px; flex-direction: column; align-items: flex-start; }
+      .top-cta > div:last-child { width: 100%; }
+      .top-cta > div:last-child .btn { flex: 1; text-align: center; }
+      .contact { padding: 20px; flex-direction: column; align-items: flex-start; }
+      .contact > div:last-child { width: 100%; }
+      .contact > div:last-child .btn { flex: 1; text-align: center; }
+      .proj-block { padding: 18px 16px; }
+    }
+    @media (max-width: 420px) {
+      .brand { font-size: .85rem; }
+      .theme-switch button { padding: 4px 8px; font-size: .72rem; }
+      h1 { font-size: 1.35rem; }
+      .stack { gap: 6px; }
+      .chip { font-size: .74rem; padding: 5px 11px; }
+    }
   </style>
 </head>
 <body>
@@ -203,14 +236,13 @@
 
   <header>
     <div class="hello">Привет 👋</div>
-    <h1>Проектирую и довожу до продакшн-состояния игровые системы для Roblox.</h1>
+    <h1>Проектирую и довожу до продакшна игровые системы для Roblox — независимо от жанра и масштаба проекта.</h1>
     <p class="lead">
-      Экономика, данные игрока, боевые механики, UI, кросс-серверная синхронизация — беру системы там,
-      где баг стоит не красоты, а денег или прогресса игрока: дубликаты валюты, рассинхрон между
-      серверами, потеря данных при падении сервера, лаг под нагрузкой. Стек — TypeScript, Luau или
-      любой другой — выбираю под задачу, а не наоборот.
+      Разбираю любую механику на модели данных, потоки событий и точки отказа — и прихожу к рабочему
+      решению, даже если раньше не делал именно такую систему. Например: дубликаты валюты, рассинхрон
+      между серверами, потеря данных при падении, лаг под нагрузкой. Язык (TypeScript, Luau) и
+      конкретные инструменты — выбираю под задачу, стек — в описании проекта ниже.
     </p>
-    <p class="persona">Чем неприятнее баг — тем интереснее в нём разбираться.</p>
   </header>
 
   <div class="top-cta">
@@ -231,16 +263,17 @@
     <div class="kicker">Коротко обо мне</div>
     <h2>Кто я и почему мне можно доверить задачу</h2>
     <p class="story">
-      Я делаю продакшн-архитектуру для Roblox: два независимых стора (сервер — источник истины,
-      клиент — реактивное зеркало), Broadcaster-синхронизация, оптимистичные и пессимистичные
-      обновления UI, BigNum-математика для чисел за пределами точности обычного числа,
-      виртуализация списков, object pooling, троттлинг автосохранения, cancellation-паттерны
-      для ProfileService, rate limiting и античит на сервере. Это не список терминов для галочки —
-      каждый пункт появился потому, что я реально об это споткнулся и разобрался, как делать правильно.
+      Паттерны, которыми пользуюсь на практике: разделение серверного и клиентского состояния
+      (сервер — источник истины), синхронизация через broadcaster вместо поллинга, оптимистичные
+      и пессимистичные обновления UI, BigNum-математика для чисел за пределами точности обычного
+      числа, виртуализация тяжёлых списков, object pooling, троттлинг автосохранения,
+      cancellation-паттерны для асинхронных операций, rate limiting и серверная защита от чита.
+      Это не список терминов для галочки — каждый пункт появился, потому что я реально об него
+      споткнулся на проде и разобрался, как делать правильно (подробный разбор — в проекте
+      <a href="#project">Clicker</a>).
     </p>
     <p class="story">
-      Могу ответить по большинству вопросов архитектуры, сети и перформанса — не выдумываю
-      на ходу и не боюсь сложных вопросов.
+      Могу ответить по большинству вопросов архитектуры, сети и перформанса.
     </p>
 
     <div class="skill-list">
@@ -261,7 +294,7 @@
   <!-- ПРОЕКТЫ -->
   <section id="project">
     <div class="kicker">Проекты</div>
-    <h2>Что я построил</h2>
+    <h2>Один проект, доведённый до продакшна — не десять недоделанных</h2>
 
     <div class="proj-tabs">
       <button class="proj-tab active" data-tab="own">Мои проекты</button>
@@ -297,19 +330,17 @@
           </p>
         </details>
         <p class="stat-line"><span class="num">170+</span> файлов · <span class="num">15+</span> игровых механик — весь путь соло: от архитектуры до продакшна.</p>
-        <p class="stack-note">Стек ниже — что использовалось в этом проекте, не ограничение: одинаково беру чистый Luau, roblox-ts или любой другой инструмент — под задачу, а не по привычке.</p>
+        <p class="stack-note">Технологии этого конкретного проекта — весь код на TypeScript, без ручного Luau.</p>
         <div class="stack">
           <span class="chip">roblox-ts</span>
           <span class="chip">TypeScript</span>
-          <span class="chip">Luau</span>
           <span class="chip">Flamework</span>
           <span class="chip">Reflex</span>
           <span class="chip">React</span>
-          <span class="chip">ProfileStore / Lapis</span>
+          <span class="chip">ProfileStore</span>
           <span class="chip">Sift</span>
           <span class="chip">MemoryStore</span>
           <span class="chip">MessagingService</span>
-          <span class="chip more">+ любой стек под задачу</span>
         </div>
       </div>
     </div>
@@ -556,12 +587,12 @@ while (cond) {
     <div class="kicker">Условия</div>
     <h2>Как со мной удобнее работать</h2>
     <div class="terms">
-      <div class="term"><span class="yn ok">ок</span><p>Работаю через таск-задачи: тикет с описанием в любом трекере (или просто список) — сделал, отчитался текстом.</p></div>
+      <div class="term"><span class="yn ok">ок</span><p>Работаю через таск-задачи: тикет с описанием в любом трекере (или просто список) — сделал, отчитался.</p></div>
       <div class="term"><span class="yn ok">ок</span><p>Оплачиваемое тестовое задание — нормальная практика, готов.</p></div>
       <div class="term"><span class="yn ok">ок</span><p>Показать код и объяснить решение по конкретному вопросу.</p></div>
-      <div class="term"><span class="yn ok">ок</span><p>Оплата: крипта или Robux. Формат обсуждаем под задачу — поэтапно или после сдачи.</p></div>
+      <div class="term"><span class="yn ok">ок</span><p>Оплата: крипта или Robux. Формат обсуждаем под задачу.</p></div>
       <div class="term"><span class="yn ok">ок</span><p>Без фиксированных часов — включаюсь в разное время дня, подстраиваюсь под дедлайн задачи, а не под расписание.</p></div>
-      <div class="term"><span class="yn no">нет</span><p>Чистый процент от будущей прибыли без фикса и без ясного объёма задач. Процент + фикс — норм.</p></div>
+      <div class="term"><span class="yn no">нет</span><p>Чистый процент от будущей прибыли без доп фикс оплаты и без ясного объёма задач. Процент + фикс — готов работать.</p></div>
     </div>
   </section>
 
@@ -581,8 +612,6 @@ while (cond) {
       </div>
     </div>
   </section>
-
-  <footer>Ссылка на игры появится здесь после релиза.</footer>
 
 </div>
 
