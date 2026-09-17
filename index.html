@@ -646,9 +646,7 @@ while (cond) {
 <script>
   (function () {
     var switchEl = document.getElementById('themeSwitch');
-    // Вход на сайт — всегда светлая тема (data-theme="light" в разметке).
-    // Выбор живёт только в рамках сессии: без localStorage, кнопка всегда
-    // синхронна с фактическим атрибутом на <html>.
+  
     switchEl.addEventListener('click', function (e) {
       var btn = e.target.closest('button');
       if (!btn) return;
@@ -670,10 +668,7 @@ while (cond) {
     });
   })();
   (function () {
-    // Живые данные игры через свой Cloudflare Worker (GET /stats, кэш 12 часов).
-    // Roblox Games/Thumbnails API не отдают CORS-заголовков — напрямую из
-    // браузера их не получить, поэтому запрос идёт через прокси-воркер.
-    // Подставь адрес своего воркера после `wrangler deploy` (см. worker/README.md).
+   
     var STATS_URL = "https://clicker-webhook-gateway.sskyaxie.workers.dev/stats";
 
     var thumbEl = document.getElementById('clickerThumb');
