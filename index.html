@@ -631,12 +631,13 @@ while (cond) {
     <div class="contact">
       <div>
         <b style="font-size:1.02rem;display:block;">Открыт к задачам и командам</b>
-        <small>Отвечаю быстро, текстом. Контакты будут добавлены здесь.</small>
+        <small>Отвечаю быстро, текстом. Ссылки ниже — кликабельные.</small>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <a class="btn placeholder" href="#">GitHub</a>
-        <a class="btn ghost placeholder" href="#">Discord</a>
-        <a class="btn ghost placeholder" href="#">Email</a>
+        <a class="btn" id="cGithub" href="#" rel="noopener">GitHub</a>
+        <a class="btn ghost" id="cTg" href="#" rel="noopener">Telegram</a>
+        <a class="btn ghost" id="cDiscord" href="#">Discord</a>
+        <a class="btn ghost" id="cMail" href="#">Email</a>
       </div>
     </div>
   </section>
@@ -715,6 +716,55 @@ while (cond) {
         statsEl.hidden = false;
       })
       .catch(function () { /* воркер недоступен — блок статов остаётся скрыт */ });
+
+ 
+  (function () {
+    var dec = function (parts) {
+      var s = '';
+      for (var i = 0; i < parts.length; i++) s += String.fromCharCode(parts[i]);
+      return s;
+    };
+
+  
+    var ghUser = dec([83, 83, 117, 122, 117, 107, 97]);
+    document.getElementById('cGithub').href = 'https' + ':' + '/' + '/' + 'github' + '.com/' + ghUser;
+
+    
+    var tgUser = dec([83, 101, 105, 117, 110, 95, 83, 107, 121]);
+    document.getElementById('cTg').href = 'https' + ':' + '/' + '/' + 't' + '.me/' + tgUser;
+
+    // Discord: ник нигде не пишется в разметке/href — по клику копируется в буфер.
+    var dcUser = dec([105, 116, 115, 95, 119, 104, 97, 116, 105, 116, 105, 115]);
+    var dcEl = document.getElementById('cDiscord');
+    dcEl.addEventListener('click', function (e) {
+      e.preventDefault();
+      var done = function () {
+        var old = dcEl.textContent;
+        dcEl.textContent = 'Скопировано!';
+        setTimeout(function () { dcEl.textContent = old; }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(dcUser).then(done, done);
+      } else {
+        // Fallback: скрытая textarea + execCommand
+        var ta = document.createElement('textarea');
+        ta.value = dcUser;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (err) {}
+        document.body.removeChild(ta);
+        done();
+      }
+    });
+
+
+    var mail = dec([115, 115, 107, 121, 97, 120, 105, 101]) + '@' +
+      dec([103, 109, 97, 105, 108]) + '.' + dec([99, 111, 109]);
+    var mailEl = document.getElementById('cMail');
+    mailEl.href = 'mailto' + ':' + mail;
+  })();
   })();
 </script>
 
