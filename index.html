@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="dark">
+<html lang="ru" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -110,6 +110,7 @@
     .proj-preview-label { font-size: .78rem; font-weight: 700; color: var(--text); }
     .proj-preview-note { font-size: .8rem; color: var(--muted); }
     .proj-preview-live { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-left: auto; padding-left: 16px; border-left: 1px solid var(--border); }
+    .proj-preview-live[hidden] { display: none; }
     .rbx-stat { display: flex; align-items: baseline; gap: 6px; font-size: .8rem; color: var(--muted); white-space: nowrap; }
     .rbx-stat b { font-family: "JetBrains Mono", ui-monospace, monospace; font-weight: 600; font-size: .88rem; color: var(--text); display: inline-flex; align-items: center; gap: 6px; }
     .rbx-stat .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border-2); flex-shrink: 0; }
@@ -232,8 +233,8 @@
         <a href="#contact">Связь</a>
       </div>
       <div class="theme-switch" id="themeSwitch">
-        <button data-theme="dark" class="active">Тёмная</button>
-        <button data-theme="light">Светлая</button>
+        <button data-theme="dark">Тёмная</button>
+        <button data-theme="light" class="active">Светлая</button>
       </div>
     </div>
   </div>
@@ -643,15 +644,13 @@ while (cond) {
 <script>
   (function () {
     var switchEl = document.getElementById('themeSwitch');
-    var saved = null;
-    try { saved = localStorage.getItem('pf-theme'); } catch (e) {}
-    if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
+    // Вход на сайт — всегда светлая тема (data-theme="light" в разметке).
+    // Выбор живёт только в рамках сессии: без localStorage, кнопка всегда
+    // синхронна с фактическим атрибутом на <html>.
     switchEl.addEventListener('click', function (e) {
       var btn = e.target.closest('button');
       if (!btn) return;
-      var theme = btn.getAttribute('data-theme');
-      document.documentElement.setAttribute('data-theme', theme);
-      try { localStorage.setItem('pf-theme', theme); } catch (err) {}
+      document.documentElement.setAttribute('data-theme', btn.getAttribute('data-theme'));
       var buttons = switchEl.querySelectorAll('button');
       for (var i = 0; i < buttons.length; i++) buttons[i].classList.toggle('active', buttons[i] === btn);
     });
