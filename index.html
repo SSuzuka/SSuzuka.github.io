@@ -73,7 +73,10 @@
     .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px color-mix(in srgb, var(--cta) 35%, transparent); }
     .btn.ghost { background: transparent; border: 1px solid var(--border-2); color: var(--text); font-weight: 600; box-shadow: none; }
     .btn.ghost:hover { border-color: var(--accent-2); box-shadow: none; transform: translateY(-1px); }
-    .btn.placeholder { opacity: .45; pointer-events: none; }
+    .contact-btn { display: inline-flex; align-items: center; gap: 8px; }
+    .contact-btn .c-ic { width: 22px; height: 22px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; background: var(--bc, var(--muted)); flex-shrink: 0; }
+    .contact-btn .c-ic svg { width: 13px; height: 13px; fill: #fff; display: block; }
+    .btn.ghost.contact-btn:hover { border-color: var(--bc, var(--accent-2)); }
 
     section { padding: 36px 0; border-top: 1px solid var(--border); transition: border-color .25s ease; }
     header + .top-cta + section { border-top: none; }
@@ -263,9 +266,7 @@
       <small>Только текст — обсуждение задачи, статус, вопросы, фидбэк — без созвонов и войсов. Отвечаю быстро, без пропаданий.</small>
     </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
-      <a class="btn placeholder" href="#">GitHub</a>
-      <a class="btn ghost placeholder" href="#">Discord</a>
-      <a class="btn ghost placeholder" href="#">Email</a>
+      <a class="btn" href="#contact">Связаться</a>
     </div>
   </div>
 
@@ -284,7 +285,9 @@
       ).
     </p>
     <p class="story">
-      Могу ответить по большинству вопросов архитектуры, сети и перформанса.
+      Любое решение из проектов могу объяснить до уровня кода: почему Reflex, а не самописный стор;
+      почему спам действий гасится тихим отказом, а не киком; где в экономике точка отказа и чем
+      она закрыта. Вопрос по архитектуре, сети или перформансу — отвечу конкретикой, а не общими словами.
     </p>
 
     <div class="skill-list">
@@ -295,7 +298,7 @@
       <div class="skill-row"><b>Легаси-код.</b> Спокойно разбираюсь в чужом или старом коде без документации и чиню, не ломая рядом лежащее.</div>
       <div class="skill-row"><b>Быстрые MVP.</b> Рабочий прототип механики под проверку гипотезы — без переинжиниринга.</div>
       <div class="skill-row"><b>Работа с живым проектом.</b> Аккуратно, там, где нельзя всё сломать экспериментом.</div>
-      <div class="skill-row"><b>UI / UX.</b> Адаптив, производительность рендера, реактивная связь со стором — создание готовых UI по референсу и связка с логикой.</div>
+      <div class="skill-row"><b>UI / UX.</b> Адаптив (мобилка / десктоп / геймпад), производительность рендера, реактивная связь со стором — создание готовых UI по референсу и связка с логикой.</div>
       <div class="skill-row"><b>Экономика и анти-чит.</b> Серверная валидация, защита от дублирования, спама и накрутки — деньги игрока не должны утекать.</div>
     </div>
 
@@ -336,9 +339,12 @@
               не авторитетен, сервер пересчитывает всё сам. Два независимых стора (Reflex),
               Broadcaster-синхронизация, BigNum-математика под числа за пределами e15, виртуализация
               списков карточек героев, object pooling (числа урона и лута, звуки, клик-VFX),
-              time-sliced планировщик тяжёлых
-              расчётов, чтобы не подвесить кадр. MemoryStore и MessagingService — под кросс-серверный
-              рейтинг кланов и единого кланового босса (общее HP на все сервера).
+              офлайн-прогресс между сессиями и локализация интерфейса. Тяжёлые расчёты («купить максимум»
+              на сотни уровней) считаются закрытой формулой суммы геометрической прогрессии за O(log N)
+              с ограниченным кэшем — без перебора уровней и без риска подвесить кадр.
+              MemoryStore и MessagingService — под кросс-серверный
+              рейтинг кланов и единого кланового босса (общее HP на все сервера); Discord-алерты
+              идут через собственный Cloudflare-воркер.
             </p>
             <p class="desc">
               Архитектурно — SSoT на сервере, иммутабельный стор на клиенте (Reflex), сервисы и контроллеры
@@ -349,10 +355,11 @@
           </div>
         </details>
 
-        <p class="stat-line"><span class="num">190+</span> файлов · <span class="num">15+</span> игровых механик — весь путь соло: от архитектуры до продакшна.</p>
+        <p class="stat-line"><span class="num">200+</span> файлов · <span class="num">15+</span> игровых механик — весь путь соло: от архитектуры до продакшна.</p>
         <div class="stack">
           <span class="chip">roblox-ts</span>
           <span class="chip">TypeScript</span>
+          <span class="chip">Luau</span>
           <span class="chip">Flamework</span>
           <span class="chip">Reflex</span>
           <span class="chip">React</span>
@@ -426,7 +433,7 @@
                 <span class="p-tag">проблема</span>
                 <p class="p-text">Расчёт «купить максимум» перебирает сотни уровней и может подвесить кадр на середине клика.</p>
                 <span class="s-tag">решение</span>
-                <p>Тяжёлые расчёты режутся на порции с бюджетом по времени на кадр, чтобы игра не замирала.</p>
+                <p>Перебор заменён закрытой формулой суммы геометрической прогрессии — O(log N) BigNum-операций вместо сотен итераций, плюс кэш с жёстким лимитом (FIFO). Кадр не «укладывается в бюджет» — расчёт просто не может его подвесить в принципе.</p>
               </div>
               <div class="problem">
                 <span class="p-tag">проблема</span>
@@ -469,7 +476,7 @@
               общий стор и перерисовываются только при изменении конкретных данных, которые им нужны.
               Ниже — решения, которых потребовала производительность и удобство.
             </p>
-            <p class="stat-line"><span class="num">50+</span> UI-компонентов · <span class="num">20</span> хуков игровой логики · адаптив под мобилку и десктоп.</p>
+            <p class="stat-line"><span class="num">50+</span> UI-компонентов · <span class="num">20+</span> хуков игровой логики · адаптив под мобилку, десктоп и геймпад.</p>
             <div class="problem-grid">
               <div class="problem">
                 <span class="p-tag">проблема</span>
@@ -562,8 +569,8 @@ const rng = new SeededRandom(seed); // тот же монстр при том ж
                 <pre>// Перед освобождением профиля всегда форсируем синк данных из стора,
 // затем ждём именно факт завершения записи — а не событие «вышел»,
 // оно может прийти раньше фактического сохранения.
-profile.Data = obbyStore.getState().players[userId]!; // force-sync перед Release
-await profile.Release();                              // дождались записи</pre>
+profile.Data = obbyStore.getState().players[userId]!; // force-sync: данные из стора
+releaseAndAwait(); // дождались факта записи, а не события «вышел»</pre>
               </details>
             </details>
 
@@ -631,13 +638,13 @@ while (cond) {
     <div class="contact">
       <div>
         <b style="font-size:1.02rem;display:block;">Открыт к задачам и командам</b>
-        <small>Отвечаю быстро, текстом. Ссылки ниже — кликабельные.</small>
+        <small>Покажу код, архитектуру и объясню решения. Ссылки ниже — кликабельные.</small>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <a class="btn" id="cGithub" href="#" rel="noopener">GitHub</a>
-        <a class="btn ghost" id="cTg" href="#" rel="noopener">Telegram</a>
-        <a class="btn ghost" id="cDiscord" href="#">Discord</a>
-        <a class="btn ghost" id="cMail" href="#">Email</a>
+        <a class="btn ghost contact-btn" id="cGithub" href="#" rel="noopener" style="--bc:#24292e" title="Откроется в новой вкладке"><span class="c-ic"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></span>GitHub</a>
+        <a class="btn ghost contact-btn" id="cTg" href="#" rel="noopener" style="--bc:#229ED9" title="Откроется в Telegram"><span class="c-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg></span>Telegram</a>
+        <a class="btn ghost contact-btn" id="cDiscord" href="#" style="--bc:#5865F2" title="Откроется в Discord, ник скопируется в буфер"><span class="c-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg></span><span id="cDiscordLabel">Discord</span></a>
+        <a class="btn ghost contact-btn" id="cMail" href="#" style="--bc:#EA4335" title="Адрес скопируется в буфер, почта откроется если настроена"><span class="c-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span><span id="cMailLabel">Email</span></a>
       </div>
     </div>
   </section>
@@ -716,8 +723,9 @@ while (cond) {
         statsEl.hidden = false;
       })
       .catch(function () { /* воркер недоступен — блок статов остаётся скрыт */ });
+  })();
 
- 
+
   (function () {
     var dec = function (parts) {
       var s = '';
@@ -729,42 +737,66 @@ while (cond) {
     var ghUser = dec([83, 83, 117, 122, 117, 107, 97]);
     document.getElementById('cGithub').href = 'https' + ':' + '/' + '/' + 'github' + '.com/' + ghUser;
 
-    
+  
     var tgUser = dec([83, 101, 105, 117, 110, 95, 83, 107, 121]);
     document.getElementById('cTg').href = 'https' + ':' + '/' + '/' + 't' + '.me/' + tgUser;
 
-    // Discord: ник нигде не пишется в разметке/href — по клику копируется в буфер.
+   
+    var legacyCopy = function (text) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+      document.body.removeChild(ta);
+      return ok;
+    };
+    var copyToClipboard = function (text, onDone, onFail) {
+      if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onDone, function () {
+          if (legacyCopy(text)) { onDone(); } else { onFail(); }
+        });
+      } else {
+        if (legacyCopy(text)) { onDone(); } else { onFail(); }
+      }
+    };
+   
+    var showLabel = function (labelEl, text, defaultText, ms) {
+      labelEl.textContent = text;
+      setTimeout(function () { labelEl.textContent = defaultText; }, ms);
+    };
+
+   
+    var dcUserId = dec([51, 53, 49, 48, 49, 53, 57, 48, 54, 55, 54, 53, 51, 48, 55, 57, 48, 53]);
     var dcUser = dec([105, 116, 115, 95, 119, 104, 97, 116, 105, 116, 105, 115]);
     var dcEl = document.getElementById('cDiscord');
-    dcEl.addEventListener('click', function (e) {
-      e.preventDefault();
-      var done = function () {
-        var old = dcEl.textContent;
-        dcEl.textContent = 'Скопировано!';
-        setTimeout(function () { dcEl.textContent = old; }, 1600);
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(dcUser).then(done, done);
-      } else {
-        // Fallback: скрытая textarea + execCommand
-        var ta = document.createElement('textarea');
-        ta.value = dcUser;
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand('copy'); } catch (err) {}
-        document.body.removeChild(ta);
-        done();
-      }
+    dcEl.href = 'https' + ':' + '/' + '/' + 'discord' + '.com/' + 'users' + '/' + dcUserId;
+  
+    dcEl.addEventListener('click', function () {
+      var label = document.getElementById('cDiscordLabel');
+      copyToClipboard(dcUser,
+        function () { showLabel(label, 'Ник в буфере', 'Discord', 1600); },
+        function () { showLabel(label, dcUser, 'Discord', 4000); }
+      );
     });
 
-
+   
     var mail = dec([115, 115, 107, 121, 97, 120, 105, 101]) + '@' +
       dec([103, 109, 97, 105, 108]) + '.' + dec([99, 111, 109]);
     var mailEl = document.getElementById('cMail');
     mailEl.href = 'mailto' + ':' + mail;
-  })();
+   
+    mailEl.addEventListener('click', function () {
+      var label = document.getElementById('cMailLabel');
+      copyToClipboard(mail,
+        function () { showLabel(label, 'Скопировано!', 'Email', 1600); },
+        function () { showLabel(label, mail, 'Email', 4000); }
+      );
+    });
   })();
 </script>
 
