@@ -668,10 +668,11 @@ while (cond) {
     });
   })();
   (function () {
-    // Живые данные игры из публичных Roblox API (CORS открыт, ключи не нужны).
-    // При смене игры достаточно поменять universeId — остальное подтянется само.
-    var universeId = "10762170624";
-    if (!universeId) return;
+    // Живые данные игры через свой Cloudflare Worker (GET /stats, кэш 12 часов).
+    // Roblox Games/Thumbnails API не отдают CORS-заголовков — напрямую из
+    // браузера их не получить, поэтому запрос идёт через прокси-воркер.
+    // Подставь адрес своего воркера после `wrangler deploy` (см. worker/README.md).
+    var STATS_URL = "https://clicker-webhook-gateway.sskyaxie.workers.dev/stats";
 
     var thumbEl = document.getElementById('clickerThumb');
     var statsEl = document.getElementById('rbxStats');
@@ -695,31 +696,19 @@ while (cond) {
       return (years === 1 ? '1 год' : years + ' лет') + ' назад';
     };
 
-    var loadJson = function (url) {
-      return fetch(url).then(function (r) {
+    fetch(STATS_URL)
+      .then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
         return r.json();
-      });
-    };
-
-    // Иконка 512x512 (чётко на retina); при ошибке остаётся плейсхолдер 🔷.
-    loadJson('https://thumbnails.roblox.com/v1/games/icons?universeIds=' + universeId + '&size=512x512&format=Png')
-      .then(function (data) {
-        var entry = data && data.data && data.data[0];
-        if (entry && entry.state === 'Completed' && entry.imageUrl && thumbEl) {
-          thumbEl.innerHTML = '<img src="' + entry.imageUrl + '" alt="Иконка Infinity Clicker">';
-        }
       })
-      .catch(function () { /* иконка недоступна — плейсхолдер остаётся */ });
-
-    // Публичная статистика: онлайн, визиты, дата последнего обновления.
-    loadJson('https://games.roblox.com/v1/games?universeIds=' + universeId)
-      .then(function (data) {
-        var g = data && data.data && data.data[0];
-        if (!g || !statsEl || !playingEl || !visitsEl || !updatedEl) return;
-        playingEl.innerHTML = '<span class="dot' + (g.playing > 0 ? ' live-on' : '') + '" aria-hidden="true"></span>' + fmtInt(g.playing || 0);
-        visitsEl.textContent = fmtInt(g.visits || 0);
-        var updated = fmtUpdated(g.updated);
+      .then(function (stats) {
+        if (!stats || !statsEl || !playingEl || !visitsEl || !updatedEl) return;
+        if (thumbEl && typeof stats.iconUrl === 'string' && stats.iconUrl.indexOf('https://') === 0) {
+          thumbEl.innerHTML = '<img src="' + stats.iconUrl + '" alt="Иконка Infinity Clicker">';
+        }
+        playingEl.innerHTML = '<span class="dot' + (stats.playing > 0 ? ' live-on' : '') + '" aria-hidden="true"></span>' + fmtInt(stats.playing || 0);
+        visitsEl.textContent = fmtInt(stats.visits || 0);
+        var updated = fmtUpdated(stats.updated);
         if (updated) {
           updatedEl.textContent = updated;
         } else {
@@ -728,7 +717,7 @@ while (cond) {
         }
         statsEl.hidden = false;
       })
-      .catch(function () { /* Roblox недоступен — блок статов остаётся скрыт */ });
+      .catch(function () { /* воркер недоступен — блок статов остаётся скрыт */ });
   })();
 </script>
 
