@@ -569,7 +569,7 @@ const rng = new SeededRandom(seed); // тот же монстр при том ж
                 <pre>// Перед освобождением профиля всегда форсируем синк данных из стора,
 // затем ждём именно факт завершения записи — а не событие «вышел»,
 // оно может прийти раньше фактического сохранения.
-profile.Data = obbyStore.getState().players[userId]!; // force-sync: данные из стора
+profile.Data = MainStore.getState().players[userId]!; // force-sync: данные из стора
 releaseAndAwait(); // дождались факта записи, а не события «вышел»</pre>
               </details>
             </details>
