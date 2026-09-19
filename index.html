@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="light">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Roblox-разработчик</title>
+  <title>Roblox Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -238,21 +238,21 @@
 
 <nav>
   <div class="nav-inner">
-    <a class="brand" href="#top" data-i18n-html="brand"><i></i>Roblox-разработчик</a>
+    <a class="brand" href="#top" data-i18n-html="brand"><i></i>Roblox Developer</a>
     <div class="nav-right" style="display:flex;align-items:center;gap:18px;">
       <div class="nav-links">
-        <a href="#about" data-i18n="navAbout">Обо мне</a>
-        <a href="#project" data-i18n="navProjects">Проекты</a>
-        <a href="#terms" data-i18n="navTerms">Как работаем</a>
-        <a href="#contact" data-i18n="navContact">Связь</a>
+        <a href="#about" data-i18n="navAbout">About</a>
+        <a href="#project" data-i18n="navProjects">Projects</a>
+        <a href="#terms" data-i18n="navTerms">How we work</a>
+        <a href="#contact" data-i18n="navContact">Contact</a>
       </div>
       <div class="theme-switch" id="langSwitch">
-        <button data-lang="ru" class="active">RU</button>
-        <button data-lang="en">EN</button>
+        <button data-lang="ru">RU</button>
+        <button data-lang="en" class="active">EN</button>
       </div>
       <div class="theme-switch" id="themeSwitch">
-        <button data-theme="dark" data-i18n="themeDark">Тёмная</button>
-        <button data-theme="light" class="active" data-i18n="themeLight">Светлая</button>
+        <button data-theme="dark" data-i18n="themeDark">Dark</button>
+        <button data-theme="light" class="active" data-i18n="themeLight">Light</button>
       </div>
     </div>
   </div>
@@ -261,119 +261,79 @@
 <div class="wrap">
 
   <header>
-    <div class="hello" data-i18n="hello">Привет 👋</div>
-    <h1 data-i18n="h1">Проектирую и довожу до продакшна игровые системы для Roblox — независимо от жанра и масштаба проекта.</h1>
-    <p class="lead" data-i18n="lead">
-      Разбираю любую механику на модели данных, потоки событий и точки отказа — и прихожу к рабочему
-      решению, даже если раньше не делал именно такую систему. Например: дубликаты валюты, рассинхрон
-      между серверами, потеря данных при падении, лаг под нагрузкой. Язык (TypeScript, Luau) и
-      конкретные инструменты — выбираю под задачу, стек — в описании проектов.
-    </p>
+    <div class="hello" data-i18n="hello">Hi there 👋</div>
+    <h1 data-i18n="h1">I design and ship production-grade game systems for Roblox — regardless of genre or project scale.</h1>
+    <p class="lead" data-i18n="lead">I break any mechanic down into data models, event flows and failure points — and arrive at a working solution, even for a system I have never built before. Think: currency dupes, cross-server desync, data loss on crashes, lag under load. The language (TypeScript, Luau) and specific tools are chosen per task; the stack is in the project descriptions.</p>
   </header>
 
   <div class="top-cta">
     <div>
-      <div class="avail" data-i18n="avail">открыт к проектам</div>
-      <b data-i18n="ctaBold">Готов взять что угодно — от архитектуры с нуля до починки прод-рантайма</b>
-      <small data-i18n="ctaSmall">Только текст — обсуждение задачи, статус, вопросы, фидбэк — без созвонов и войсов. Отвечаю быстро, без пропаданий.</small>
+      <div class="avail" data-i18n="avail">open to projects</div>
+      <b data-i18n="ctaBold">I will take on anything — from greenfield architecture to fixing production runtime</b>
+      <small data-i18n="ctaSmall">Text only — task discussion, status updates, questions, feedback — no calls or voice chats. I reply fast and never disappear.</small>
     </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
-      <a class="btn" href="#contact" data-i18n="ctaBtn">Связаться</a>
+      <a class="btn" href="#contact" data-i18n="ctaBtn">Contact me</a>
     </div>
   </div>
 
    <!-- ABOUT -->
   <section id="about">
-    <div class="kicker" data-i18n="kickerAbout">Коротко обо мне</div>
-    <h2 data-i18n="h2About">Кто я и почему мне можно доверить задачу</h2>
-    <p class="story" data-i18n-html="story1">
-      Паттерны, которыми пользуюсь на практике: разделение серверного и клиентского состояния
-      (сервер — источник истины), синхронизация через broadcaster вместо поллинга, оптимистичные
-      и пессимистичные обновления UI, BigNum-математика для чисел за пределами точности обычного
-      числа, виртуализация тяжёлых списков, object pooling, троттлинг автосохранения,
-      cancellation-паттерны для асинхронных операций, rate limiting и серверная защита от чита.
-      Это не список терминов для галочки — каждый пункт появился, потому что я реально об него
-      споткнулся на проде и разобрался, как делать правильно (подробный разбор — в <a href="#project">проектах</a>
-      ).
-    </p>
-    <p class="story" data-i18n-html="story2">
-      Любое решение из проектов могу объяснить до уровня кода: почему Reflex, а не самописный стор;
-      почему спам действий гасится тихим отказом, а не киком; где в экономике точка отказа и чем
-      она закрыта. Вопрос по архитектуре, сети или перформансу — отвечу конкретикой, а не общими словами.
-    </p>
+    <div class="kicker" data-i18n="kickerAbout">A quick intro</div>
+    <h2 data-i18n="h2About">Who I am and why you can trust me with a task</h2>
+    <p class="story" data-i18n-html="story1">The patterns I actually use: separating server and client state (server as the single source of truth), broadcaster-based sync instead of polling, optimistic and pessimistic UI updates, BigNum math beyond float precision, virtualization of heavy lists, object pooling, throttled autosave, cancellation patterns for async operations, rate limiting and server-side anti-cheat. This is not a checklist of buzzwords — every item appeared because I genuinely tripped over it in production and figured out the right way to do it (detailed breakdown in the <a href="#project">projects</a>).</p>
+    <p class="story" data-i18n-html="story2">I can explain any solution from my projects down to the code level: why Reflex instead of a hand-rolled store; why action spam is silently rejected rather than kicked; where the economy’s failure point is and how it is protected. Ask me about architecture, networking or performance — you will get specifics, not generalities.</p>
 
     <div class="skill-list">
-      <div class="skill-row" data-i18n-html="skill1"><b>Архитектура с нуля.</b> Спроектировать систему — экономику, данные, сеть — под конкретную игру и её масштаб, и довести до рабочего продакшн-состояния.</div>
-      <div class="skill-row" data-i18n-html="skill2"><b>Починка прод-рантайма.</b> Живой проект ведёт себя странно под нагрузкой или у части игроков: гонки данных, обрывы соединения, дублирование, спам действий.</div>
-      <div class="skill-row" data-i18n-html="skill3"><b>Профилирование и перформанс.</b> Игра тормозит — нахожу реальное узкое место, а не гадаю.</div>
-      <div class="skill-row" data-i18n-html="skill4"><b>Тесты на критических путях.</b> Имитация рантайма — моки и полифилы на эдж-кейсах; по запросу — полное покрытие.</div>
-      <div class="skill-row" data-i18n-html="skill5"><b>Легаси-код.</b> Спокойно разбираюсь в чужом или старом коде без документации и чиню, не ломая рядом лежащее.</div>
-      <div class="skill-row" data-i18n-html="skill6"><b>Быстрые MVP.</b> Рабочий прототип механики под проверку гипотезы — без переинжиниринга.</div>
-      <div class="skill-row" data-i18n-html="skill7"><b>Работа с живым проектом.</b> Аккуратно, там, где нельзя всё сломать экспериментом.</div>
-      <div class="skill-row" data-i18n-html="skill8"><b>UI / UX.</b> Адаптив (мобилка / десктоп / геймпад), производительность рендера, реактивная связь со стором — создание готовых UI по референсу и связка с логикой.</div>
-      <div class="skill-row" data-i18n-html="skill9"><b>Экономика и анти-чит.</b> Серверная валидация, защита от дублирования, спама и накрутки — деньги игрока не должны утекать.</div>
+      <div class="skill-row" data-i18n-html="skill1"><b>Greenfield architecture.</b> Designing a system — economy, data, networking — for a specific game and its scale, and taking it to a working production state.</div>
+      <div class="skill-row" data-i18n-html="skill2"><b>Production runtime fixes.</b> A live project acting strangely under load or for some players: data races, connection drops, duplication, action spam.</div>
+      <div class="skill-row" data-i18n-html="skill3"><b>Profiling and performance.</b> The game lags — I find the real bottleneck instead of guessing.</div>
+      <div class="skill-row" data-i18n-html="skill4"><b>Tests on critical paths.</b> Runtime simulation — mocks and polyfills for edge cases; full coverage on request.</div>
+      <div class="skill-row" data-i18n-html="skill5"><b>Legacy code.</b> Comfortable digging through someone else’s or old code with no documentation, and fixing it without breaking what is around.</div>
+      <div class="skill-row" data-i18n-html="skill6"><b>Fast MVPs.</b> A working prototype of a mechanic to validate a hypothesis — without over-engineering.</div>
+      <div class="skill-row" data-i18n-html="skill7"><b>Live project work.</b> Careful changes in a running project, where an experiment must not break everything.</div>
+      <div class="skill-row" data-i18n-html="skill8"><b>UI / UX.</b> Responsive (mobile / desktop / gamepad), render performance, reactive store bindings — building finished UI from a reference and wiring it to logic.</div>
+      <div class="skill-row" data-i18n-html="skill9"><b>Economy and anti-cheat.</b> Server-side validation, protection against duping, spam and exploits — player money must not leak.</div>
     </div>
 
-    <p class="note" data-i18n="noteAbout">По срокам — могу дать примерную оценку заранее, если нужно понимать таймлайн до старта.</p>
+    <p class="note" data-i18n="noteAbout">On timelines — I can give a rough estimate up front if you need to understand the schedule before starting.</p>
   </section>
 
   <!-- PROJECTS -->
   <section id="project">
-    <div class="kicker" data-i18n="kickerProjects">Проекты</div>
+    <div class="kicker" data-i18n="kickerProjects">Projects</div>
 
     <div class="proj-tabs">
-      <button class="proj-tab active" data-tab="own" data-i18n="tabOwn">Мои проекты</button>
+      <button class="proj-tab active" data-tab="own" data-i18n="tabOwn">My projects</button>
     </div>
 
     <div class="proj-pane active" data-pane="own">
       <div class="proj-block">
         <div class="proj-preview" id="clickerPreview">
-          <a class="proj-preview-thumb" id="clickerThumb" href="https://www.roblox.com/games/78926568468468/Infinity-Clicker" target="_blank" rel="noopener" title="Открыть Infinity Clicker в Roblox" data-i18n-title="thumbTitle">🔷</a>
+          <a class="proj-preview-thumb" id="clickerThumb" href="https://www.roblox.com/games/78926568468468/Infinity-Clicker" target="_blank" rel="noopener" title="Open Infinity Clicker on Roblox" data-i18n-title="thumbTitle">🔷</a>
           <div class="proj-preview-meta">
             <span class="proj-preview-note" id="clickerPreviewNote"><a href="https://www.roblox.com/games/78926568468468/Infinity-Clicker" target="_blank" rel="noopener">Infinity Clicker</a></span>
           </div>
           <div class="proj-preview-live" id="rbxStats" hidden>
-            <span class="rbx-stat"><b id="rbxPlaying"><span class="dot" aria-hidden="true"></span>—</b><span data-i18n="statOnline">онлайн</span></span>
-            <span class="rbx-stat"><b id="rbxVisits">—</b><span data-i18n="statVisits">визитов</span></span>
-            <span class="rbx-stat"><b id="rbxUpdated">—</b><span data-i18n="statUpdated">обновлено</span></span>
+            <span class="rbx-stat"><b id="rbxPlaying"><span class="dot" aria-hidden="true"></span>—</b><span data-i18n="statOnline">playing</span></span>
+            <span class="rbx-stat"><b id="rbxVisits">—</b><span data-i18n="statVisits">visits</span></span>
+            <span class="rbx-stat"><b id="rbxUpdated">—</b><span data-i18n="statUpdated"></span></span>
           </div>
         </div>
         <h3 class="proj-title" data-i18n="projTitle">Clicker</h3>
-        <p class="desc-short" data-i18n="projDescShort">Продакшн idle-игра: экономика, бои, кросс-серверная синхронизация — под капотом простого клика.</p>
+        <p class="desc-short" data-i18n="projDescShort">A production idle game: economy, combat, cross-server sync — under the hood of a simple click.</p>
 
-        <div class="dev-callout" data-i18n-html="devCallout">
-          <b>🛠 В игре открыта DEV-панель</b> — все механики можно протестировать вживую: выдача золота,
-          шардов, кристаллов и фрагментов; макс прокачка героев, апгрейдов, шардовых перков и скиллов;
-          артефакты; резонанс; мудрецы и мгновенное завершение всех миссий; телепорт по зонам.
-          Вкладка <b>DEV</b> в игровом меню — попробуйте всё сами.
-        </div>
+        <div class="dev-callout" data-i18n-html="devCallout"><b>🛠 The game ships with a live DEV panel</b> — every mechanic can be tested in-game: gold, shards, crystals and fragments grants; maxed heroes, upgrades, shard perks and skills; artifacts; resonance; sages and instant completion of all missions; zone teleports. Open the <b>DEV</b> tab in the game menu and try it all yourself.</div>
 
         <details class="proj-more">
-          <summary data-i18n="sumArch">Архитектура и техническое устройство</summary>
+          <summary data-i18n="sumArch">Architecture and technical design</summary>
           <div class="proj-more-body">
-            <p class="desc" data-i18n-html="projDesc1">
-              Clicker — продакшн idle-игра, где игрок качает героев, бьёт монстров и проходит Ascension
-              за осколки, открывающие новые апгрейды. Полное разделение слоёв — клиент никогда
-              не авторитетен, сервер пересчитывает всё сам. Два независимых стора (Reflex),
-              Broadcaster-синхронизация, BigNum-математика под числа за пределами e15, виртуализация
-              списков карточек героев, object pooling (числа урона и лута, звуки, клик-VFX),
-              офлайн-прогресс между сессиями и локализация интерфейса. Тяжёлые расчёты («купить максимум»
-              на сотни уровней) считаются закрытой формулой суммы геометрической прогрессии за O(log N)
-              с ограниченным кэшем — без перебора уровней и без риска подвесить кадр.
-              MemoryStore и MessagingService — под кросс-серверный
-              рейтинг кланов и единого кланового босса (общее HP на все сервера); Discord-алерты
-              идут через собственный Cloudflare-воркер.
-            </p>
-            <p class="desc" data-i18n="projDesc2">
-              Архитектурно — SSoT на сервере, иммутабельный стор на клиенте (Reflex), сервисы и контроллеры
-              через Flamework вместо самодельных синглтонов — событийно, а не поллингом каждый кадр;
-              асинхронная работа — через корутины и событийный API, Promise — точечно (ProfileStore
-              и сетевые операции с одним результатом).
-            </p>
+            <p class="desc" data-i18n-html="projDesc1">Clicker is a production idle game where players level up heroes, fight monsters and go through Ascension for shards that unlock new upgrades. Complete layer separation — the client is never authoritative, the server recalculates everything itself. Two independent stores (Reflex), Broadcaster synchronization, BigNum math for numbers beyond e15, virtualized hero card lists, object pooling (damage numbers, loot, sounds, click VFX), offline progress between sessions and UI localization. Heavy calculations (“buy max” across hundreds of levels) are computed with a closed-form geometric series sum in O(log N) with a bounded cache — no level iteration and no risk of stalling a frame. MemoryStore and MessagingService power the cross-server clan leaderboard and a single clan boss (shared HP across all servers); Discord alerts go through a custom Cloudflare worker.</p>
+            <p class="desc" data-i18n="projDesc2">Architecturally: SSoT on the server, an immutable client store (Reflex), services and controllers through Flamework instead of hand-rolled singletons — event-driven, not polling every frame; async work through coroutines and event APIs, Promises used sparingly (ProfileStore and single-result network operations).</p>
           </div>
         </details>
 
-        <p class="stat-line" data-i18n-html="statFiles"><span class="num">200+</span> файлов · <span class="num">15+</span> игровых механик — весь путь соло: от архитектуры до продакшна.</p>
+        <p class="stat-line" data-i18n-html="statFiles"><span class="num">200+</span> files · <span class="num">15+</span> game mechanics — the entire journey solo: from architecture to production.</p>
         <div class="stack">
           <span class="chip">roblox-ts</span>
           <span class="chip">TypeScript</span>
@@ -389,142 +349,135 @@
 
         <!-- Nested case: runtime problems -->
         <details class="proj-more">
-          <summary data-i18n="sumRuntime">Проблемы рантайма, которые решал (14 кейсов)</summary>
+          <summary data-i18n="sumRuntime">Runtime problems I solved (14 cases)</summary>
           <div class="proj-more-body">
-            <p class="desc" data-i18n="descNoCode">Без кода — суть проблемы и в какую сторону решено. Код и детали — по запросу, покажу и объясню на пальцах.</p>
+            <p class="desc" data-i18n="descNoCode">No code here — the essence of the problem and the direction of the fix. Code and details on request: I will show and explain it in plain terms.</p>
             <div class="problem-grid">
               <div class="problem">
-                <span class="p-tag" data-i18n="pTag">проблема</span>
-                <p class="p-text" data-i18n="pb1p">Оплата может подтвердиться Roblox-ом повторно — риск выдать награду дважды.</p>
-                <span class="s-tag" data-i18n="sTag">решение</span>
-                <p data-i18n="pb1s">Каждая оплата запоминается по id; повторное подтверждение не выдаёт награду заново.</p>
+                <span class="p-tag" data-i18n="pTag">problem</span>
+                <p class="p-text" data-i18n="pb1p">A purchase can be re-confirmed by Roblox — risk of granting the reward twice.</p>
+                <span class="s-tag" data-i18n="sTag">solution</span>
+                <p data-i18n="pb1s">Every purchase is remembered by id; a repeated confirmation does not grant the reward again.</p>
               </div>
               <div class="problem">
-                <span class="p-tag" data-i18n="pTag">проблема</span>
-                <p class="p-text" data-i18n="pb2p">Общий межсерверный босс: несколько серверов бьют одно состояние одновременно.</p>
-                <span class="s-tag" data-i18n="sTag">решение</span>
-                <p data-i18n="pb2s">Урон применяется через атомарное обновление общего состояния, а не через отдельные копии на каждом сервере.</p>
+                <span class="p-tag" data-i18n="pTag">problem</span>
+                <p class="p-text" data-i18n="pb2p">A shared cross-server boss: several servers hit the same state simultaneously.</p>
+                <span class="s-tag" data-i18n="sTag">solution</span>
+                <p data-i18n="pb2s">Damage is applied through an atomic update of the shared state, not separate copies per server.</p>
               </div>
               <div class="problem">
-                <span class="p-tag" data-i18n="pTag">проблема</span>
-                <p class="p-text" data-i18n="pb3p">Игрок выходит и тут же заходит снова, пока данные ещё загружаются — риск получить два процесса на один профиль.</p>
-                <span class="s-tag" data-i18n="sTag">решение</span>
-                <p data-i18n="pb3s">Повторный вход ждёт завершения предыдущей операции вместо запуска параллельно.</p>
+                <span class="p-tag" data-i18n="pTag">problem</span>
+                <p class="p-text" data-i18n="pb3p">A player leaves and immediately rejoins while data is still loading — risk of two processes on one profile.</p>
+                <span class="s-tag" data-i18n="sTag">solution</span>
+                <p data-i18n="pb3s">Rejoining waits for the previous operation to finish instead of running in parallel.</p>
               </div>
               <div class="problem">
-                <span class="p-tag" data-i18n="pTag">проблема</span>
-                <p class="p-text" data-i18n="pb4p">Сервер может упасть в середине операции с валютой — риск потери прогресса или дублирования.</p>
-                <span class="s-tag" data-i18n="sTag">решение</span>
-                <p data-i18n="pb4s">При остановке сервер дожидается завершения активных сохранений, а не отключается мгновенно.</p>
+                <span class="p-tag" data-i18n="pTag">problem</span>
+                <p class="p-text" data-i18n="pb4p">A server can crash in the middle of a currency operation — risk of lost progress or duplication.</p>
+                <span class="s-tag" data-i18n="sTag">solution</span>
+                <p data-i18n="pb4s">On shutdown the server waits for active saves to finish instead of cutting off instantly.</p>
               </div>
               <div class="problem">
-                <span class="p-tag" data-i18n="pTag">проблема</span>
-                <p class="p-text" data-i18n="pb5p">Дабл-клик или спам одного действия — риск провести операцию несколько раз.</p>
-                <span class="s-tag" data-i18n="sTag">решение</span>
-                <p data-i18n="pb5s">Пока операция не завершена, повторный такой же запрос игрока не запускает новую.</p>
+                <span class="p-tag" data-i18n="pTag">problem</span>
+                <p class="p-text" data-i18n="pb5p">A double click or spamming one action — risk of running the operation multiple times.</p>
+                <span class="s-tag" data-i18n="sTag">solution</span>
+                <p data-i18n="pb5s">Until the operation completes, a repeated identical request from the player does not start a new one.</p>
               </div>
               <div class="problem">
-                <span class="p-tag" data-i18n="pTag">проблема</span>
-                <p class="p-text" data-i18n="pb6p">Клиенту нельзя доверять цену/баланс — можно подменить данные при отправке запроса.</p>
-                <span class="s-tag" data-i18n="sTag">решение</span>
-                <p data-i18n="pb6s">От клиента принимается только само действие, все цифры пересчитываются на сервере заново.</p>
+                <span class="p-tag" data-i18n="pTag">problem</span>
+                <p class="p-text" data-i18n="pb6p">The client cannot be trusted with price/balance — data can be tampered with when sending a request.</p>
+                <span class="s-tag" data-i18n="sTag">solution</span>
+                <p data-i18n="pb6s">Only the action itself is accepted from the client; all numbers are recalculated on the server.</p>
               </div>
               <div class="problem">
-                <span class="p-tag" data-i18n="pTag">проблема</span>
-                <p class="p-text" data-i18n="pb7p">Клик должен ощущаться мгновенным, но экономика не терпит рассинхрона между вкладками/устройствами.</p>
-                <span class="s-tag" data-i18n="sTag">решение</span>
-                <p data-i18n="pb7s">Клик применяется мгновенно на клиенте (оптимистично), а покупки — только после подтверждения сервера, кнопка блокируется до ответа.</p>
+                <span class="p-tag" data-i18n="pTag">problem</span>
+                <p class="p-text" data-i18n="pb7p">Clicks must feel instant, but the economy cannot tolerate desync between tabs/devices.</p>
+                <span class="s-tag" data-i18n="sTag">solution</span>
+                <p data-i18n="pb7s">Clicks apply instantly on the client (optimistically); purchases only after server confirmation — the button is locked until a response.</p>
               </div>
               <div class="problem">
-                <span class="p-tag" data-i18n="pTag">проблема</span>
-                <p class="p-text" data-i18n="pb8p">Валюта в idle-игре легко уходит за пределы точности обычного числа (e15 и выше) — начинаются округления и баги.</p>
-                <span class="s-tag" data-i18n="sTag">решение</span>
-                <p data-i18n="pb8s">Все игровые числа — строки в BigNum-формате со своим движком математики, а не встроенные числа.</p>
+                <span class="p-tag" data-i18n="pTag">problem</span>
+                <p class="p-text" data-i18n="pb8p">Currency in an idle game quickly exceeds normal number precision (e15 and beyond) — rounding and bugs begin.</p>
+                <span class="s-tag" data-i18n="sTag">solution</span>
+                <p data-i18n="pb8s">All game numbers are strings in a BigNum format with their own math engine, not built-in numbers.</p>
               </div>
               <div class="problem">
-                <span class="p-tag" data-i18n="pTag">проблема</span>
-                <p class="p-text" data-i18n="pb9p">Список из сотен карточек героев в интерфейсе тормозил игру — рендерились все сразу.</p>
-                <span class="s-tag" data-i18n="sTag">решение</span>
-                <p data-i18n="pb9s">Виртуализация: в памяти живут только видимые карточки, остальные не создаются, пока не понадобятся.</p>
+                <span class="p-tag" data-i18n="pTag">problem</span>
+                <p class="p-text" data-i18n="pb9p">A list of hundreds of hero cards in the UI lagged the game — all of them rendered at once.</p>
+                <span class="s-tag" data-i18n="sTag">solution</span>
+                <p data-i18n="pb9s">Virtualization: only visible cards live in memory; the rest are not created until needed.</p>
               </div>
               <div class="problem">
-                <span class="p-tag" data-i18n="pTag">проблема</span>
-                <p class="p-text" data-i18n="pb10p">Расчёт «купить максимум» перебирает сотни уровней и может подвесить кадр на середине клика.</p>
-                <span class="s-tag" data-i18n="sTag">решение</span>
-                <p data-i18n="pb10s">Перебор заменён закрытой формулой суммы геометрической прогрессии — O(log N) BigNum-операций вместо сотен итераций, плюс кэш с жёстким лимитом (FIFO). Кадр не «укладывается в бюджет» — расчёт просто не может его подвесить в принципе.</p>
+                <span class="p-tag" data-i18n="pTag">problem</span>
+                <p class="p-text" data-i18n="pb10p">“Buy max” iterates over hundreds of levels and can stall a frame mid-click.</p>
+                <span class="s-tag" data-i18n="sTag">solution</span>
+                <p data-i18n="pb10s">Iteration replaced with a closed-form geometric series sum — O(log N) BigNum operations instead of hundreds of iterations, plus a hard-limited cache (FIFO). We do not rely on the frame budget absorbing the calculation — it simply cannot stall a frame in principle.</p>
               </div>
               <div class="problem">
-                <span class="p-tag" data-i18n="pTag">проблема</span>
-                <p class="p-text" data-i18n="pb11p">Наивная обработка таймаута при загрузке профиля игрока приводила к «утечке» сессии — профиль оставался занят.</p>
-                <span class="s-tag" data-i18n="sTag">решение</span>
-                <p data-i18n="pb11s">Загрузка отменяется явным флагом, а не гонкой промисов — профиль корректно освобождается в любом сценарии.</p>
+                <span class="p-tag" data-i18n="pTag">problem</span>
+                <p class="p-text" data-i18n="pb11p">Naive timeout handling when loading a player profile leaked the session — the profile stayed locked.</p>
+                <span class="s-tag" data-i18n="sTag">solution</span>
+                <p data-i18n="pb11s">Loading is cancelled with an explicit flag, not a promise race — the profile is released correctly in every scenario.</p>
               </div>
               <div class="problem">
-                <span class="p-tag" data-i18n="pTag">проблема</span>
-                <p class="p-text" data-i18n="pb12p">Нужно было отличать читера с автокликером от игрока с быстрой реакцией, не браня честных игроков.</p>
-                <span class="s-tag" data-i18n="sTag">решение</span>
-                <p data-i18n="pb12s">Лимит скорости действий с запасом на погрешность и «тихий» отказ вместо кика — без ложных банов.</p>
+                <span class="p-tag" data-i18n="pTag">problem</span>
+                <p class="p-text" data-i18n="pb12p">Needed to tell a cheater with an autoclicker apart from a player with fast reactions, without punishing honest players.</p>
+                <span class="s-tag" data-i18n="sTag">solution</span>
+                <p data-i18n="pb12s">Action rate limits with headroom for measurement noise and a silent rejection instead of a kick — no false bans.</p>
               </div>
               <div class="problem">
-                <span class="p-tag" data-i18n="pTag">проблема</span>
-                <p class="p-text" data-i18n="pb13p">Передача платных кристаллов между игроками через несколько серверов — потеря подтверждения или повторная доставка могут задвоить баланс.</p>
-                <span class="s-tag" data-i18n="sTag">решение</span>
-                <p data-i18n="pb13s">Внешний журнал операций как единственный маркер коммита: списание и начисление применяются по нему один раз, а не по клиентским подтверждениям.</p>
+                <span class="p-tag" data-i18n="pTag">problem</span>
+                <p class="p-text" data-i18n="pb13p">Transferring paid crystals between players across servers — a lost confirmation or redelivery can duplicate the balance.</p>
+                <span class="s-tag" data-i18n="sTag">solution</span>
+                <p data-i18n="pb13s">An external operations ledger as the single commit marker: debit and credit are applied against it exactly once, not on client confirmations.</p>
               </div>
               <div class="problem">
-                <span class="p-tag" data-i18n="pTag">проблема</span>
-                <p class="p-text" data-i18n="pb14p">Повреждение данных игрока могло молча обнулить купленные за Robux кристаллы вместе с историей покупок.</p>
-                <span class="s-tag" data-i18n="sTag">решение</span>
-                <p data-i18n="pb14s">Независимый ledger чеков покупок: при повреждении профиля донатный баланс, история и статус восстанавливаются, а не теряются.</p>
+                <span class="p-tag" data-i18n="pTag">problem</span>
+                <p class="p-text" data-i18n="pb14p">Corrupted player data could silently zero out Robux-bought crystals along with purchase history.</p>
+                <span class="s-tag" data-i18n="sTag">solution</span>
+                <p data-i18n="pb14s">An independent ledger of purchase receipts: if a profile is corrupted, the donation balance, history and status are restored, not lost.</p>
               </div>
             </div>
-            <p class="desc" style="margin-top:16px;" data-i18n="tailDesc">
-              Падение одной механики не должно ронять всю игру — места, где на кону деньги или данные
-              игрока, я отдельно проверяю на отказ, остальное — обычная разработка без переусложнения.
-            </p>
+            <p class="desc" style="margin-top:16px;" data-i18n="tailDesc">One broken mechanic should not take down the whole game — places where money or player data are at stake are explicitly tested against failures; the rest is straightforward development without over-complication.</p>
           </div>
         </details>
 
         <!-- Nested case: UI/UX -->
         <details class="proj-more">
-          <summary data-i18n="sumUi">UI/UX — инженерные решения (5 кейсов)</summary>
+          <summary data-i18n="sumUi">UI/UX — engineering decisions (5 cases)</summary>
           <div class="proj-more-body">
-            <p class="desc" data-i18n="uiIntro">
-              Весь UI написан с нуля, без сторонних UI-тулкитов: компоненты реактивно подписаны на
-              общий стор и перерисовываются только при изменении конкретных данных, которые им нужны.
-              Ниже — решения, которых потребовала производительность и удобство.
-            </p>
-            <p class="stat-line" data-i18n-html="uiStat"><span class="num">50+</span> UI-компонентов · <span class="num">20+</span> хуков игровой логики · адаптив под мобилку, десктоп и геймпад.</p>
+            <p class="desc" data-i18n="uiIntro">The entire UI is written from scratch, without third-party UI kits: components reactively subscribe to a shared store and re-render only when the specific data they need changes. Below are the decisions that performance and usability demanded.</p>
+            <p class="stat-line" data-i18n-html="uiStat"><span class="num">50+</span> UI components · <span class="num">20+</span> game-logic hooks · responsive for mobile, desktop and gamepad.</p>
             <div class="problem-grid">
               <div class="problem">
-                <span class="p-tag" data-i18n="pTag">проблема</span>
-                <p class="p-text" data-i18n="ui1p">HP-бар рисуется каждый кадр, счётчик босс-таймера — раз в секунду. Гнать это через React-состояние — ре-рендер поддерева на каждый тик, хотя менять нужно только ширину одного элемента и текст.</p>
-                <span class="s-tag" data-i18n="sTag">решение</span>
-                <p data-i18n="ui1s">Элементы держат ref, и значение пишется напрямую вне React: HP-бар — на Heartbeat, таймер — с тиком раз в 0.25 с. Перед записью тик сравнивает новое значение с прошлым и пропускает неизменённые тики. HP-бар дополнительно экстраполирует урон между тиками стора по DPS — полоска тает плавно, а не скачками.</p>
+                <span class="p-tag" data-i18n="pTag">problem</span>
+                <p class="p-text" data-i18n="ui1p">The HP bar renders every frame, the boss timer counter once a second. Driving that through React state means a subtree re-render on every tick, when only one element’s width and a piece of text change.</p>
+                <span class="s-tag" data-i18n="sTag">solution</span>
+                <p data-i18n="ui1s">Elements keep refs and values are written directly outside React: the HP bar on Heartbeat, the timer with a 0.25s tick. Before writing, the tick compares the new value with the previous one and skips unchanged ticks. The HP bar additionally extrapolates damage between store ticks by DPS — the bar melts smoothly instead of jumping.</p>
               </div>
               <div class="problem">
-                <span class="p-tag" data-i18n="pTag">проблема</span>
-                <p class="p-text" data-i18n="ui2p">Подписка компонента на весь стейт — интерфейс перерисовывается при любом изменении в игре.</p>
-                <span class="s-tag" data-i18n="sTag">решение</span>
-                <p data-i18n="ui2s">Каждый компонент подписан на конкретное значение, а составные данные (статы героев, стоимость покупки) мемоизированы и пересчитываются только когда меняются их входы.</p>
+                <span class="p-tag" data-i18n="pTag">problem</span>
+                <p class="p-text" data-i18n="ui2p">A component subscribing to the entire state — the UI re-renders on any change in the game.</p>
+                <span class="s-tag" data-i18n="sTag">solution</span>
+                <p data-i18n="ui2s">Each component subscribes to a specific value, and composite data (hero stats, purchase cost) is memoized and recomputed only when its inputs change.</p>
               </div>
               <div class="problem">
-                <span class="p-tag" data-i18n="pTag">проблема</span>
-                <p class="p-text" data-i18n="ui3p">Один шаблон UI на мобилку и десктоп: на телефоне панели перекрывают игру, на ПК — пустые края.</p>
-                <span class="s-tag" data-i18n="sTag">решение</span>
-                <p data-i18n="ui3s">Разные деревья интерфейса для мобильного и десктопного режима, а размерозависимые модалки монтируются только после того, как движок отдал реальные размеры экрана и врезку топбара — иначе они открываются с кривой геометрией.</p>
+                <span class="p-tag" data-i18n="pTag">problem</span>
+                <p class="p-text" data-i18n="ui3p">One UI layout for mobile and desktop: on phones panels cover the game, on PC there are empty edges.</p>
+                <span class="s-tag" data-i18n="sTag">solution</span>
+                <p data-i18n="ui3s">Different interface trees for mobile and desktop modes, and size-dependent modals only mount after the engine reports the real screen size and topbar inset — otherwise they open with broken geometry.</p>
               </div>
               <div class="problem">
-                <span class="p-tag" data-i18n="pTag">проблема</span>
-                <p class="p-text" data-i18n="ui4p">Скроллящиеся списки с рамками у элементов: первая карточка упирается в границу обрезки и рамка режется, полоса прокрутки съедает ширину.</p>
-                <span class="s-tag" data-i18n="sTag">решение</span>
-                <p data-i18n="ui4s">Геометрия окна и канвы скролла разведена явно: у каждого скролла один владелец отступов, проверяются оба состояния (с полосой и без), у крайних элементов — безопасный врез под рамку.</p>
+                <span class="p-tag" data-i18n="pTag">problem</span>
+                <p class="p-text" data-i18n="ui4p">Scrolling lists with item borders: the first card hits the clipping boundary and its border is cut; the scrollbar eats width.</p>
+                <span class="s-tag" data-i18n="sTag">solution</span>
+                <p data-i18n="ui4s">Window and canvas geometry of a scroll are explicitly separated: each scroll has a single inset owner, both states (with and without the scrollbar) are checked, and edge elements get a stroke-safe inset.</p>
               </div>
               <div class="problem">
-                <span class="p-tag" data-i18n="pTag">проблема</span>
-                <p class="p-text" data-i18n="ui5p">Тултипы внутри карточек обрезаются границами списков и виртуализацией — карточка исчезла, тултип с ней.</p>
-                <span class="s-tag" data-i18n="sTag">решение</span>
-                <p data-i18n="ui5s">Тултипы рендерятся через портал поверх всего интерфейса, привязаны к реальному положению карточки на экране, а не к её месту в списке.</p>
+                <span class="p-tag" data-i18n="pTag">problem</span>
+                <p class="p-text" data-i18n="ui5p">Tooltips inside cards get clipped by list and virtualization bounds — the card disappears, the tooltip with it.</p>
+                <span class="s-tag" data-i18n="sTag">solution</span>
+                <p data-i18n="ui5s">Tooltips render through a portal above the whole UI, anchored to the card’s real on-screen position, not its place in the list.</p>
               </div>
             </div>
           </div>
@@ -532,93 +485,69 @@
 
         <!-- Nested case: engineering details / code -->
         <details class="proj-more">
-          <summary data-i18n="sumDeep">Глубже: код и защитные паттерны</summary>
+          <summary data-i18n="sumDeep">Deeper: code and defensive patterns</summary>
           <div class="proj-more-body">
-            <p class="desc" data-i18n="deepDesc">Конкретные защитные решения из кода. Под спойлером — упрощённая иллюстрация принципа, а не боевой код из прода.</p>
+            <p class="desc" data-i18n="deepDesc">Concrete defensive solutions from the code. Under the spoilers — a simplified illustration of the principle, not the production code.</p>
 
             <details class="detail-block">
-              <summary data-i18n="dd1t">Единая очередь вебхуков в Discord</summary>
-              <p data-i18n="dd1p">
-                Все алерты (донат-операции, ошибки DataStore, баг-репорты) идут через один WebhookService
-                с приоритетной очередью (донат раньше datastore и bugs) и пачками под лимит Discord —
-                вместо разрозненных точек отправки. Прод видно в реальном времени, не роясь в логах.
-              </p>
-              <details class="ill"><summary data-i18n="illLabel">Иллюстрация</summary>
-                <pre data-i18n-html="pre1">webhookService.reportDataStore("сохранение", "игрок X", "не прошло"); // канал datastore
-webhookService.notify(channel, { title, description, color });        // единая очередь</pre>
+              <summary data-i18n="dd1t">A single Discord webhook queue</summary>
+              <p data-i18n="dd1p">All alerts (donation operations, DataStore errors, bug reports) go through one WebhookService with a priority queue (donations before datastore and bugs) and batches to respect Discord limits — instead of scattered send points. Production is visible in real time without digging through logs.</p>
+              <details class="ill"><summary data-i18n="illLabel">Illustration</summary>
+                <pre data-i18n-html="pre1">webhookService.reportDataStore("save", "player X", "failed"); // datastore channel
+webhookService.notify(channel, { title, description, color });        // single queue</pre>
               </details>
             </details>
 
             <details class="detail-block">
-              <summary data-i18n="dd2t">Контракт на аргументы синхронизации</summary>
-              <p data-i18n="dd2p">
-                Каждое действие, которое рассылается между клиентом и сервером, сверяется со строгой схемой:
-                если тип аргумента не совпал с ожидаемым — действие отклоняется целиком, а не выполняется
-                со сдвинутыми значениями. Отдельно проверяется, что действие применяется только тому игроку,
-                которому принадлежит — не может прилететь чужому клиенту.
-              </p>
-              <details class="ill"><summary data-i18n="illLabel">Иллюстрация</summary>
+              <summary data-i18n="dd2t">A contract for sync arguments</summary>
+              <p data-i18n="dd2p">Every action broadcast between client and server is checked against a strict schema: if an argument’s type does not match what is expected, the action is rejected entirely rather than executed with shifted values. It is also verified that an action applies only to the player it belongs to — it cannot land on someone else’s client.</p>
+              <details class="ill"><summary data-i18n="illLabel">Illustration</summary>
                 <pre data-i18n-html="pre2">const contract = { amount: "number" };
-if (typeof(actual) !== contract.amount) return; // отклонено целиком
-if (owner !== player) return;                    // чужое не летит дальше</pre>
+if (typeof(actual) !== contract.amount) return; // rejected outright
+if (owner !== player) return;                    // foreign data never passes on</pre>
               </details>
             </details>
 
             <details class="detail-block">
-              <summary data-i18n="dd3t">Детерминированный монстр зоны</summary>
-              <p data-i18n="dd3p">
-                Генератор монстра на основе seed от зоны: один и тот же сервер после рестарта всегда выдаёт
-                одного и того же монстра, без необходимости хранить его модель в данных игрока.
-              </p>
-              <details class="ill"><summary data-i18n="illLabel">Иллюстрация</summary>
+              <summary data-i18n="dd3t">A deterministic zone monster</summary>
+              <p data-i18n="dd3p">The monster generator is based on a seed from the zone: the same server after a restart always produces the same monster, with no need to store its model in player data.</p>
+              <details class="ill"><summary data-i18n="illLabel">Illustration</summary>
                 <pre data-i18n-html="pre3">const seed = stableHash(zone);
-const rng = new SeededRandom(seed); // тот же монстр при том же входе</pre>
+const rng = new SeededRandom(seed); // same monster for the same input</pre>
               </details>
             </details>
 
             <details class="detail-block">
-              <summary data-i18n="dd4t">Ожидание финального сохранения, а не события выхода</summary>
-              <p data-i18n="dd4p">
-                Событие «игрок вышел» в Roblox может сработать раньше, чем реально завершится сохранение
-                профиля. Логика ждёт именно завершения сохранения, а не сам факт выхода — иначе можно
-                начать новую сессию поверх ещё не сохранённой старой.
-              </p>
-              <details class="ill"><summary data-i18n="illLabel">Иллюстрация</summary>
-                <pre data-i18n-html="pre4">// Перед освобождением профиля всегда форсируем синк данных из стора,
-// затем ждём именно факт завершения записи — а не событие «вышел»,
-// оно может прийти раньше фактического сохранения.
-profile.Data = MainStore.getState().players[userId]!; // force-sync: данные из стора
-releaseAndAwait(); // дождались факта записи, а не события «вышел»</pre>
+              <summary data-i18n="dd4t">Waiting for the save to finish, not the leave event</summary>
+              <p data-i18n="dd4p">The “player left” event in Roblox can fire before the profile save actually completes. The logic waits for the save to finish, not the leave itself — otherwise a new session could start on top of an unsaved old one.</p>
+              <details class="ill"><summary data-i18n="illLabel">Illustration</summary>
+                <pre data-i18n-html="pre4">// Before releasing the profile, always force-sync the data from the store,
+// then wait for the actual completion of the write — not the “left” event;
+// the event can arrive before the save has actually persisted.
+profile.Data = MainStore.getState().players[userId]!; // force-sync: data from the store
+releaseAndAwait(); // waited for the write to complete, not the “left” event</pre>
               </details>
             </details>
 
             <details class="detail-block">
-              <summary data-i18n="dd5t">Коммит награды в конце цепочки действий</summary>
-              <p data-i18n="dd5p">
-                Награда за убийство применяется только после того, как успешно запущен следующий шаг
-                (например, заспавнен следующий монстр). Если по пути произошла ошибка — начисление
-                не происходит, и повторный пакет от клиента не может задвоить награду.
-              </p>
-              <details class="ill"><summary data-i18n="illLabel">Иллюстрация</summary>
-                <pre data-i18n-html="pre5">const ok = spawnNextMonster(); // сначала — следующий шаг
-if (!ok) return;                // ошибка — коммита нет, повтор клиента не задвоит
-grantReward();                  // награда только когда всё выше сработало</pre>
+              <summary data-i18n="dd5t">Committing the reward at the end of the action chain</summary>
+              <p data-i18n="dd5p">The kill reward is applied only after the next step has successfully started (for example, the next monster has spawned). If anything fails along the way — no reward is granted, and a repeated client packet cannot double the reward.</p>
+              <details class="ill"><summary data-i18n="illLabel">Illustration</summary>
+                <pre data-i18n-html="pre5">const ok = spawnNextMonster(); // the next step first
+if (!ok) return;                // error — no commit, a client retry cannot double it
+grantReward();                  // the reward only when everything above succeeded</pre>
               </details>
             </details>
 
             <details class="detail-block">
-              <summary data-i18n="dd6t">Защита BigNum от зависания на аномальных данных</summary>
-              <p data-i18n="dd6p">
-                Внутренние циклы нормализации больших чисел ограничены по количеству итераций с явным
-                предупреждением, а не оставлены открытыми — на редком крайнем случае это могло бы
-                привести к зависанию, а не просто к неверному результату.
-              </p>
-              <details class="ill"><summary data-i18n="illLabel">Иллюстрация</summary>
+              <summary data-i18n="dd6t">Guarding BigNum against stalling on anomalous data</summary>
+              <p data-i18n="dd6p">Internal big-number normalization loops are iteration-bounded with an explicit warning rather than left unbounded — otherwise, in a rare edge case, they could cause a hang instead of just a wrong result.</p>
+              <details class="ill"><summary data-i18n="illLabel">Illustration</summary>
                 <pre data-i18n-html="pre6">let guard = 0;
 while (cond) {
   ...
   guard++;
-  if (guard > 3) { warn("аномальный вход"); break; }
+  if (guard > 3) { warn("anomalous input"); break; }
 }</pre>
               </details>
             </details>
@@ -633,31 +562,31 @@ while (cond) {
 
   <!-- HOW WE WORK -->
   <section id="terms">
-    <div class="kicker" data-i18n="kickerTerms">Условия</div>
-    <h2 data-i18n="h2Terms">Как со мной удобнее работать</h2>
+    <div class="kicker" data-i18n="kickerTerms">Terms</div>
+    <h2 data-i18n="h2Terms">How to work with me most conveniently</h2>
     <div class="terms">
-      <div class="term"><span class="yn ok" data-i18n="ynOk">ок</span><p data-i18n="t1">Работаю через таск-задачи: тикет с описанием в любом трекере (или просто список) — сделал, отчитался.</p></div>
-      <div class="term"><span class="yn ok" data-i18n="ynOk">ок</span><p data-i18n="t2">Готов выполнить оплачиваемое тестовое задание.</p></div>
-      <div class="term"><span class="yn ok" data-i18n="ynOk">ок</span><p data-i18n="t3">Могу показать примеры своего кода, архитектуру и подробно расписать логику решений.</p></div>
-      <div class="term"><span class="yn ok" data-i18n="ynOk">ок</span><p data-i18n="t4">Оплата: USD / Robux. Другие варианты обсуждаются индивидуально.</p></div>
-      <div class="term"><span class="yn ok" data-i18n="ynOk">ок</span><p data-i18n="t5">Асинхронный график: работаю без привязки к фиксированным часам в течение дня, ориентируюсь на дедлайны задач.</p></div>
-      <div class="term"><span class="yn no" data-i18n="ynNo">нет</span><p data-i18n="t6">Чистый процент от будущей прибыли. Доля от доходов проекта обсуждается индивидуально только в качестве бонуса к основной оплате.</p></div>
+      <div class="term"><span class="yn ok" data-i18n="ynOk">yes</span><p data-i18n="t1">I work through tickets: a task description in any tracker (or just a list) — done, reported.</p></div>
+      <div class="term"><span class="yn ok" data-i18n="ynOk">yes</span><p data-i18n="t2">Happy to do a paid test task.</p></div>
+      <div class="term"><span class="yn ok" data-i18n="ynOk">yes</span><p data-i18n="t3">I can show code examples, architecture and walk through the logic of my decisions in detail.</p></div>
+      <div class="term"><span class="yn ok" data-i18n="ynOk">yes</span><p data-i18n="t4">Payment: USD/Robux. Other options discussed individually.</p></div>
+      <div class="term"><span class="yn ok" data-i18n="ynOk">yes</span><p data-i18n="t5">Async schedule: I work without fixed hours during the day, focused on task deadlines.</p></div>
+      <div class="term"><span class="yn no" data-i18n="ynNo">no</span><p data-i18n="t6">Revenue share only (a percentage of future profit). A share of project income is discussed individually only as a bonus on top of the base payment.</p></div>
     </div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact">
-    <div class="kicker" data-i18n="kickerContact">Связь</div>
-    <h2 data-i18n="h2Contact">Есть задача, тестовое или просто вопрос?</h2>
+    <div class="kicker" data-i18n="kickerContact">Contact</div>
+    <h2 data-i18n="h2Contact">Got a task, a test task or just a question?</h2>
     <div class="contact">
       <div>
-        <b style="font-size:1.02rem;display:block;" data-i18n="contactBold">Открыт к задачам и командам</b>
+        <b style="font-size:1.02rem;display:block;" data-i18n="contactBold">Open to tasks and teams</b>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <a class="btn ghost contact-btn" id="cGithub" href="#" rel="noopener" style="--bc:#24292e" title="Откроется в новой вкладке" data-i18n-title="tipNewTab"><span class="c-ic"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></span>GitHub</a>
-        <a class="btn ghost contact-btn" id="cTg" href="#" rel="noopener" style="--bc:#229ED9" title="Откроется в Telegram" data-i18n-title="tipTg"><span class="c-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg></span>Telegram</a>
-        <a class="btn ghost contact-btn" id="cDiscord" href="#" style="--bc:#5865F2" title="Откроется в Discord, ник скопируется в буфер" data-i18n-title="tipDiscord"><span class="c-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg></span><span id="cDiscordLabel">Discord</span></a>
-        <a class="btn ghost contact-btn" id="cMail" href="#" style="--bc:#EA4335" title="Адрес скопируется в буфер, почта откроется если настроена" data-i18n-title="tipMail"><span class="c-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span><span id="cMailLabel">Email</span></a>
+        <a class="btn ghost contact-btn" id="cGithub" href="#" rel="noopener" style="--bc:#24292e" title="Opens in a new tab" data-i18n-title="tipNewTab"><span class="c-ic"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></span>GitHub</a>
+        <a class="btn ghost contact-btn" id="cTg" href="#" rel="noopener" style="--bc:#229ED9" title="Opens in Telegram" data-i18n-title="tipTg"><span class="c-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg></span>Telegram</a>
+        <a class="btn ghost contact-btn" id="cDiscord" href="#" style="--bc:#5865F2" title="Opens in Discord, the nickname will be copied to the clipboard" data-i18n-title="tipDiscord"><span class="c-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg></span><span id="cDiscordLabel">Discord</span></a>
+        <a class="btn ghost contact-btn" id="cMail" href="#" style="--bc:#EA4335" title="The address will be copied to the clipboard; mail will open if configured" data-i18n-title="tipMail"><span class="c-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span><span id="cMailLabel">Email</span></a>
       </div>
     </div>
   </section>
@@ -665,148 +594,151 @@ while (cond) {
 </div>
 
 <script>
-  /* ============ i18n: RU lives in the markup (default), EN in the dictionary below.
-     The original (RU) text is captured on load, so switching back and forth
-     restores it. The payment method is bound to the language: RU → USD/RUB/Robux. ============ */
-  var currentLang = 'ru';
+  /* ============ i18n: EN lives in the markup (default, crawler-visible), RU in
+     the dictionary below. English is always the served default; Russian is applied
+     only after a real human switches the language (persisted in localStorage),
+     never from navigator.languages — so bots and crawlers never see or index the
+     Russian text. ============ */
+  var currentLang = 'en';
   try {
     var savedLang = localStorage.getItem('lang');
-    if (savedLang === 'en' || savedLang === 'ru') {
-      currentLang = savedLang;
-    } else {
-      var hasRu = false;
-      if (navigator.languages) {
-        for (var li = 0; li < navigator.languages.length; li++) {
-          if ((navigator.languages[li] || '').toLowerCase().indexOf('ru') === 0) { hasRu = true; break; }
-        }
-      }
-      currentLang = hasRu ? 'ru' : 'en';
-    }
-  } catch (e) { currentLang = 'ru'; }
+    if (savedLang === 'ru') currentLang = 'ru';
+  } catch (e) { currentLang = 'en'; }
 
-  var EN = {
-    brand: '<i></i>Roblox Developer',
-    navAbout: 'About', navProjects: 'Projects', navTerms: 'How we work', navContact: 'Contact',
-    themeDark: 'Dark', themeLight: 'Light',
-    docTitle: 'Roblox Developer',
-    hello: 'Hi there 👋',
-    h1: 'I design and ship production-grade game systems for Roblox — regardless of genre or project scale.',
-    lead: 'I break any mechanic down into data models, event flows and failure points — and arrive at a working solution, even for a system I have never built before. Think: currency dupes, cross-server desync, data loss on crashes, lag under load. The language (TypeScript, Luau) and specific tools are chosen per task; the stack is in the project descriptions.',
-    avail: 'open to projects',
-    ctaBold: 'I will take on anything — from greenfield architecture to fixing production runtime',
-    ctaSmall: 'Text only — task discussion, status updates, questions, feedback — no calls or voice chats. I reply fast and never disappear.',
-    ctaBtn: 'Contact me',
-    kickerAbout: 'A quick intro',
-    h2About: 'Who I am and why you can trust me with a task',
-    story1: 'The patterns I actually use: separating server and client state (server as the single source of truth), broadcaster-based sync instead of polling, optimistic and pessimistic UI updates, BigNum math beyond float precision, virtualization of heavy lists, object pooling, throttled autosave, cancellation patterns for async operations, rate limiting and server-side anti-cheat. This is not a checklist of buzzwords — every item appeared because I genuinely tripped over it in production and figured out the right way to do it (detailed breakdown in the <a href="#project">projects</a>).',
-    story2: 'I can explain any solution from my projects down to the code level: why Reflex instead of a hand-rolled store; why action spam is silently rejected rather than kicked; where the economy’s failure point is and how it is protected. Ask me about architecture, networking or performance — you will get specifics, not generalities.',
-    skill1: '<b>Greenfield architecture.</b> Designing a system — economy, data, networking — for a specific game and its scale, and taking it to a working production state.',
-    skill2: '<b>Production runtime fixes.</b> A live project acting strangely under load or for some players: data races, connection drops, duplication, action spam.',
-    skill3: '<b>Profiling and performance.</b> The game lags — I find the real bottleneck instead of guessing.',
-    skill4: '<b>Tests on critical paths.</b> Runtime simulation — mocks and polyfills for edge cases; full coverage on request.',
-    skill5: '<b>Legacy code.</b> Comfortable digging through someone else’s or old code with no documentation, and fixing it without breaking what is around.',
-    skill6: '<b>Fast MVPs.</b> A working prototype of a mechanic to validate a hypothesis — without over-engineering.',
-    skill7: '<b>Live project work.</b> Careful changes in a running project, where an experiment must not break everything.',
-    skill8: '<b>UI / UX.</b> Responsive (mobile / desktop / gamepad), render performance, reactive store bindings — building finished UI from a reference and wiring it to logic.',
-    skill9: '<b>Economy and anti-cheat.</b> Server-side validation, protection against duping, spam and exploits — player money must not leak.',
-    noteAbout: 'On timelines — I can give a rough estimate up front if you need to understand the schedule before starting.',
-    kickerProjects: 'Projects',
-    tabOwn: 'My projects', tabHired: 'Client projects',
-    thumbTitle: 'Open Infinity Clicker on Roblox',
-    statOnline: 'playing', statVisits: 'visits',
-    statUpdated: '',
-    projTitle: 'Clicker',
-    projDescShort: 'A production idle game: economy, combat, cross-server sync — under the hood of a simple click.',
-    devCallout: '<b>🛠 The game ships with a live DEV panel</b> — every mechanic can be tested in-game: gold, shards, crystals and fragments grants; maxed heroes, upgrades, shard perks and skills; artifacts; resonance; sages and instant completion of all missions; zone teleports. Open the <b>DEV</b> tab in the game menu and try it all yourself.',
-    sumArch: 'Architecture and technical design',
-    projDesc1: 'Clicker is a production idle game where players level up heroes, fight monsters and go through Ascension for shards that unlock new upgrades. Complete layer separation — the client is never authoritative, the server recalculates everything itself. Two independent stores (Reflex), Broadcaster synchronization, BigNum math for numbers beyond e15, virtualized hero card lists, object pooling (damage numbers, loot, sounds, click VFX), offline progress between sessions and UI localization. Heavy calculations (“buy max” across hundreds of levels) are computed with a closed-form geometric series sum in O(log N) with a bounded cache — no level iteration and no risk of stalling a frame. MemoryStore and MessagingService power the cross-server clan leaderboard and a single clan boss (shared HP across all servers); Discord alerts go through a custom Cloudflare worker.',
-    projDesc2: 'Architecturally: SSoT on the server, an immutable client store (Reflex), services and controllers through Flamework instead of hand-rolled singletons — event-driven, not polling every frame; async work through coroutines and event APIs, Promises used sparingly (ProfileStore and single-result network operations).',
-    statFiles: '<span class="num">200+</span> files · <span class="num">15+</span> game mechanics — the entire journey solo: from architecture to production.',
-    sumRuntime: 'Runtime problems I solved (14 cases)',
-    descNoCode: 'No code here — the essence of the problem and the direction of the fix. Code and details on request: I will show and explain it in plain terms.',
-    pb1p: 'A purchase can be re-confirmed by Roblox — risk of granting the reward twice.',
-    pb1s: 'Every purchase is remembered by id; a repeated confirmation does not grant the reward again.',
-    pb2p: 'A shared cross-server boss: several servers hit the same state simultaneously.',
-    pb2s: 'Damage is applied through an atomic update of the shared state, not separate copies per server.',
-    pb3p: 'A player leaves and immediately rejoins while data is still loading — risk of two processes on one profile.',
-    pb3s: 'Rejoining waits for the previous operation to finish instead of running in parallel.',
-    pb4p: 'A server can crash in the middle of a currency operation — risk of lost progress or duplication.',
-    pb4s: 'On shutdown the server waits for active saves to finish instead of cutting off instantly.',
-    pb5p: 'A double click or spamming one action — risk of running the operation multiple times.',
-    pb5s: 'Until the operation completes, a repeated identical request from the player does not start a new one.',
-    pb6p: 'The client cannot be trusted with price/balance — data can be tampered with when sending a request.',
-    pb6s: 'Only the action itself is accepted from the client; all numbers are recalculated on the server.',
-    pb7p: 'Clicks must feel instant, but the economy cannot tolerate desync between tabs/devices.',
-    pb7s: 'Clicks apply instantly on the client (optimistically); purchases only after server confirmation — the button is locked until a response.',
-    pb8p: 'Currency in an idle game quickly exceeds normal number precision (e15 and beyond) — rounding and bugs begin.',
-    pb8s: 'All game numbers are strings in a BigNum format with their own math engine, not built-in numbers.',
-    pb9p: 'A list of hundreds of hero cards in the UI lagged the game — all of them rendered at once.',
-    pb9s: 'Virtualization: only visible cards live in memory; the rest are not created until needed.',
-    pb10p: '“Buy max” iterates over hundreds of levels and can stall a frame mid-click.',
-    pb10s: 'Iteration replaced with a closed-form geometric series sum — O(log N) BigNum operations instead of hundreds of iterations, plus a hard-limited cache (FIFO). We do not rely on the frame budget absorbing the calculation — it simply cannot stall a frame in principle.',
-    pb11p: 'Naive timeout handling when loading a player profile leaked the session — the profile stayed locked.',
-    pb11s: 'Loading is cancelled with an explicit flag, not a promise race — the profile is released correctly in every scenario.',
-    pb12p: 'Needed to tell a cheater with an autoclicker apart from a player with fast reactions, without punishing honest players.',
-    pb12s: 'Action rate limits with headroom for measurement noise and a silent rejection instead of a kick — no false bans.',
-    pb13p: 'Transferring paid crystals between players across servers — a lost confirmation or redelivery can duplicate the balance.',
-    pb13s: 'An external operations ledger as the single commit marker: debit and credit are applied against it exactly once, not on client confirmations.',
-    pb14p: 'Corrupted player data could silently zero out Robux-bought crystals along with purchase history.',
-    pb14s: 'An independent ledger of purchase receipts: if a profile is corrupted, the donation balance, history and status are restored, not lost.',
-    tailDesc: 'One broken mechanic should not take down the whole game — places where money or player data are at stake are explicitly tested against failures; the rest is straightforward development without over-complication.',
-    sumUi: 'UI/UX — engineering decisions (5 cases)',
-    uiIntro: 'The entire UI is written from scratch, without third-party UI kits: components reactively subscribe to a shared store and re-render only when the specific data they need changes. Below are the decisions that performance and usability demanded.',
-    uiStat: '<span class="num">50+</span> UI components · <span class="num">20+</span> game-logic hooks · responsive for mobile, desktop and gamepad.',
-    ui1p: 'The HP bar renders every frame, the boss timer counter once a second. Driving that through React state means a subtree re-render on every tick, when only one element’s width and a piece of text change.',
-    ui1s: 'Elements keep refs and values are written directly outside React: the HP bar on Heartbeat, the timer with a 0.25s tick. Before writing, the tick compares the new value with the previous one and skips unchanged ticks. The HP bar additionally extrapolates damage between store ticks by DPS — the bar melts smoothly instead of jumping.',
-    ui2p: 'A component subscribing to the entire state — the UI re-renders on any change in the game.',
-    ui2s: 'Each component subscribes to a specific value, and composite data (hero stats, purchase cost) is memoized and recomputed only when its inputs change.',
-    ui3p: 'One UI layout for mobile and desktop: on phones panels cover the game, on PC there are empty edges.',
-    ui3s: 'Different interface trees for mobile and desktop modes, and size-dependent modals only mount after the engine reports the real screen size and topbar inset — otherwise they open with broken geometry.',
-    ui4p: 'Scrolling lists with item borders: the first card hits the clipping boundary and its border is cut; the scrollbar eats width.',
-    ui4s: 'Window and canvas geometry of a scroll are explicitly separated: each scroll has a single inset owner, both states (with and without the scrollbar) are checked, and edge elements get a stroke-safe inset.',
-    ui5p: 'Tooltips inside cards get clipped by list and virtualization bounds — the card disappears, the tooltip with it.',
-    ui5s: 'Tooltips render through a portal above the whole UI, anchored to the card’s real on-screen position, not its place in the list.',
-    sumDeep: 'Deeper: code and defensive patterns',
-    deepDesc: 'Concrete defensive solutions from the code. Under the spoilers — a simplified illustration of the principle, not the production code.',
-    dd1t: 'A single Discord webhook queue',
-    dd1p: 'All alerts (donation operations, DataStore errors, bug reports) go through one WebhookService with a priority queue (donations before datastore and bugs) and batches to respect Discord limits — instead of scattered send points. Production is visible in real time without digging through logs.',
-    dd2t: 'A contract for sync arguments',
-    dd2p: 'Every action broadcast between client and server is checked against a strict schema: if an argument’s type does not match what is expected, the action is rejected entirely rather than executed with shifted values. It is also verified that an action applies only to the player it belongs to — it cannot land on someone else’s client.',
-    dd3t: 'A deterministic zone monster',
-    dd3p: 'The monster generator is based on a seed from the zone: the same server after a restart always produces the same monster, with no need to store its model in player data.',
-    dd4t: 'Waiting for the save to finish, not the leave event',
-    dd4p: 'The “player left” event in Roblox can fire before the profile save actually completes. The logic waits for the save to finish, not the leave itself — otherwise a new session could start on top of an unsaved old one.',
-    dd5t: 'Committing the reward at the end of the action chain',
-    dd5p: 'The kill reward is applied only after the next step has successfully started (for example, the next monster has spawned). If anything fails along the way — no reward is granted, and a repeated client packet cannot double the reward.',
-    dd6t: 'Guarding BigNum against stalling on anomalous data',
-    dd6p: 'Internal big-number normalization loops are iteration-bounded with an explicit warning rather than left unbounded — otherwise, in a rare edge case, they could cause a hang instead of just a wrong result.',
-    hiredEmpty: 'Client projects I have worked on will appear here — I will add them as soon as there is something to show.',
-    kickerTerms: 'Terms',
-    h2Terms: 'How to work with me most conveniently',
-    t1: 'I work through tickets: a task description in any tracker (or just a list) — done, reported.',
-    t2: 'Happy to do a paid test task.',
-    t3: 'I can show code examples, architecture and walk through the logic of my decisions in detail.',
-    t4: 'Payment: USD/Robux. Other options discussed individually.',
-    t5: 'Async schedule: I work without fixed hours during the day, focused on task deadlines.',
-    t6: 'Revenue share only (a percentage of future profit). A share of project income is discussed individually only as a bonus on top of the base payment.',
-    kickerContact: 'Contact',
-    h2Contact: 'Got a task, a test task or just a question?',
-    contactBold: 'Open to tasks and teams',
-    tipNewTab: 'Opens in a new tab',
-    tipTg: 'Opens in Telegram',
-    tipDiscord: 'Opens in Discord, the nickname will be copied to the clipboard',
-    tipMail: 'The address will be copied to the clipboard; mail will open if configured',
-    pre1: 'webhookService.reportDataStore("save", "player X", "failed"); // datastore channel\nwebhookService.notify(channel, { title, description, color });        // single queue',
-    pre2: 'const contract = { amount: "number" };\nif (typeof(actual) !== contract.amount) return; // rejected outright\nif (owner !== player) return;                    // foreign data never passes on',
-    pre3: 'const seed = stableHash(zone);\nconst rng = new SeededRandom(seed); // same monster for the same input',
-    pre4: '// Before releasing the profile, always force-sync the data from the store,\n// then wait for the actual completion of the write — not the “left” event;\n// the event can arrive before the save has actually persisted.\nprofile.Data = MainStore.getState().players[userId]!; // force-sync: data from the store\nreleaseAndAwait(); // waited for the write to complete, not the “left” event',
-    pre5: 'const ok = spawnNextMonster(); // the next step first\nif (!ok) return;                // error — no commit, a client retry cannot double it\ngrantReward();                  // the reward only when everything above succeeded',
-    pre6: 'let guard = 0;\nwhile (cond) {\n  ...\n  guard++;\n  if (guard > 3) { warn("anomalous input"); break; }\n}',
-    pTag: 'problem', sTag: 'solution', ynOk: 'yes', ynNo: 'no', illLabel: 'Illustration',
-    copyNick: 'Nickname copied', copied: 'Copied!'
+  var RU = {
+    "brand": "<i></i>Roblox-разработчик",
+    "navAbout": "Обо мне",
+    "navProjects": "Проекты",
+    "navTerms": "Как работаем",
+    "navContact": "Связь",
+    "themeDark": "Тёмная",
+    "themeLight": "Светлая",
+    "docTitle": "Roblox-разработчик",
+    "hello": "Привет 👋",
+    "h1": "Проектирую и довожу до продакшна игровые системы для Roblox — независимо от жанра и масштаба проекта.",
+    "lead": "\n      Разбираю любую механику на модели данных, потоки событий и точки отказа — и прихожу к рабочему\n      решению, даже если раньше не делал именно такую систему. Например: дубликаты валюты, рассинхрон\n      между серверами, потеря данных при падении, лаг под нагрузкой. Язык (TypeScript, Luau) и\n      конкретные инструменты — выбираю под задачу, стек — в описании проектов.\n    ",
+    "avail": "открыт к проектам",
+    "ctaBold": "Готов взять что угодно — от архитектуры с нуля до починки прод-рантайма",
+    "ctaSmall": "Только текст — обсуждение задачи, статус, вопросы, фидбэк — без созвонов и войсов. Отвечаю быстро, без пропаданий.",
+    "ctaBtn": "Связаться",
+    "kickerAbout": "Коротко обо мне",
+    "h2About": "Кто я и почему мне можно доверить задачу",
+    "story1": "\n      Паттерны, которыми пользуюсь на практике: разделение серверного и клиентского состояния\n      (сервер — источник истины), синхронизация через broadcaster вместо поллинга, оптимистичные\n      и пессимистичные обновления UI, BigNum-математика для чисел за пределами точности обычного\n      числа, виртуализация тяжёлых списков, object pooling, троттлинг автосохранения,\n      cancellation-паттерны для асинхронных операций, rate limiting и серверная защита от чита.\n      Это не список терминов для галочки — каждый пункт появился, потому что я реально об него\n      споткнулся на проде и разобрался, как делать правильно (подробный разбор — в <a href=\"#project\">проектах</a>\n      ).\n    ",
+    "story2": "\n      Любое решение из проектов могу объяснить до уровня кода: почему Reflex, а не самописный стор;\n      почему спам действий гасится тихим отказом, а не киком; где в экономике точка отказа и чем\n      она закрыта. Вопрос по архитектуре, сети или перформансу — отвечу конкретикой, а не общими словами.\n    ",
+    "skill1": "<b>Архитектура с нуля.</b> Спроектировать систему — экономику, данные, сеть — под конкретную игру и её масштаб, и довести до рабочего продакшн-состояния.",
+    "skill2": "<b>Починка прод-рантайма.</b> Живой проект ведёт себя странно под нагрузкой или у части игроков: гонки данных, обрывы соединения, дублирование, спам действий.",
+    "skill3": "<b>Профилирование и перформанс.</b> Игра тормозит — нахожу реальное узкое место, а не гадаю.",
+    "skill4": "<b>Тесты на критических путях.</b> Имитация рантайма — моки и полифилы на эдж-кейсах; по запросу — полное покрытие.",
+    "skill5": "<b>Легаси-код.</b> Спокойно разбираюсь в чужом или старом коде без документации и чиню, не ломая рядом лежащее.",
+    "skill6": "<b>Быстрые MVP.</b> Рабочий прототип механики под проверку гипотезы — без переинжиниринга.",
+    "skill7": "<b>Работа с живым проектом.</b> Аккуратно, там, где нельзя всё сломать экспериментом.",
+    "skill8": "<b>UI / UX.</b> Адаптив (мобилка / десктоп / геймпад), производительность рендера, реактивная связь со стором — создание готовых UI по референсу и связка с логикой.",
+    "skill9": "<b>Экономика и анти-чит.</b> Серверная валидация, защита от дублирования, спама и накрутки — деньги игрока не должны утекать.",
+    "noteAbout": "По срокам — могу дать примерную оценку заранее, если нужно понимать таймлайн до старта.",
+    "kickerProjects": "Проекты",
+    "tabOwn": "Мои проекты",
+    "tabHired": "Проекты клиентов",
+    "thumbTitle": "Открыть Infinity Clicker в Roblox",
+    "statOnline": "онлайн",
+    "statVisits": "визитов",
+    "statUpdated": "обновлено",
+    "projTitle": "Clicker",
+    "projDescShort": "Продакшн idle-игра: экономика, бои, кросс-серверная синхронизация — под капотом простого клика.",
+    "devCallout": "\n          <b>🛠 В игре открыта DEV-панель</b> — все механики можно протестировать вживую: выдача золота,\n          шардов, кристаллов и фрагментов; макс прокачка героев, апгрейдов, шардовых перков и скиллов;\n          артефакты; резонанс; мудрецы и мгновенное завершение всех миссий; телепорт по зонам.\n          Вкладка <b>DEV</b> в игровом меню — попробуйте всё сами.\n        ",
+    "sumArch": "Архитектура и техническое устройство",
+    "projDesc1": "\n              Clicker — продакшн idle-игра, где игрок качает героев, бьёт монстров и проходит Ascension\n              за осколки, открывающие новые апгрейды. Полное разделение слоёв — клиент никогда\n              не авторитетен, сервер пересчитывает всё сам. Два независимых стора (Reflex),\n              Broadcaster-синхронизация, BigNum-математика под числа за пределами e15, виртуализация\n              списков карточек героев, object pooling (числа урона и лута, звуки, клик-VFX),\n              офлайн-прогресс между сессиями и локализация интерфейса. Тяжёлые расчёты («купить максимум»\n              на сотни уровней) считаются закрытой формулой суммы геометрической прогрессии за O(log N)\n              с ограниченным кэшем — без перебора уровней и без риска подвесить кадр.\n              MemoryStore и MessagingService — под кросс-серверный\n              рейтинг кланов и единого кланового босса (общее HP на все сервера); Discord-алерты\n              идут через собственный Cloudflare-воркер.\n            ",
+    "projDesc2": "\n              Архитектурно — SSoT на сервере, иммутабельный стор на клиенте (Reflex), сервисы и контроллеры\n              через Flamework вместо самодельных синглтонов — событийно, а не поллингом каждый кадр;\n              асинхронная работа — через корутины и событийный API, Promise — точечно (ProfileStore\n              и сетевые операции с одним результатом).\n            ",
+    "statFiles": "<span class=\"num\">200+</span> файлов · <span class=\"num\">15+</span> игровых механик — весь путь соло: от архитектуры до продакшна.",
+    "sumRuntime": "Проблемы рантайма, которые решал (14 кейсов)",
+    "descNoCode": "Без кода — суть проблемы и в какую сторону решено. Код и детали — по запросу, покажу и объясню на пальцах.",
+    "pb1p": "Оплата может подтвердиться Roblox-ом повторно — риск выдать награду дважды.",
+    "pb1s": "Каждая оплата запоминается по id; повторное подтверждение не выдаёт награду заново.",
+    "pb2p": "Общий межсерверный босс: несколько серверов бьют одно состояние одновременно.",
+    "pb2s": "Урон применяется через атомарное обновление общего состояния, а не через отдельные копии на каждом сервере.",
+    "pb3p": "Игрок выходит и тут же заходит снова, пока данные ещё загружаются — риск получить два процесса на один профиль.",
+    "pb3s": "Повторный вход ждёт завершения предыдущей операции вместо запуска параллельно.",
+    "pb4p": "Сервер может упасть в середине операции с валютой — риск потери прогресса или дублирования.",
+    "pb4s": "При остановке сервер дожидается завершения активных сохранений, а не отключается мгновенно.",
+    "pb5p": "Дабл-клик или спам одного действия — риск провести операцию несколько раз.",
+    "pb5s": "Пока операция не завершена, повторный такой же запрос игрока не запускает новую.",
+    "pb6p": "Клиенту нельзя доверять цену/баланс — можно подменить данные при отправке запроса.",
+    "pb6s": "От клиента принимается только само действие, все цифры пересчитываются на сервере заново.",
+    "pb7p": "Клик должен ощущаться мгновенным, но экономика не терпит рассинхрона между вкладками/устройствами.",
+    "pb7s": "Клик применяется мгновенно на клиенте (оптимистично), а покупки — только после подтверждения сервера, кнопка блокируется до ответа.",
+    "pb8p": "Валюта в idle-игре легко уходит за пределы точности обычного числа (e15 и выше) — начинаются округления и баги.",
+    "pb8s": "Все игровые числа — строки в BigNum-формате со своим движком математики, а не встроенные числа.",
+    "pb9p": "Список из сотен карточек героев в интерфейсе тормозил игру — рендерились все сразу.",
+    "pb9s": "Виртуализация: в памяти живут только видимые карточки, остальные не создаются, пока не понадобятся.",
+    "pb10p": "Расчёт «купить максимум» перебирает сотни уровней и может подвесить кадр на середине клика.",
+    "pb10s": "Перебор заменён закрытой формулой суммы геометрической прогрессии — O(log N) BigNum-операций вместо сотен итераций, плюс кэш с жёстким лимитом (FIFO). Кадр не «укладывается в бюджет» — расчёт просто не может его подвесить в принципе.",
+    "pb11p": "Наивная обработка таймаута при загрузке профиля игрока приводила к «утечке» сессии — профиль оставался занят.",
+    "pb11s": "Загрузка отменяется явным флагом, а не гонкой промисов — профиль корректно освобождается в любом сценарии.",
+    "pb12p": "Нужно было отличать читера с автокликером от игрока с быстрой реакцией, не браня честных игроков.",
+    "pb12s": "Лимит скорости действий с запасом на погрешность и «тихий» отказ вместо кика — без ложных банов.",
+    "pb13p": "Передача платных кристаллов между игроками через несколько серверов — потеря подтверждения или повторная доставка могут задвоить баланс.",
+    "pb13s": "Внешний журнал операций как единственный маркер коммита: списание и начисление применяются по нему один раз, а не по клиентским подтверждениям.",
+    "pb14p": "Повреждение данных игрока могло молча обнулить купленные за Robux кристаллы вместе с историей покупок.",
+    "pb14s": "Независимый ledger чеков покупок: при повреждении профиля донатный баланс, история и статус восстанавливаются, а не теряются.",
+    "tailDesc": "\n              Падение одной механики не должно ронять всю игру — места, где на кону деньги или данные\n              игрока, я отдельно проверяю на отказ, остальное — обычная разработка без переусложнения.\n            ",
+    "sumUi": "UI/UX — инженерные решения (5 кейсов)",
+    "uiIntro": "\n              Весь UI написан с нуля, без сторонних UI-тулкитов: компоненты реактивно подписаны на\n              общий стор и перерисовываются только при изменении конкретных данных, которые им нужны.\n              Ниже — решения, которых потребовала производительность и удобство.\n            ",
+    "uiStat": "<span class=\"num\">50+</span> UI-компонентов · <span class=\"num\">20+</span> хуков игровой логики · адаптив под мобилку, десктоп и геймпад.",
+    "ui1p": "HP-бар рисуется каждый кадр, счётчик босс-таймера — раз в секунду. Гнать это через React-состояние — ре-рендер поддерева на каждый тик, хотя менять нужно только ширину одного элемента и текст.",
+    "ui1s": "Элементы держат ref, и значение пишется напрямую вне React: HP-бар — на Heartbeat, таймер — с тиком раз в 0.25 с. Перед записью тик сравнивает новое значение с прошлым и пропускает неизменённые тики. HP-бар дополнительно экстраполирует урон между тиками стора по DPS — полоска тает плавно, а не скачками.",
+    "ui2p": "Подписка компонента на весь стейт — интерфейс перерисовывается при любом изменении в игре.",
+    "ui2s": "Каждый компонент подписан на конкретное значение, а составные данные (статы героев, стоимость покупки) мемоизированы и пересчитываются только когда меняются их входы.",
+    "ui3p": "Один шаблон UI на мобилку и десктоп: на телефоне панели перекрывают игру, на ПК — пустые края.",
+    "ui3s": "Разные деревья интерфейса для мобильного и десктопного режима, а размерозависимые модалки монтируются только после того, как движок отдал реальные размеры экрана и врезку топбара — иначе они открываются с кривой геометрией.",
+    "ui4p": "Скроллящиеся списки с рамками у элементов: первая карточка упирается в границу обрезки и рамка режется, полоса прокрутки съедает ширину.",
+    "ui4s": "Геометрия окна и канвы скролла разведена явно: у каждого скролла один владелец отступов, проверяются оба состояния (с полосой и без), у крайних элементов — безопасный врез под рамку.",
+    "ui5p": "Тултипы внутри карточек обрезаются границами списков и виртуализацией — карточка исчезла, тултип с ней.",
+    "ui5s": "Тултипы рендерятся через портал поверх всего интерфейса, привязаны к реальному положению карточки на экране, а не к её месту в списке.",
+    "sumDeep": "Глубже: код и защитные паттерны",
+    "deepDesc": "Конкретные защитные решения из кода. Под спойлером — упрощённая иллюстрация принципа, а не боевой код из прода.",
+    "dd1t": "Единая очередь вебхуков в Discord",
+    "dd1p": "\n                Все алерты (донат-операции, ошибки DataStore, баг-репорты) идут через один WebhookService\n                с приоритетной очередью (донат раньше datastore и bugs) и пачками под лимит Discord —\n                вместо разрозненных точек отправки. Прод видно в реальном времени, не роясь в логах.\n              ",
+    "dd2t": "Контракт на аргументы синхронизации",
+    "dd2p": "\n                Каждое действие, которое рассылается между клиентом и сервером, сверяется со строгой схемой:\n                если тип аргумента не совпал с ожидаемым — действие отклоняется целиком, а не выполняется\n                со сдвинутыми значениями. Отдельно проверяется, что действие применяется только тому игроку,\n                которому принадлежит — не может прилететь чужому клиенту.\n              ",
+    "dd3t": "Детерминированный монстр зоны",
+    "dd3p": "\n                Генератор монстра на основе seed от зоны: один и тот же сервер после рестарта всегда выдаёт\n                одного и того же монстра, без необходимости хранить его модель в данных игрока.\n              ",
+    "dd4t": "Ожидание финального сохранения, а не события выхода",
+    "dd4p": "\n                Событие «игрок вышел» в Roblox может сработать раньше, чем реально завершится сохранение\n                профиля. Логика ждёт именно завершения сохранения, а не сам факт выхода — иначе можно\n                начать новую сессию поверх ещё не сохранённой старой.\n              ",
+    "dd5t": "Коммит награды в конце цепочки действий",
+    "dd5p": "\n                Награда за убийство применяется только после того, как успешно запущен следующий шаг\n                (например, заспавнен следующий монстр). Если по пути произошла ошибка — начисление\n                не происходит, и повторный пакет от клиента не может задвоить награду.\n              ",
+    "dd6t": "Защита BigNum от зависания на аномальных данных",
+    "dd6p": "\n                Внутренние циклы нормализации больших чисел ограничены по количеству итераций с явным\n                предупреждением, а не оставлены открытыми — на редком крайнем случае это могло бы\n                привести к зависанию, а не просто к неверному результату.\n              ",
+    "hiredEmpty": "Проекты клиентов появятся здесь — добавлю, как только будет что показать.",
+    "kickerTerms": "Условия",
+    "h2Terms": "Как со мной удобнее работать",
+    "t1": "Работаю через таск-задачи: тикет с описанием в любом трекере (или просто список) — сделал, отчитался.",
+    "t2": "Готов выполнить оплачиваемое тестовое задание.",
+    "t3": "Могу показать примеры своего кода, архитектуру и подробно расписать логику решений.",
+    "t4": "Оплата: USD / Robux. Другие варианты обсуждаются индивидуально.",
+    "t5": "Асинхронный график: работаю без привязки к фиксированным часам в течение дня, ориентируюсь на дедлайны задач.",
+    "t6": "Чистый процент от будущей прибыли. Доля от доходов проекта обсуждается индивидуально только в качестве бонуса к основной оплате.",
+    "kickerContact": "Связь",
+    "h2Contact": "Есть задача, тестовое или просто вопрос?",
+    "contactBold": "Открыт к задачам и командам",
+    "tipNewTab": "Откроется в новой вкладке",
+    "tipTg": "Откроется в Telegram",
+    "tipDiscord": "Откроется в Discord, ник скопируется в буфер",
+    "tipMail": "Адрес скопируется в буфер, почта откроется если настроена",
+    "pre1": "webhookService.reportDataStore(\"сохранение\", \"игрок X\", \"не прошло\"); // канал datastore\nwebhookService.notify(channel, { title, description, color });        // единая очередь",
+    "pre2": "const contract = { amount: \"number\" };\nif (typeof(actual) !== contract.amount) return; // отклонено целиком\nif (owner !== player) return;                    // чужое не летит дальше",
+    "pre3": "const seed = stableHash(zone);\nconst rng = new SeededRandom(seed); // тот же монстр при том же входе",
+    "pre4": "// Перед освобождением профиля всегда форсируем синк данных из стора,\n// затем ждём именно факт завершения записи — а не событие «вышел»,\n// оно может прийти раньше фактического сохранения.\nprofile.Data = MainStore.getState().players[userId]!; // force-sync: данные из стора\nreleaseAndAwait(); // дождались факта записи, а не события «вышел»",
+    "pre5": "const ok = spawnNextMonster(); // сначала — следующий шаг\nif (!ok) return;                // ошибка — коммита нет, повтор клиента не задвоит\ngrantReward();                  // награда только когда всё выше сработало",
+    "pre6": "let guard = 0;\nwhile (cond) {\n  ...\n  guard++;\n  if (guard > 3) { warn(\"аномальный вход\"); break; }\n}",
+    "pTag": "проблема",
+    "sTag": "решение",
+    "ynOk": "ок",
+    "ynNo": "нет",
+    "illLabel": "Иллюстрация",
+    "copyNick": "Ник в буфере",
+    "copied": "Скопировано!"
   };
 
-  var ruDocTitle = document.title;
+  var enDocTitle = document.title;
 
   var i18n = (function () {
     var cache = [];
@@ -823,35 +755,42 @@ while (cond) {
         key: el.getAttribute('data-i18n') || el.getAttribute('data-i18n-html') || el.getAttribute('data-i18n-title'),
         isHtml: isHtml,
         isTitle: isTitle,
-        ruText: isTitle ? null : (isHtml ? el.innerHTML : el.textContent),
-        ruTitle: el.getAttribute('title')
+        enText: isTitle ? null : (isHtml ? el.innerHTML : el.textContent),
+        enTitle: el.getAttribute('title')
       });
     }
-    var apply = function (lang) {
+    var apply = function (lang, persist) {
       for (var i = 0; i < cache.length; i++) {
         var c = cache[i];
-        var en = c.key ? EN[c.key] : undefined;
+        var ru = c.key ? RU[c.key] : undefined;
+        var isRu = (lang === 'ru' && ru !== undefined);
         if (c.isTitle) {
-          c.el.setAttribute('title', (lang === 'en' && en !== undefined) ? en : c.ruTitle);
+          c.el.setAttribute('title', isRu ? ru : c.enTitle);
           continue;
         }
-        // An empty dictionary value hides the node: in EN the "Updated ..." prefix is
-        // already part of the date string, and an empty span would add a stray gap.
-        if (lang === 'en' && en === '') {
+        // An empty value for the active language hides the node: in EN the
+        // "Updated ..." prefix is already part of the date string, and an empty
+        // span would add a stray gap.
+        var text = isRu ? ru : c.enText;
+        if (text === '') {
           c.el.style.display = 'none';
           continue;
         }
         c.el.style.display = '';
-        if (lang === 'en' && en !== undefined) {
-          if (c.isHtml || en.indexOf('<') === 0) c.el.innerHTML = en; else c.el.textContent = en;
+        if (isRu) {
+          if (c.isHtml || ru.indexOf('<') === 0) c.el.innerHTML = ru; else c.el.textContent = ru;
         } else {
-          if (c.isHtml) c.el.innerHTML = c.ruText; else c.el.textContent = c.ruText;
+          if (c.isHtml) c.el.innerHTML = c.enText; else c.el.textContent = c.enText;
         }
       }
       document.documentElement.lang = lang;
-      document.title = (lang === 'en') ? EN.docTitle : ruDocTitle;
+      document.title = (lang === 'ru') ? RU.docTitle : enDocTitle;
       currentLang = lang;
-      try { localStorage.setItem('lang', lang); } catch (e) { /* private browsing mode */ }
+      // Persist only an explicit human choice, so the default English page is
+      // never pinned by an automated visit.
+      if (persist) {
+        try { localStorage.setItem('lang', lang); } catch (e) { /* private browsing mode */ }
+      }
       var btns = document.querySelectorAll('#langSwitch button');
       for (var j = 0; j < btns.length; j++) btns[j].classList.toggle('active', btns[j].getAttribute('data-lang') === lang);
       for (var l = 0; l < listeners.length; l++) listeners[l](lang);
@@ -860,7 +799,7 @@ while (cond) {
       apply: apply,
       onChange: function (fn) { listeners.push(fn); },
       lang: function () { return currentLang; },
-      t: function (key) { return (currentLang === 'en' && EN[key] !== undefined) ? EN[key] : null; }
+      t: function (key) { return (currentLang === 'ru' && RU[key] !== undefined) ? RU[key] : null; }
     };
   })();
 
@@ -869,9 +808,9 @@ while (cond) {
     sw.addEventListener('click', function (e) {
       var btn = e.target.closest('button');
       if (!btn) return;
-      i18n.apply(btn.getAttribute('data-lang'));
+      i18n.apply(btn.getAttribute('data-lang'), true);
     });
-    i18n.apply(currentLang);
+    i18n.apply(currentLang, false);
   })();
 
   (function () {
@@ -1013,7 +952,7 @@ while (cond) {
     dcEl.addEventListener('click', function () {
       var label = document.getElementById('cDiscordLabel');
       copyToClipboard(dcUser,
-        function () { showLabel(label, i18n.t('copyNick') || 'Ник в буфере', 'Discord', 1600); },
+        function () { showLabel(label, i18n.t('copyNick') || 'Nickname copied', 'Discord', 1600); },
         function () { showLabel(label, dcUser, 'Discord', 4000); }
       );
     });
@@ -1027,7 +966,7 @@ while (cond) {
     mailEl.addEventListener('click', function () {
       var label = document.getElementById('cMailLabel');
       copyToClipboard(mail,
-        function () { showLabel(label, i18n.t('copied') || 'Скопировано!', 'Email', 1600); },
+        function () { showLabel(label, i18n.t('copied') || 'Copied!', 'Email', 1600); },
         function () { showLabel(label, mail, 'Email', 4000); }
       );
     });
