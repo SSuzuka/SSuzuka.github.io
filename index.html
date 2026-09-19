@@ -122,6 +122,14 @@
     .rbx-stat .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border-2); flex-shrink: 0; }
     .rbx-stat .dot.live-on { background: var(--ok); box-shadow: 0 0 8px color-mix(in srgb, var(--ok) 70%, transparent); }
     .desc-short { color: var(--text); font-size: .95rem; max-width: 640px; margin-bottom: 10px; }
+    .dev-callout {
+      margin: 4px 0 16px; padding: 11px 15px; max-width: 640px;
+      border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--border));
+      background: color-mix(in srgb, var(--accent) 10%, var(--card));
+      border-radius: var(--radius); font-size: .9rem;
+      transition: background-color .25s ease, border-color .25s ease;
+    }
+    .dev-callout b { color: var(--accent-2); }
     .proj-more { margin-bottom: 14px; }
     .proj-more summary { cursor: pointer; list-style: none; position: relative; padding-left: 22px; font-weight: 600; font-size: .88rem; color: var(--accent-2); }
     .proj-more summary::-webkit-details-marker { display: none; }
@@ -332,6 +340,13 @@
         </div>
         <h3 class="proj-title" data-i18n="projTitle">Clicker</h3>
         <p class="desc-short" data-i18n="projDescShort">Продакшн idle-игра: экономика, бои, кросс-серверная синхронизация — под капотом простого клика.</p>
+
+        <div class="dev-callout" data-i18n-html="devCallout">
+          <b>🛠 В игре открыта DEV-панель</b> — все механики можно протестировать вживую: выдача золота,
+          шардов, кристаллов и фрагментов; макс прокачка героев, апгрейдов, шардовых перков и скиллов;
+          артефакты; резонанс; мудрецы и мгновенное завершение всех миссий; телепорт по зонам.
+          Вкладка <b>DEV</b> в игровом меню — попробуйте всё сами.
+        </div>
 
         <details class="proj-more">
           <summary data-i18n="sumArch">Архитектура и техническое устройство</summary>
@@ -706,6 +721,7 @@ while (cond) {
     statUpdated: '',
     projTitle: 'Clicker',
     projDescShort: 'A production idle game: economy, combat, cross-server sync — under the hood of a simple click.',
+    devCallout: '<b>🛠 The game ships with a live DEV panel</b> — every mechanic can be tested in-game: gold, shards, crystals and fragments grants; maxed heroes, upgrades, shard perks and skills; artifacts; resonance; sages and instant completion of all missions; zone teleports. Open the <b>DEV</b> tab in the game menu and try it all yourself.',
     sumArch: 'Architecture and technical design',
     projDesc1: 'Clicker is a production idle game where players level up heroes, fight monsters and go through Ascension for shards that unlock new upgrades. Complete layer separation — the client is never authoritative, the server recalculates everything itself. Two independent stores (Reflex), Broadcaster synchronization, BigNum math for numbers beyond e15, virtualized hero card lists, object pooling (damage numbers, loot, sounds, click VFX), offline progress between sessions and UI localization. Heavy calculations (“buy max” across hundreds of levels) are computed with a closed-form geometric series sum in O(log N) with a bounded cache — no level iteration and no risk of stalling a frame. MemoryStore and MessagingService power the cross-server clan leaderboard and a single clan boss (shared HP across all servers); Discord alerts go through a custom Cloudflare worker.',
     projDesc2: 'Architecturally: SSoT on the server, an immutable client store (Reflex), services and controllers through Flamework instead of hand-rolled singletons — event-driven, not polling every frame; async work through coroutines and event APIs, Promises used sparingly (ProfileStore and single-result network operations).',
