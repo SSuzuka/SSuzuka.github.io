@@ -99,8 +99,6 @@
     .col-card.do li::before { content: "\2713"; color: var(--ok); }
     .col-card.dont h3 { color: var(--warn); }
     .col-card.dont li::before { content: "\2014"; color: var(--warn); }
-    .note { color: var(--muted); font-size: .87rem; margin-top: 16px; max-width: 660px; }
-    .note b { color: var(--text); }
 
     /* Project rail */
     .proj-rail { display: flex; gap: 14px; overflow-x: auto; padding: 4px 2px 16px; scroll-snap-type: x mandatory; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
@@ -209,24 +207,21 @@
     /* Contact popover */
     .contact-pop { position: fixed; inset: 0; z-index: 200; display: none; }
     .contact-pop.open { display: block; }
-    .contact-pop-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.58); backdrop-filter: blur(3px); }
+    .contact-pop-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.62); }
     .contact-pop-card {
       position: relative; max-width: 430px; margin: 10vh auto 0; background: var(--card);
       border: 1px solid var(--border-2); border-radius: 18px; padding: 22px 22px 20px;
-      box-shadow: 0 30px 80px rgba(0,0,0,.55); animation: popIn .22s ease both;
+      box-shadow: 0 24px 60px rgba(0,0,0,.5); animation: popIn .22s ease both;
     }
-    .contact-pop-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
-    .contact-pop-card h3 { font-family: "Unbounded", "Manrope", sans-serif; font-size: 1.05rem; font-weight: 700; }
-    .contact-pop-hint { color: var(--muted); font-size: .82rem; margin-bottom: 12px; }
-    .contact-pop-close { border: 1px solid var(--border); background: transparent; color: var(--muted); width: 30px; height: 30px; border-radius: 8px; cursor: pointer; font-size: 1rem; line-height: 1; flex-shrink: 0; transition: color .15s ease, border-color .15s ease; }
+    .contact-pop-hint { color: var(--muted); font-size: .82rem; margin-bottom: 12px; padding-right: 40px; }
+    .contact-pop-close { position: absolute; top: 14px; right: 14px; border: 1px solid var(--border); background: transparent; color: var(--muted); width: 30px; height: 30px; border-radius: 8px; cursor: pointer; font-size: 1rem; line-height: 1; transition: color .15s ease, border-color .15s ease; }
     .contact-pop-close:hover { color: var(--text); border-color: var(--border-2); }
-    .contact-pop-row { display: flex; align-items: center; gap: 12px; padding: 11px 13px; border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: var(--text); margin-top: 9px; transition: border-color .15s ease, transform .15s ease, background-color .15s ease; }
-    .contact-pop-row:hover { border-color: var(--bc, var(--accent-2)); transform: translateY(-1px); }
+    .contact-pop-row { display: flex; align-items: center; gap: 12px; padding: 11px 13px; border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: var(--text); margin-top: 9px; transition: border-color .15s ease, background-color .15s ease; }
+    .contact-pop-row:hover { border-color: var(--bc, var(--accent-2)); }
     .contact-pop-row .c-ic { width: 34px; height: 34px; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; background: var(--bc, var(--muted)); flex-shrink: 0; }
     .contact-pop-row .c-ic svg { width: 17px; height: 17px; fill: #fff; display: block; }
     .contact-pop-meta { display: flex; flex-direction: column; min-width: 0; }
     .contact-pop-meta b { font-size: .92rem; }
-    .contact-pop-meta small { color: var(--muted); font-size: .76rem; }
     .contact-pop-hinttag { margin-left: auto; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); border: 1px solid var(--border-2); border-radius: 999px; padding: 3px 9px; white-space: nowrap; }
     .contact-pop-row.copied { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 12%, transparent); }
     .contact-pop-row.copied .contact-pop-hinttag { color: var(--ok); border-color: var(--ok); }
@@ -327,7 +322,6 @@
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
       <button class="btn" type="button" data-hire data-i18n="btnHire">Hire me</button>
       <a class="btn ghost" href="#games" data-i18n="btnProjects">My projects</a>
-      <a class="btn ghost" id="heroLive" href="https://www.roblox.com/games/78926568468468/Infinity-Clicker" target="_blank" rel="noopener" data-i18n="btnLive">Live game</a>
     </div>
   </div>
 
@@ -358,7 +352,6 @@
         </ul>
       </div>
     </div>
-    <p class="note" data-i18n-html="doNote">This is not a weakness — it's a filter. <b>I'm a pure code machine:</b> you bring the vision, the art and the design doc, I turn them into a working product.</p>
   </section>
 
   <!-- LIVE GAMES -->
@@ -411,7 +404,7 @@
         <details class="proj-more">
           <summary data-i18n="sumArch">Architecture and technical design</summary>
           <div class="proj-more-body">
-            <p class="desc" data-i18n-html="clickerDesc1">Clicker is a production idle game where players level up heroes, fight monsters and go through Ascension for shards that unlock new upgrades. Complete layer separation — the client is never authoritative, the server recalculates everything itself. Two independent stores (Reflex), Broadcaster synchronization, BigNum math for numbers beyond e15, virtualized hero card lists, object pooling (damage numbers, loot, sounds, click VFX), offline progress between sessions and UI localization. Heavy calculations (“buy max” across hundreds of levels) are computed with a closed-form geometric series sum in O(log N) with a bounded cache — no level iteration and no risk of stalling a frame. MemoryStore and MessagingService power the cross-server clan leaderboard and a single clan boss (shared HP across all servers); Discord alerts go through a custom Cloudflare worker.</p>
+            <p class="desc" data-i18n-html="clickerDesc1">Clicker is a production idle game where players level up heroes, fight monsters and go through Ascension for shards that unlock new upgrades. Complete layer separation — the client is never authoritative, the server recalculates everything itself. Two independent stores (Reflex), Broadcaster synchronization, BigNum math for numbers beyond e15, virtualized hero card lists, object pooling (damage numbers, loot, sounds, click VFX), offline progress between sessions and UI localization. Heavy calculations (“buy max” across hundreds of levels) are computed with a closed-form geometric series sum in O(log N) with a bounded cache — no level-by-level iteration, so the cost does not grow with the number of levels. MemoryStore and MessagingService power the cross-server clan leaderboard and a single clan boss (shared HP across all servers); Discord alerts go through a custom Cloudflare worker.</p>
             <p class="desc" data-i18n="clickerDesc2">Architecturally: SSoT on the server, an immutable client store (Reflex), services and controllers through Flamework instead of hand-rolled singletons — event-driven, not polling every frame; async work through coroutines and event APIs, Promises used sparingly (ProfileStore and single-result network operations).</p>
           </div>
         </details>
@@ -453,7 +446,7 @@
         <details class="proj-more">
           <summary data-i18n="miningTechTitle">What is under the hood</summary>
           <div class="proj-more-body">
-            <p class="desc" data-i18n="miningTech1">The world is a deterministic generator (seed + coordinate) plus a sparse diff of player edits — nothing about the world is persisted, it lives in RAM and replicates as compact deltas. A custom greedy + incremental mesher works directly on a raw byte buffer, distance LOD stitches chunk seams against neighbor render representations, and block parts come from an object pool instead of being created and destroyed. Explosions are volumes, not per-block lists: a sphere descriptor travels as ~20 bytes and is rasterized with the exact same predicate on client and server. A metrics pipeline (counters, gauges, histograms) tracks frame budget, remesh queue and region counts for profiling.</p>
+            <p class="desc" data-i18n="miningTech1">The world is a deterministic generator (seed + coordinate) plus a sparse diff of player edits — nothing about the world is persisted, it lives in RAM and replicates as compact deltas. A custom greedy + incremental mesher works directly on a raw byte buffer, distance LOD stitches chunk seams against neighbor render representations, and block parts come from an object pool instead of being created and destroyed. Explosions are volumes, not per-block lists: a sphere descriptor travels as ~20 bytes and is rasterized with the exact same predicate on client and server. Performance is measured by a custom metrics layer shared by client and server: a single registry of counters, gauges, histograms and events with a named catalog, heavy scans deferred to a sampler that runs only on dump, and one-line snapshots built to be diffed between runs — counters as absolute + window delta, timings as p50/p95/max instead of a mean that hides spikes. The server dumps the registry and the client feeds an in-game diagnostics HUD.</p>
             <p class="desc" data-i18n="miningTech2">Architecturally the same discipline as the clicker: server-authoritative state, client sends intents only, Reflex stores for player data, Flamework for services and controllers, ProfileStore for persistence. The difference is the hot path — buffers, not objects.</p>
           </div>
         </details>
@@ -577,19 +570,19 @@
               <span class="p-tag" data-i18n="pTag">problem</span>
               <p class="p-text" data-i18n="pb10p">“Buy max” iterates over hundreds of levels and can stall a frame mid-click.</p>
               <span class="s-tag" data-i18n="sTag">solution</span>
-              <p data-i18n="pb10s">Iteration replaced with a closed-form geometric series sum — O(log N) BigNum operations instead of hundreds of iterations, plus a hard-limited cache (FIFO). We do not rely on the frame budget absorbing the calculation — it simply cannot stall a frame in principle.</p>
+              <p data-i18n="pb10s">Iteration replaced with a closed-form geometric series sum — O(log N) BigNum operations instead of hundreds of iterations, plus a hard-limited FIFO cache. The cost stops depending on the number of levels.</p>
             </div>
             <div class="problem">
               <span class="p-tag" data-i18n="pTag">problem</span>
               <p class="p-text" data-i18n="pb11p">Naive timeout handling when loading a player profile leaked the session — the profile stayed locked.</p>
               <span class="s-tag" data-i18n="sTag">solution</span>
-              <p data-i18n="pb11s">Loading is cancelled with an explicit flag, not a promise race — the profile is released correctly in every scenario.</p>
+              <p data-i18n="pb11s">Loading is cancelled with an explicit flag, not a promise race — the profile is released on cancellation instead of staying locked.</p>
             </div>
             <div class="problem">
               <span class="p-tag" data-i18n="pTag">problem</span>
               <p class="p-text" data-i18n="pb12p">Needed to tell a cheater with an autoclicker apart from a player with fast reactions, without punishing honest players.</p>
               <span class="s-tag" data-i18n="sTag">solution</span>
-              <p data-i18n="pb12s">Action rate limits with headroom for measurement noise and a silent rejection instead of a kick — no false bans.</p>
+              <p data-i18n="pb12s">Action rate limits with headroom for measurement noise and a silent rejection instead of a kick, so a fast honest player is not punished for speed.</p>
             </div>
             <div class="problem">
               <span class="p-tag" data-i18n="pTag">problem</span>
@@ -753,36 +746,33 @@ while (cond) {
 <footer data-i18n="footer">Full-cycle Roblox Developer · built solo, from architecture to production.</footer>
 
 <!-- CONTACT POPOVER -->
-<div class="contact-pop" id="contactPop" role="dialog" aria-modal="true" aria-labelledby="contactPopTitle">
+<div class="contact-pop" id="contactPop" role="dialog" aria-modal="true" aria-label="Contacts">
   <div class="contact-pop-backdrop" data-pop-close></div>
   <div class="contact-pop-card">
-    <div class="contact-pop-head">
-      <h3 id="contactPopTitle" data-i18n="popTitle">Hire me</h3>
-      <button class="contact-pop-close" type="button" data-pop-close aria-label="Close">&times;</button>
-    </div>
+    <button class="contact-pop-close" type="button" data-pop-close aria-label="Close">&times;</button>
     <p class="contact-pop-hint" data-i18n="popHint">Click a contact — it's copied to your clipboard.</p>
 
     <a class="contact-pop-row" id="pDiscord" href="#" target="_blank" rel="noopener" style="--bc:#5865F2">
       <span class="c-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg></span>
-      <span class="contact-pop-meta"><b>Discord</b><small data-i18n="popDiscordSub">Primary — standard for gamedev</small></span>
+      <span class="contact-pop-meta"><b>Discord</b></span>
       <span class="contact-pop-hinttag" data-copy-tag data-i18n="tagCopy">copy</span>
     </a>
 
     <a class="contact-pop-row" id="pTg" href="#" target="_blank" rel="noopener" style="--bc:#229ED9">
       <span class="c-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg></span>
-      <span class="contact-pop-meta"><b>Telegram</b><small data-i18n="popTgSub">Fast replies, text only</small></span>
+      <span class="contact-pop-meta"><b>Telegram</b></span>
       <span class="contact-pop-hinttag" data-copy-tag data-i18n="tagCopy">copy</span>
     </a>
 
     <a class="contact-pop-row" id="pMail" href="#" style="--bc:#EA4335">
       <span class="c-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span>
-      <span class="contact-pop-meta"><b>Email</b><small data-i18n="popMailSub">For scope, docs and long-form</small></span>
+      <span class="contact-pop-meta"><b>Email</b></span>
       <span class="contact-pop-hinttag" data-copy-tag data-i18n="tagCopy">copy</span>
     </a>
 
     <a class="contact-pop-row" id="pGithub" href="#" target="_blank" rel="noopener" style="--bc:#24292e">
       <span class="c-ic"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></span>
-      <span class="contact-pop-meta"><b>GitHub</b><small data-i18n="popGithubSub">Code samples on request</small></span>
+      <span class="contact-pop-meta"><b>GitHub</b></span>
       <span class="contact-pop-hinttag" data-copy-tag data-i18n="tagCopy">copy</span>
     </a>
   </div>
@@ -819,7 +809,6 @@ while (cond) {
     "ctaSmall": "Только текст — обсуждение задачи, статус, вопросы, фидбэк — без созвонов и войсов. Отвечаю быстро, без пропаданий.",
     "btnHire": "Нанять меня",
     "btnProjects": "Мои проекты",
-    "btnLive": "Живая игра",
     "kickerDo": "Объём работы",
     "h2Do": "Что я делаю — и чего не делаю",
     "subDo": "Две колонки, которые снимают большую часть недопониманий ещё до старта.",
@@ -835,7 +824,6 @@ while (cond) {
     "dont1": "Арт, 3D-модели, анимации, VFX",
     "dont2": "Музыка и звук",
     "dont3": "Геймдизайн с нуля (реализую твой дизайн-док)",
-    "doNote": "Это не слабость — это фильтр. <b>Я чисто код-машина:</b> ты приносишь видение, арт и дизайн-док, я превращаю их в рабочий продукт.",
     "kickerGames": "Живые игры и тех-демо",
     "h2Games": "Реальные проекты, которые можно открыть в Roblox прямо сейчас",
     "subGames": "Не макеты — играбельные билды. Открой и попробуй механики сам.",
@@ -854,14 +842,14 @@ while (cond) {
     "clickerDescShort": "Продакшн idle-игра: экономика, бои, кросс-серверная синхронизация — под капотом простого клика.",
     "devCallout": "\n          <b>🛠 В игре открыта DEV-панель</b> — все механики можно протестировать вживую: выдача золота,\n          шардов, кристаллов и фрагментов; макс прокачка героев, апгрейдов, шардовых перков и скиллов;\n          артефакты; резонанс; мудрецы и мгновенное завершение всех миссий; телепорт по зонам.\n          Вкладка <b>DEV</b> в игровом меню — попробуйте всё сами.\n        ",
     "sumArch": "Архитектура и техническое устройство",
-    "clickerDesc1": "\n              Clicker — продакшн idle-игра, где игрок качает героев, бьёт монстров и проходит Ascension\n              за осколки, открывающие новые апгрейды. Полное разделение слоёв — клиент никогда\n              не авторитетен, сервер пересчитывает всё сам. Два независимых стора (Reflex),\n              Broadcaster-синхронизация, BigNum-математика под числа за пределами e15, виртуализация\n              списков карточек героев, object pooling (числа урона и лута, звуки, клик-VFX),\n              офлайн-прогресс между сессиями и локализация интерфейса. Тяжёлые расчёты («купить максимум»\n              на сотни уровней) считаются закрытой формулой суммы геометрической прогрессии за O(log N)\n              с ограниченным кэшем — без перебора уровней и без риска подвесить кадр.\n              MemoryStore и MessagingService — под кросс-серверный\n              рейтинг кланов и единого кланового босса (общее HP на все сервера); Discord-алерты\n              идут через собственный Cloudflare-воркер.\n            ",
+    "clickerDesc1": "\n              Clicker — продакшн idle-игра, где игрок качает героев, бьёт монстров и проходит Ascension\n              за осколки, открывающие новые апгрейды. Полное разделение слоёв — клиент никогда\n              не авторитетен, сервер пересчитывает всё сам. Два независимых стора (Reflex),\n              Broadcaster-синхронизация, BigNum-математика под числа за пределами e15, виртуализация\n              списков карточек героев, object pooling (числа урона и лута, звуки, клик-VFX),\n              офлайн-прогресс между сессиями и локализация интерфейса. Тяжёлые расчёты («купить максимум»\n              на сотни уровней) считаются закрытой формулой суммы геометрической прогрессии за O(log N)\n              с ограниченным кэшем — без перебора по уровням, поэтому стоимость не растёт с их числом.\n              MemoryStore и MessagingService — под кросс-серверный\n              рейтинг кланов и единого кланового босса (общее HP на все сервера); Discord-алерты\n              идут через собственный Cloudflare-воркер.\n            ",
     "clickerDesc2": "\n              Архитектурно — SSoT на сервере, иммутабельный стор на клиенте (Reflex), сервисы и контроллеры\n              через Flamework вместо самодельных синглтонов — событийно, а не поллингом каждый кадр;\n              асинхронная работа — через корутины и событийный API, Promise — точечно (ProfileStore\n              и сетевые операции с одним результатом).\n            ",
     "statFiles": "<span class=\"num\">200+</span> файлов · <span class=\"num\">15+</span> игровых механик — весь путь соло: от архитектуры до продакшна.",
     "miningTitle": "Mining — воксельное тех-демо",
     "miningDescShort": "Процедурно генерируемый воксельный мир, собранный ради одного вопроса: насколько далеко можно разогнать мир в Roblox, прежде чем движок начнёт сопротивляться.",
     "miningCallout": "<b>⛏️ В разработке, но играбельно.</b> Генератор мира, мешинг чанков, разрушение и игровые инструменты (факелы, метаемые бомбы, дальномер, сброс мира) уже внутри. Живая статистика скрыта, пока у билда нет трафика.",
     "miningTechTitle": "Что под капотом",
-    "miningTech1": "Мир — это детерминированный генератор (seed + координата) плюс разрежённый дифф правок игрока: состояние мира нигде не персистится, живёт в RAM и реплицируется компактными дельтами. Собственный greedy + incremental-мешер работает прямо по сырому byte-буферу, дистанционный LOD сшивает швы чанков по рендер-представлению соседа, а Part'ы блоков берутся из object pool, а не создаются и уничтожаются. Взрывы — это объёмы, а не списки блоков: дескриптор сферы едет как ~20 байт и растеризуется одним и тем же предикатом на клиенте и сервере. Пайплайн метрик (счётчики, gauge, гистограммы) считает бюджет кадра, очередь ремеша и число регионов для профайлинга.",
+    "miningTech1": "Мир — это детерминированный генератор (seed + координата) плюс разрежённый дифф правок игрока: состояние мира нигде не персистится, живёт в RAM и реплицируется компактными дельтами. Собственный greedy + incremental-мешер работает прямо по сырому byte-буферу, дистанционный LOD сшивает швы чанков по рендер-представлению соседа, а Part'ы блоков берутся из object pool, а не создаются и уничтожаются. Взрывы — это объёмы, а не списки блоков: дескриптор сферы едет как ~20 байт и растеризуется одним и тем же предикатом на клиенте и сервере. Производительность измеряет собственный слой метрик, общий для клиента и сервера: единый реестр счётчиков, gauge, гистограмм и событий с каталогом имён; тяжёлые сканы вынесены в сэмплер, который вызывается только на дампе; снимки — одна строка, рассчитанная на дифф между прогонами (счётчики — абсолют и дельта окна, тайминги — p50/p95/max, а не среднее, скрывающее пики). Сервер дампит реестр, клиент отдаёт его в игровой HUD диагностики.",
     "miningTech2": "Архитектурно — та же дисциплина, что и в кликере: сервер авторитетен, клиент шлёт только намерения, Reflex-стор под данные игрока, Flamework под сервисы и контроллеры, ProfileStore под персистентность. Отличие — горячий путь: буферы, а не объекты.",
     "miningStat": "мир на <span class=\"num\">buffer</span> · детерминированная генерация · <span class=\"num\">LOD</span> + greedy-мешинг · объёмные взрывы — соло, в процессе.",
     "kickerProcess": "Как мы работаем",
@@ -903,11 +891,11 @@ while (cond) {
     "pb9p": "Список из сотен карточек героев в интерфейсе тормозил игру — рендерились все сразу.",
     "pb9s": "Виртуализация: в памяти живут только видимые карточки, остальные не создаются, пока не понадобятся.",
     "pb10p": "Расчёт «купить максимум» перебирает сотни уровней и может подвесить кадр на середине клика.",
-    "pb10s": "Перебор заменён закрытой формулой суммы геометрической прогрессии — O(log N) BigNum-операций вместо сотен итераций, плюс кэш с жёстким лимитом (FIFO). Кадр не «укладывается в бюджет» — расчёт просто не может его подвесить в принципе.",
+    "pb10s": "Перебор заменён закрытой формулой суммы геометрической прогрессии — O(log N) BigNum-операций вместо сотен итераций, плюс кэш с жёстким лимитом (FIFO). Стоимость перестаёт зависеть от числа уровней.",
     "pb11p": "Наивная обработка таймаута при загрузке профиля игрока приводила к «утечке» сессии — профиль оставался занят.",
-    "pb11s": "Загрузка отменяется явным флагом, а не гонкой промисов — профиль корректно освобождается в любом сценарии.",
+    "pb11s": "Загрузка отменяется явным флагом, а не гонкой промисов — профиль освобождается при отмене, а не остаётся занятым.",
     "pb12p": "Нужно было отличать читера с автокликером от игрока с быстрой реакцией, не браня честных игроков.",
-    "pb12s": "Лимит скорости действий с запасом на погрешность и «тихий» отказ вместо кика — без ложных банов.",
+    "pb12s": "Лимит скорости действий с запасом на погрешность и «тихий» отказ вместо кика, чтобы быстрый честный игрок не получал бан за скорость.",
     "pb13p": "Передача платных кристаллов между игроками через несколько серверов — потеря подтверждения или повторная доставка могут задвоить баланс.",
     "pb13s": "Внешний журнал операций как единственный маркер коммита: списание и начисление применяются по нему один раз, а не по клиентским подтверждениям.",
     "pb14p": "Повреждение данных игрока могло молча обнулить купленные за Robux кристаллы вместе с историей покупок.",
@@ -952,12 +940,7 @@ while (cond) {
     "h2Contact": "Есть ассеты и дизайн-док?",
     "contactLead": "Пришли объём — скажу, что реально и сколько это займёт. Только текст, без созвонов.",
     "footer": "Roblox-разработчик полного цикла · всё соло, от архитектуры до продакшна.",
-    "popTitle": "Нанять меня",
     "popHint": "Клик по контакту — он скопируется в буфер.",
-    "popDiscordSub": "Основной — стандарт для геймдева",
-    "popTgSub": "Быстрые ответы, только текст",
-    "popMailSub": "Для ТЗ, документов и лонгридов",
-    "popGithubSub": "Примеры кода по запросу",
     "tagCopy": "копировать",
     "pre1": "webhookService.reportDataStore(\"сохранение\", \"игрок X\", \"не прошло\"); // канал datastore\nwebhookService.notify(channel, { title, description, color });        // единая очередь",
     "pre2": "const contract = { amount: \"number\" };\nif (typeof(actual) !== contract.amount) return; // отклонено целиком\nif (owner !== player) return;                    // чужое не летит дальше",
