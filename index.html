@@ -163,7 +163,7 @@
     .problem p { font-size: .87rem; color: var(--muted); }
     .problem p.p-text { color: var(--text); }
     .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
-    .proj-block .problem, .under-block .problem { background: color-mix(in srgb, var(--bg) 94%, var(--card)); }
+    .proj-block .problem { background: color-mix(in srgb, var(--bg) 94%, var(--card)); }
 
     /* How we work — 4 steps */
     .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
@@ -174,12 +174,10 @@
     .step .step-case { margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border-2); font-size: .82rem; color: var(--text); }
     .step .step-case b { color: var(--accent-2); }
 
-    /* Under the hood */
-    .under-block { border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); padding: 22px 24px; margin-bottom: 14px; transition: background-color .25s ease, border-color .25s ease; }
 
     /* Deep-dive accordion */
     .detail-block { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; margin-bottom: 10px; transition: border-color .2s ease, background-color .25s ease; }
-    .proj-block .detail-block, .under-block .detail-block { background: color-mix(in srgb, var(--bg) 94%, var(--card)); }
+    .proj-block .detail-block { background: color-mix(in srgb, var(--bg) 94%, var(--card)); }
     .detail-block summary, .ill summary { cursor: pointer; list-style: none; position: relative; padding-left: 22px; }
     .detail-block summary::-webkit-details-marker, .ill summary::-webkit-details-marker { display: none; }
     .detail-block summary { font-weight: 600; }
@@ -266,7 +264,7 @@
       .contact { padding: 20px; flex-direction: column; align-items: flex-start; }
       .contact > div:last-child { width: 100%; }
       .contact > div:last-child .btn { width: 100%; text-align: center; }
-      .proj-block, .under-block { padding: 18px 16px; }
+      .proj-block { padding: 18px 16px; }
       .contact-pop-card { margin: 8vh 14px 0; }
     }
     @media (max-width: 420px) {
@@ -289,7 +287,7 @@
         <a href="#do" data-i18n="navDo">What I do</a>
         <a href="#games" data-i18n="navGames">Games</a>
         <a href="#process" data-i18n="navProcess">How we work</a>
-        <a href="#under" data-i18n="navUnder">Under the hood</a>
+        <a href="#under" data-i18n="navUnder">Approach</a>
         <a href="#contact" data-i18n="navContact">Contact</a>
       </div>
       <div class="theme-switch" id="langSwitch">
@@ -390,7 +388,7 @@
           <div class="proj-preview-meta">
             <span class="proj-preview-note"><a href="https://www.roblox.com/games/78926568468468/Infinity-Clicker" target="_blank" rel="noopener" data-i18n="clickerLink">Infinity Clicker on Roblox</a></span>
           </div>
-          <div class="proj-preview-live rbx-stats" data-universe="10762170624" hidden>
+          <div class="proj-preview-live rbx-stats" data-universe="10762170624">
             <span class="rbx-stat"><b data-stat="playing"><span class="dot" aria-hidden="true"></span>—</b><span data-i18n="statOnline">playing</span></span>
             <span class="rbx-stat"><b data-stat="visits">—</b><span data-i18n="statVisits">visits</span></span>
             <span class="rbx-stat"><b data-stat="updated">—</b><span data-i18n="statUpdated"></span></span>
@@ -422,91 +420,7 @@
           <span class="chip">MemoryStore</span>
           <span class="chip">MessagingService</span>
         </div>
-      </div>
-    </div>
 
-    <!-- MINING PANE -->
-    <div class="proj-pane" data-pane="mining">
-      <div class="proj-block">
-        <div class="proj-preview">
-          <div class="proj-preview-meta">
-            <span class="proj-preview-note"><a href="https://www.roblox.com/games/95983455461555/miningpref" target="_blank" rel="noopener" data-i18n="miningLink">Mining on Roblox (tech demo)</a></span>
-          </div>
-          <div class="proj-preview-live rbx-stats" data-universe="10453688696" hidden>
-            <span class="rbx-stat"><b data-stat="playing"><span class="dot" aria-hidden="true"></span>—</b><span data-i18n="statOnline">playing</span></span>
-            <span class="rbx-stat"><b data-stat="visits">—</b><span data-i18n="statVisits">visits</span></span>
-            <span class="rbx-stat"><b data-stat="updated">—</b><span data-i18n="statUpdated"></span></span>
-          </div>
-        </div>
-        <h3 class="proj-title" data-i18n="miningTitle">Mining — voxel tech demo</h3>
-        <p class="desc-short" data-i18n="miningDescShort">A procedurally generated voxel world, built to answer one question: how far can a Roblox world be pushed before the engine pushes back.</p>
-
-        <div class="dev-callout" data-i18n-html="miningCallout"><b>⛏️ In development, but playable.</b> The world generator, chunk meshing, destruction and in-game tools (placeable torches, thrown bombs, rangefinder, world reset) are already in. Live player stats stay hidden while the build has no traffic yet.</div>
-
-        <details class="proj-more">
-          <summary data-i18n="miningTechTitle">What is under the hood</summary>
-          <div class="proj-more-body">
-            <p class="desc" data-i18n="miningTech1">The world is a deterministic generator (seed + coordinate) plus a sparse diff of player edits — nothing about the world is persisted, it lives in RAM and replicates as compact deltas. A custom greedy + incremental mesher works directly on a raw byte buffer, distance LOD stitches chunk seams against neighbor render representations, and block parts come from an object pool instead of being created and destroyed. Explosions are volumes, not per-block lists: a sphere descriptor travels as ~20 bytes and is rasterized with the exact same predicate on client and server. Performance is measured by a custom metrics layer shared by client and server: a single registry of counters, gauges, histograms and events with a named catalog, heavy scans deferred to a sampler that runs only on dump, and one-line snapshots built to be diffed between runs — counters as absolute + window delta, timings as p50/p95/max instead of a mean that hides spikes. The server dumps the registry and the client feeds an in-game diagnostics HUD.</p>
-            <p class="desc" data-i18n="miningTech2">Architecturally the same discipline as the clicker: server-authoritative state, client sends intents only, Reflex stores for player data, Flamework for services and controllers, ProfileStore for persistence. The difference is the hot path — buffers, not objects.</p>
-          </div>
-        </details>
-
-        <p class="stat-line" data-i18n-html="miningStat"><span class="num">buffer</span>-first world · deterministic generation · <span class="num">LOD</span> + greedy meshing · volume explosions — solo, in progress.</p>
-        <div class="stack">
-          <span class="chip">roblox-ts</span>
-          <span class="chip">TypeScript</span>
-          <span class="chip">Luau</span>
-          <span class="chip">Flamework</span>
-          <span class="chip">Reflex</span>
-          <span class="chip">React</span>
-          <span class="chip">ProfileStore</span>
-          <span class="chip">Sift</span>
-          <span class="chip">buffer</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW WE WORK -->
-  <section id="process">
-    <div class="kicker" data-i18n="kickerProcess">How we work</div>
-    <h2 data-i18n="h2Process">Four stages, from brief to production</h2>
-    <div class="steps">
-      <div class="step">
-        <span class="step-num">01</span>
-        <h3 data-i18n="step1t">Architecture &amp; Data Design</h3>
-        <p data-i18n="step1p">Economy, data structure and failure protection first — designed before the first mechanic is written.</p>
-        <p class="step-case" data-i18n-html="step1c"><b>In practice:</b> currency, upgrades and saves, plus the exact points where money could leak or duplicate, are mapped out up front.</p>
-      </div>
-      <div class="step">
-        <span class="step-num">02</span>
-        <h3 data-i18n="step2t">Gameplay &amp; UI Assembly</h3>
-        <p data-i18n="step2p">Mechanics plus UI built to your layouts, responsive for mobile, PC and gamepad.</p>
-        <p class="step-case" data-i18n-html="step2c"><b>In practice:</b> the entire UI is written from scratch and wired to a reactive store — no third-party UI kits, no per-frame re-renders.</p>
-      </div>
-      <div class="step">
-        <span class="step-num">03</span>
-        <h3 data-i18n="step3t">Networking &amp; Anti-Cheat</h3>
-        <p data-i18n="step3p">Server synchronization, strict validation and protection against dupes and cheats.</p>
-        <p class="step-case" data-i18n-html="step3c"><b>In practice:</b> the client sends intents only — every number is recalculated on the server, rate limits are silent, not kicks.</p>
-      </div>
-      <div class="step">
-        <span class="step-num">04</span>
-        <h3 data-i18n="step4t">Optimization &amp; Polish</h3>
-        <p data-i18n="step4p">Profiling, memory and frame budgets, and preparation for scale.</p>
-        <p class="step-case" data-i18n-html="step4c"><b>In practice:</b> I find the real bottleneck instead of guessing — measured on the profiler, not by eye.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- UNDER THE HOOD -->
-  <section id="under">
-    <div class="kicker" data-i18n="kickerUnder">Under the hood</div>
-    <h2 data-i18n="h2Under">Why games I build don't break in production</h2>
-    <p class="story" data-i18n-html="underStory1">The patterns I actually use: separating server and client state (server as the single source of truth), broadcaster-based sync instead of polling, optimistic and pessimistic UI updates, BigNum math beyond float precision, virtualization of heavy lists, object pooling, throttled autosave, cancellation patterns for async operations, rate limiting and server-side validation. This is not a checklist of buzzwords — every item appeared because I genuinely tripped over it in production and figured out the right way to do it.</p>
-    <p class="story" data-i18n-html="underStory2">Stack: <b>roblox-ts</b> (TypeScript → Luau), <b>Flamework</b> for DI / services / controllers, <b>Reflex</b> for the single source of truth, <b>React</b> for UI. Ask me about architecture, networking or performance — you will get specifics, not generalities.</p>
-
-    <div class="under-block">
       <details class="proj-more" open>
         <summary data-i18n="sumRuntime">Production failure points I closed (14 cases)</summary>
         <div class="proj-more-body">
@@ -710,7 +624,89 @@ while (cond) {
           </details>
         </div>
       </details>
+      </div>
     </div>
+
+    <!-- MINING PANE -->
+    <div class="proj-pane" data-pane="mining">
+      <div class="proj-block">
+        <div class="proj-preview">
+          <div class="proj-preview-meta">
+            <span class="proj-preview-note"><a href="https://www.roblox.com/games/95983455461555/miningpref" target="_blank" rel="noopener" data-i18n="miningLink">Mining on Roblox (tech demo)</a></span>
+          </div>
+          <div class="proj-preview-live rbx-stats" data-universe="10453688696">
+            <span class="rbx-stat"><b data-stat="playing"><span class="dot" aria-hidden="true"></span>—</b><span data-i18n="statOnline">playing</span></span>
+            <span class="rbx-stat"><b data-stat="visits">—</b><span data-i18n="statVisits">visits</span></span>
+            <span class="rbx-stat"><b data-stat="updated">—</b><span data-i18n="statUpdated"></span></span>
+          </div>
+        </div>
+        <h3 class="proj-title" data-i18n="miningTitle">Mining — voxel tech demo</h3>
+        <p class="desc-short" data-i18n="miningDescShort">A procedurally generated voxel world, built to answer one question: how far can a Roblox world be pushed before the engine pushes back.</p>
+
+        <div class="dev-callout" data-i18n-html="miningCallout"><b>⛏️ In development, but playable.</b> The world generator, chunk meshing, destruction and in-game tools (placeable torches, thrown bombs, rangefinder, world reset) are already in.</div>
+
+        <details class="proj-more">
+          <summary data-i18n="miningTechTitle">What is under the hood</summary>
+          <div class="proj-more-body">
+            <p class="desc" data-i18n="miningTech1">The world is a deterministic generator (seed + coordinate) plus a sparse diff of player edits — nothing about the world is persisted, it lives in RAM and replicates as compact deltas. A custom greedy + incremental mesher works directly on a raw byte buffer, distance LOD stitches chunk seams against neighbor render representations, and block parts come from an object pool instead of being created and destroyed. Explosions are volumes, not per-block lists: a sphere descriptor travels as ~20 bytes and is rasterized with the exact same predicate on client and server. Performance is measured by a custom metrics layer shared by client and server: a single registry of counters, gauges, histograms and events with a named catalog, heavy scans deferred to a sampler that runs only on dump, and one-line snapshots built to be diffed between runs — counters as absolute + window delta, timings as p50/p95/max instead of a mean that hides spikes. The server dumps the registry and the client feeds an in-game diagnostics HUD.</p>
+            <p class="desc" data-i18n="miningTech2">Architecturally: server-authoritative state, the client sends intents only, Reflex stores for player data, Flamework for services and controllers, ProfileStore for persistence. The hot path here is buffers, not objects.</p>
+          </div>
+        </details>
+
+        <p class="stat-line" data-i18n-html="miningStat"><span class="num">buffer</span>-first world · deterministic generation · <span class="num">LOD</span> + greedy meshing · volume explosions — solo, in progress.</p>
+        <div class="stack">
+          <span class="chip">roblox-ts</span>
+          <span class="chip">TypeScript</span>
+          <span class="chip">Luau</span>
+          <span class="chip">Flamework</span>
+          <span class="chip">Reflex</span>
+          <span class="chip">React</span>
+          <span class="chip">ProfileStore</span>
+          <span class="chip">Sift</span>
+          <span class="chip">buffer</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW WE WORK -->
+  <section id="process">
+    <div class="kicker" data-i18n="kickerProcess">Process</div>
+    <h2 data-i18n="h2Process">How I work</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <h3 data-i18n="step1t">Architecture &amp; data</h3>
+        <p data-i18n="step1p">I map the economy, the data and the ways it can break before writing any gameplay.</p>
+        <p class="step-case" data-i18n-html="step1c"><b>In practice:</b> where money could leak or duplicate is decided here, not after launch.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <h3 data-i18n="step2t">Gameplay &amp; UI</h3>
+        <p data-i18n="step2p">I build the mechanics and the interface to your layouts, responsive for mobile, PC and gamepad.</p>
+        <p class="step-case" data-i18n-html="step2c"><b>In practice:</b> UI written from scratch and wired to the store — no UI kits, no per-frame re-renders.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <h3 data-i18n="step3t">Networking &amp; anti-cheat</h3>
+        <p data-i18n="step3p">I keep the truth on the server and validate everything the client sends.</p>
+        <p class="step-case" data-i18n-html="step3c"><b>In practice:</b> the client sends intents only; rate limits drop spam silently instead of kicking.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">04</span>
+        <h3 data-i18n="step4t">Optimization &amp; polish</h3>
+        <p data-i18n="step4p">I profile the build and fix the real bottleneck.</p>
+        <p class="step-case" data-i18n-html="step4c"><b>In practice:</b> frame time, memory and load come from the profiler and the metrics layer, not guesses.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section id="under">
+    <div class="kicker" data-i18n="kickerUnder">Approach</div>
+    <h2 data-i18n="h2Under">How I approach a task</h2>
+    <p class="story" data-i18n-html="underStory1">The patterns I actually use: separating server and client state (server as the single source of truth), broadcaster-based sync instead of polling, optimistic and pessimistic UI updates, BigNum math beyond float precision, virtualization of heavy lists, object pooling, throttled autosave, cancellation patterns for async operations, rate limiting and server-side validation. This is not a checklist of buzzwords — every item is here because I actually ran into it and worked out the right fix.</p>
+
   </section>
 
   <!-- TERMS -->
@@ -795,7 +791,7 @@ while (cond) {
     "navDo": "Что делаю",
     "navGames": "Игры",
     "navProcess": "Как работаем",
-    "navUnder": "Под капотом",
+    "navUnder": "Подход",
     "navContact": "Связь",
     "themeDark": "Тёмная",
     "themeLight": "Светлая",
@@ -847,29 +843,28 @@ while (cond) {
     "statFiles": "<span class=\"num\">200+</span> файлов · <span class=\"num\">15+</span> игровых механик — весь путь соло: от архитектуры до продакшна.",
     "miningTitle": "Mining — воксельное тех-демо",
     "miningDescShort": "Процедурно генерируемый воксельный мир, собранный ради одного вопроса: насколько далеко можно разогнать мир в Roblox, прежде чем движок начнёт сопротивляться.",
-    "miningCallout": "<b>⛏️ В разработке, но играбельно.</b> Генератор мира, мешинг чанков, разрушение и игровые инструменты (факелы, метаемые бомбы, дальномер, сброс мира) уже внутри. Живая статистика скрыта, пока у билда нет трафика.",
+    "miningCallout": "<b>⛏️ В разработке, но играбельно.</b> Генератор мира, мешинг чанков, разрушение и игровые инструменты (факелы, метаемые бомбы, дальномер, сброс мира) уже внутри.",
     "miningTechTitle": "Что под капотом",
     "miningTech1": "Мир — это детерминированный генератор (seed + координата) плюс разрежённый дифф правок игрока: состояние мира нигде не персистится, живёт в RAM и реплицируется компактными дельтами. Собственный greedy + incremental-мешер работает прямо по сырому byte-буферу, дистанционный LOD сшивает швы чанков по рендер-представлению соседа, а Part'ы блоков берутся из object pool, а не создаются и уничтожаются. Взрывы — это объёмы, а не списки блоков: дескриптор сферы едет как ~20 байт и растеризуется одним и тем же предикатом на клиенте и сервере. Производительность измеряет собственный слой метрик, общий для клиента и сервера: единый реестр счётчиков, gauge, гистограмм и событий с каталогом имён; тяжёлые сканы вынесены в сэмплер, который вызывается только на дампе; снимки — одна строка, рассчитанная на дифф между прогонами (счётчики — абсолют и дельта окна, тайминги — p50/p95/max, а не среднее, скрывающее пики). Сервер дампит реестр, клиент отдаёт его в игровой HUD диагностики.",
-    "miningTech2": "Архитектурно — та же дисциплина, что и в кликере: сервер авторитетен, клиент шлёт только намерения, Reflex-стор под данные игрока, Flamework под сервисы и контроллеры, ProfileStore под персистентность. Отличие — горячий путь: буферы, а не объекты.",
+    "miningTech2": "Архитектурно: сервер авторитетен, клиент шлёт только намерения, Reflex-стор под данные игрока, Flamework под сервисы и контроллеры, ProfileStore под персистентность. Горячий путь здесь — буферы, а не объекты.",
     "miningStat": "мир на <span class=\"num\">buffer</span> · детерминированная генерация · <span class=\"num\">LOD</span> + greedy-мешинг · объёмные взрывы — соло, в процессе.",
-    "kickerProcess": "Как мы работаем",
-    "h2Process": "Четыре этапа — от брифа до продакшна",
-    "step1t": "Архитектура и проектирование данных",
-    "step1p": "Сначала экономика, структура данных и защита от сбоев — до того, как написана первая механика.",
-    "step1c": "<b>На практике:</b> валюта, апгрейды и сохранения, а также точные места, где деньги могут утечь или задвоиться, размечаются заранее.",
-    "step2t": "Сборка геймплея и UI",
-    "step2p": "Механики плюс UI по твоим макетам, адаптив под мобилку, ПК и геймпад.",
-    "step2c": "<b>На практике:</b> весь UI написан с нуля и связан с реактивным стором — без сторонних UI-китов и ре-рендеров на каждый кадр.",
+    "kickerProcess": "Процесс",
+    "h2Process": "Как я работаю",
+    "step1t": "Архитектура и данные",
+    "step1p": "Сначала разбираю экономику, данные и точки отказа — до первой строчки геймплея.",
+    "step1c": "<b>На практике:</b> где деньги могут утечь или задвоиться — решается здесь, а не после релиза.",
+    "step2t": "Геймплей и UI",
+    "step2p": "Собираю механики и интерфейс по твоим макетам, адаптив под мобилку, ПК и геймпад.",
+    "step2c": "<b>На практике:</b> UI написан с нуля и связан со стором — без UI-китов и ре-рендеров на каждый кадр.",
     "step3t": "Сеть и анти-чит",
-    "step3p": "Синхронизация серверов, жёсткая валидация и защита от дюпов и читеров.",
-    "step3c": "<b>На практике:</b> клиент шлёт только намерения — все цифры пересчитываются на сервере, рейт-лимиты тихие, а не кик.",
+    "step3p": "Держу истину на сервере и проверяю всё, что присылает клиент.",
+    "step3c": "<b>На практике:</b> клиент шлёт только намерения; рейт-лимиты гасят спам тихо, а не киком.",
     "step4t": "Оптимизация и полировка",
-    "step4p": "Профайлинг, память и бюджеты кадра, подготовка к масштабированию.",
-    "step4c": "<b>На практике:</b> нахожу реальное узкое место, а не гадаю — замер на профайлере, а не на глаз.",
-    "kickerUnder": "Под капотом",
-    "h2Under": "Почему игры, которые я собираю, не ломаются в проде",
-    "underStory1": "\n      Паттерны, которыми пользуюсь на практике: разделение серверного и клиентского состояния\n      (сервер — источник истины), синхронизация через broadcaster вместо поллинга, оптимистичные\n      и пессимистичные обновления UI, BigNum-математика для чисел за пределами точности обычного\n      числа, виртуализация тяжёлых списков, object pooling, троттлинг автосохранения,\n      cancellation-паттерны для асинхронных операций, rate limiting и серверная валидация.\n      Это не список терминов для галочки — каждый пункт появился, потому что я реально об него\n      споткнулся на проде и разобрался, как делать правильно.\n    ",
-    "underStory2": "\n      Стек: <b>roblox-ts</b> (TypeScript → Luau), <b>Flamework</b> под DI / сервисы / контроллеры,\n      <b>Reflex</b> как единый источник истины, <b>React</b> для UI. Вопрос по архитектуре,\n      сети или перформансу — отвечу конкретикой, а не общими словами.\n    ",
+    "step4p": "Профилирую билд и чиню реальное узкое место.",
+    "step4c": "<b>На практике:</b> время кадра, память и загрузку читаю с профайлера и слоя метрик, а не угадываю.",
+    "kickerUnder": "Подход",
+    "h2Under": "Как я подхожу к задачам",
+    "underStory1": "\n      Паттерны, которыми пользуюсь на практике: разделение серверного и клиентского состояния\n      (сервер — источник истины), синхронизация через broadcaster вместо поллинга, оптимистичные\n      и пессимистичные обновления UI, BigNum-математика для чисел за пределами точности обычного\n      числа, виртуализация тяжёлых списков, object pooling, троттлинг автосохранения,\n      cancellation-паттерны для асинхронных операций, rate limiting и серверная валидация.\n      Это не список терминов для галочки — каждый пункт появился, потому что я реально в него упёрся\n      и разобрался, как делать правильно.\n    ",
     "sumRuntime": "Точки отказа прода, которые я закрыл (14 кейсов)",
     "descNoCode": "Без кода — суть проблемы и в какую сторону решено. Код и детали — по запросу, покажу и объясню на пальцах.",
     "pb1p": "Оплата может подтвердиться Roblox-ом повторно — риск выдать награду дважды.",
@@ -1107,9 +1102,6 @@ while (cond) {
         if (playingEl) playingEl.innerHTML = '<span class="dot' + (playing > 0 ? ' live-on' : '') + '" aria-hidden="true"></span>' + fmtInt(playing);
         if (visitsEl) visitsEl.textContent = fmtInt(visits);
         if (updatedEl) updatedEl.textContent = fmtUpdated(stats.updated);
-        // No traffic yet -> the numbers say nothing; keep the block hidden and let
-        // the "In development" badge do the talking.
-        box.hidden = !(playing > 0 || visits > 0);
       });
     };
 
